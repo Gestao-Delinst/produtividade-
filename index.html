@@ -50,6 +50,8 @@ p{margin:0}
   padding-block:20px 16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;display:flex;flex-direction:column;gap:20px;border-right:2px solid var(--gold)}
 .brand{display:flex;gap:12px;align-items:center;padding-bottom:18px;border-bottom:1px solid rgba(201,162,74,.3)}
 .mark{width:42px;height:42px;border:1.5px solid var(--gold);border-radius:6px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-stretch:85%;font-size:17px;color:var(--gold);flex:none}
+.logo{flex:none;height:auto;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.brand .logo{width:34px}
 .brand b{display:block;font-family:var(--f-display);font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.2}
 .brand small{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;color:var(--side-muted);text-transform:uppercase;margin-top:2px}
 nav.menu{display:flex;flex-direction:column;gap:2px}
@@ -111,6 +113,16 @@ button:disabled{opacity:.45;cursor:default}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:6px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .kpi.gold{border-top-color:var(--accent)}
+.vg-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.fila{margin:0;padding:0;list-style:none;counter-reset:f;display:flex;flex-direction:column}
+.fila li{counter-increment:f;display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.fila li:last-child{border-bottom:none}
+.fila li::before{content:counter(f);grid-row:span 2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line);font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+.fila li:first-child::before{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.fila li span{font-size:12px;color:var(--muted)}
+.kpis.mini3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kpis.mini3 .kpi{box-shadow:none;background:var(--surface-2)}
+.kpis.mini3 .kpi:last-child:nth-child(odd){grid-column:auto}
 .kpi .v{font-family:var(--f-display);font-size:34px;font-weight:800;font-stretch:82%;line-height:1;font-variant-numeric:tabular-nums}
 .kpi .v small{font-size:15px;font-weight:600;color:var(--muted);font-stretch:95%;margin-left:3px}
 .kpi .d{font-size:12px;color:var(--muted);line-height:1.4}
@@ -137,7 +149,7 @@ button:disabled{opacity:.45;cursor:default}
 /* svg */
 .ax{font-family:var(--f-mono);font-size:10.5px;fill:var(--muted)}
 .lb{font-family:var(--f-body);font-size:12.5px;fill:var(--ink);font-weight:500}
-.vl{font-family:var(--f-mono);font-size:11.5px;fill:var(--ink);font-variant-numeric:tabular-nums}
+.vl{font-family:var(--f-mono);font-size:11.5px;fill:var(--ink);font-variant-numeric:tabular-nums;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
 .vl2{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
 .gh{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;fill:var(--muted);text-transform:uppercase}
 .big{font-family:var(--f-display);font-weight:800;font-stretch:82%;fill:var(--ink)}
@@ -172,6 +184,17 @@ button:disabled{opacity:.45;cursor:default}
 .feed .it small{display:block;color:var(--muted);font-size:12px}
 
 /* tabelas */
+.bare{border:none!important;background:transparent!important;overflow:visible!important}
+.acards{display:flex;flex-direction:column;gap:10px}
+.acard{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.acard .ah{display:flex;align-items:center;gap:8px;font-size:15px}
+.acard .ah .tt{margin-left:auto;font-size:12px;color:var(--muted)}
+.acard .ah .tt b{font-size:17px;color:var(--ink)}
+.acard .agrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.acard .agrid label span{font-family:var(--f-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase}
+.acard .agrid input.cnt{width:100%;font-size:16px;padding:8px 6px;text-align:center;font-family:var(--f-mono)}
+.acard .agrid b.num{font-size:17px;color:var(--ink);font-weight:600}
+.acard.tot-card{background:var(--surface-2)}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -193,8 +216,18 @@ td.zero{color:var(--muted)}
 td.up{color:var(--up)} td.down{color:var(--ok)}
 tr.flash td{animation:flash 1.6s ease}
 @keyframes flash{from{background:var(--accent-soft)}}
-td input.cnt{width:62px;text-align:right;font-family:var(--f-mono);padding:4px 6px}
+td input.cnt{width:54px;text-align:right;font-family:var(--f-mono);padding:4px 6px}
 td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
+.acts-row{justify-content:flex-end!important;gap:6px!important;flex-wrap:nowrap!important}
+td.acts{width:1%}
+tr.off td{opacity:.55}
+.agentes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:8px}
+.ag-it{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;background:var(--surface-2)}
+.ag-it.off{opacity:.55}
+.ag-it{flex-direction:row!important;align-items:center;justify-content:space-between}
+.ag-it .acts-row{flex:none}
+.acts-row > button{flex:none!important}
+.ag-it.flash{animation:flash 1.6s ease}
 .chip{display:inline-block;font-family:var(--f-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;font-weight:500;white-space:nowrap;vertical-align:1px}
 .chip.up{background:var(--up-soft);color:var(--up)}
 .chip.ok{background:var(--ok-soft);color:var(--ok)}
@@ -215,7 +248,11 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
 .parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
 .parts fieldset{border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:0;min-width:0}
 .parts legend{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 4px}
-.parts label{display:flex;gap:8px;align-items:center;padding:4px 0;font-size:13px}
+.parts fieldset{display:flex;flex-wrap:wrap;gap:6px}
+.parts legend{width:100%}
+.parts label{display:inline-flex;gap:7px;align-items:center;padding:6px 12px;font-size:13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer}
+.parts label:has(input:checked){background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+.parts input{accent-color:var(--accent);margin:0}
 .err{color:var(--up);font-size:12.5px}
 .vols{display:flex;flex-wrap:wrap;gap:8px 22px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);font-size:13px}
 .vols b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
@@ -250,6 +287,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
 #voltar{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .ro [data-edit]{display:none!important}
 
+.mais,#sheet{display:none}
 /* ===== tablet e celular: barra de navegação inferior ===== */
 @media (max-width:960px){
   .app{display:block}
@@ -262,6 +300,14 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
   nav.menu a .lf,nav.menu a .lock{display:none}
   nav.menu a .ls{display:block}
   nav.menu .ic{width:21px;height:21px}
+  nav.menu > a.xtra{display:none}
+  .mais{display:flex;flex:1 0 62px;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px 7px;background:none;border:none;border-top:3px solid transparent;border-radius:0;color:var(--side-muted);font-size:10.5px;font-weight:500;margin-top:-2px}
+  .mais[aria-current="page"]{border-top-color:var(--gold);color:var(--gold)}
+  #sheet:not([hidden]){display:flex;position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px));flex-direction:column;background:var(--side-bg);border:1px solid rgba(201,162,74,.45);border-radius:10px;padding:6px;min-width:220px;box-shadow:0 12px 32px rgba(0,0,0,.35);z-index:40}
+  #sheet a{flex-direction:row!important;font-size:14.5px!important;padding:12px!important;border-top:none!important;justify-content:flex-start!important;gap:12px!important;margin:0!important;border-radius:6px!important;flex:none!important}
+  #sheet a .lf{display:inline!important}#sheet a .ls{display:none!important}
+  #sheet a[aria-current="page"]{background:var(--side-bg-2)!important}
+  .brand .logo{display:none}
   .main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
   #toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   #voltar{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
@@ -272,7 +318,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
   .top{padding-top:14px;gap:12px;padding-bottom:12px}
   .crumb{display:none}
   .mbrand{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-  .mbrand .mark{width:24px;height:24px;font-size:10px;border-radius:4px;border-width:1.2px}
+  .mbrand .logo{width:16px}
   .top h1{font-size:22px}
   .top p{font-size:12.5px}
   .tools{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
@@ -293,7 +339,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
   td input.cnt{font-size:14px}
   /* tabelas viram fichas */
   .stack{border:none;background:transparent;overflow:visible}
-  .stack thead{display:none}
+  .stack thead,.stack tfoot{display:none}
   .stack table,.stack tbody,.stack tr,.stack td{display:block;width:100%}
   .stack tr{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:10px}
   .stack td{border:none;padding:4px 0;text-align:right;white-space:normal;position:static;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--f-body);min-width:0}
@@ -316,21 +362,21 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body><div class="app" id="app">
   <aside class="side">
-    <div class="brand"><span class="mark" aria-hidden="true">GD</span><div><b>Gestão DELINST</b><small>SR/PF/CE · DRPJ</small></div></div>
+    <div class="brand"><img class="logo" src="data:image/webp;base64,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" alt="Polícia Federal" width="34" height="44"><div><b>Gestão DELINST</b><small>SR/PF/CE · DRPJ</small></div></div>
     <nav class="menu" id="nav" aria-label="Seções"></nav>
     <div class="side-foot"><b>Uso interno</b><span>Delegacia de Direitos Humanos e Defesa Institucional</span><span id="side-ref"></span></div>
   </aside>
   <main class="main">
     <header class="top">
       <div class="tt">
-        <span class="mbrand"><span class="mark" aria-hidden="true">GD</span>Gestão DELINST · SR/PF/CE</span>
+        <span class="mbrand"><img class="logo" src="data:image/webp;base64,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" alt="" width="16" height="21">Gestão DELINST · SR/PF/CE</span>
         <span class="crumb">Polícia Federal · SR/PF/CE · DRPJ · DELINST</span>
         <h1 id="sec-title">Gestão DELINST</h1>
         <p id="sec-desc"></p>
       </div>
       <div class="tools">
         <div class="search"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input type="search" id="busca" placeholder="Buscar servidor ou atividade" aria-label="Buscar servidor ou atividade" autocomplete="off">
+          <input type="search" id="busca" placeholder="Buscar servidor" aria-label="Buscar servidor ou atividade" autocomplete="off">
           <div id="busca-res" hidden></div></div>
         <select id="periodo" aria-label="Período das atividades"></select>
         <div class="who" id="who"><span class="role">Carregando…</span></div>
@@ -361,7 +407,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
         <figure class="card">
           <div class="card-h"><div class="t"><span class="eyebrow">Acervo × pesos por tipo</span><h2>Carga ponderada</h2></div>
             <div class="seg" role="group" aria-label="Cargo"><button type="button" data-cg="DPF" aria-pressed="true">Delegados</button><button type="button" data-cg="EPF" aria-pressed="false">Escrivães</button></div></div>
-          <div class="legend" id="lg-carga"></div>
+          <div class="legend" id="lg-carga"></div><p class="info" id="nota-carga"></p>
           <div class="chart" id="ch-carga"></div>
         </figure>
         <figure class="card">
@@ -369,6 +415,17 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
           <div class="chart" id="ch-rel"></div>
         </figure>
       </div>
+      <div class="g2" data-need>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow" id="eb-psob">Período</span><h2>Sobreaviso · comparativo entre delegados</h2></div><div class="legend" id="lg-psob"></div></div>
+          <div class="chart" id="ch-psob"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow" id="eb-pcampo">Período</span><h2>Operações e missões fora da sede</h2><p>Participações por servidor no período escolhido no topo.</p></div></div>
+          <div id="pcampo-resumo"></div>
+        </figure>
+      </div>
+      <div class="g3" data-need id="campo-p"></div>
       <div class="g3" data-need>
         <figure class="card">
           <div class="card-h"><div class="t"><span class="eyebrow">Critérios explícitos</span><h2>Alertas e pontos de atenção</h2></div><span class="chip neutral" id="al-n"></span></div>
@@ -382,6 +439,31 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
           <div class="card-h"><div class="t"><span class="eyebrow">Registros recentes</span><h2>Últimas movimentações</h2></div></div>
           <div class="feed" id="feed"></div>
         </figure>
+      </div>
+    </section>
+
+    <!-- VIAGENS E OPERAÇÕES -->
+    <section class="page" data-page="viagens" hidden>
+      <div class="vg-top">
+        <div class="seg" role="group" aria-label="Cargo"><button type="button" data-vc="DPF" aria-pressed="true">Delegados</button><button type="button" data-vc="EPF" aria-pressed="false">Escrivães</button></div>
+        <button type="button" class="gold" id="vg-nova" data-edit>Registrar viagem ou operação</button>
+      </div>
+      <div class="kpis" id="vg-kpis"></div>
+      <div class="g3" id="vg-charts"></div>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow" id="vg-eb">Período</span><h2>Quem saiu, quanto e quando</h2><p>Saídas = missões com deslocamento e pernoite + operações em Fortaleza e RMF. A comparação é feita dentro do mesmo cargo.</p></div></div>
+        <div class="scroll stack" id="vg-tab"></div>
+        <p class="info" id="vg-nota"></p>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Rodízio</span><h2>Ordem sugerida para as próximas designações</h2><p>Critério: menos saídas no período; em empate, mais tempo desde a última saída. É uma referência para a chefia, não uma escala automática.</p></div></div>
+          <ol class="fila" id="vg-fila"></ol>
+        </div>
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow" id="vg-eb2">Período</span><h2>Registro de viagens e operações</h2></div></div>
+          <div class="feed" id="vg-lista"></div>
+        </div>
       </div>
     </section>
 
@@ -433,7 +515,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
           <label class="fld check" id="s-chefe-w"><input type="checkbox" id="s-chefe"> Chefe da unidade</label>
           <label class="fld check"><input type="checkbox" id="s-vol"> Voluntário para sobreaviso</label>
         </div>
-        <div class="actions"><button type="submit" id="s-ok">Incluir servidor</button><span class="err" id="s-err" role="alert"></span></div>
+        <div class="actions"><button type="submit" id="s-ok">Incluir servidor</button><span class="err" id="s-err" role="alert"></span><span style="flex:1"></span><button type="button" class="danger" id="s-toggle" hidden>Marcar fora da unidade</button><button type="button" class="danger" id="s-del" hidden>Excluir servidor</button></div>
       </form>
       <div id="efetivo-list" class="page"></div>
       <div class="g2">
@@ -545,7 +627,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
           <div class="actions"><button type="button" class="ghost" id="ver-equipe">Ver como a equipe vê</button></div>
         </div>
         <div class="card">
-          <div class="card-h"><div class="t"><span class="eyebrow">Divulgação</span><h2>Página pública</h2><p>Gera um arquivo HTML com uma cópia dos dados atuais, sem login, para publicar num endereço próprio. Quem tiver o link vê o conteúdo. A matrícula e a data de nascimento não são incluídas.</p></div></div>
+          <div class="card-h"><div class="t"><span class="eyebrow">Divulgação</span><h2>Página pública</h2><p>Gera um arquivo HTML com uma cópia dos dados atuais, sem login, para publicar num endereço próprio. Quem tiver o link vê o conteúdo. Não são incluídas a matrícula, a data de nascimento nem a descrição das operações e missões (só tipo, datas e participantes).</p></div></div>
           <div class="actions"><button type="button" class="gold" id="gerar-pub">Gerar página pública</button></div>
         </div>
       </div>
@@ -557,7 +639,7 @@ td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
 
     <footer class="foot"><span>Polícia Federal · SR/PF/CE · DRPJ · DELINST</span><span id="foot-ref"></span><span><b>Uso interno</b> · divulgação restrita aos servidores da unidade e interessados</span></footer>
   </main>
-</div><div id="tip" hidden></div><div id="toast" hidden role="status"></div><script>window.__SNAPSHOT__={"geradoEm": "2026-10-15T19:06:48.379587+00:00", "cfg": {"pesos": {"IPL": 1, "NC": 1, "RE": 1, "RDF": 1, "NCV": 1}, "limiteAlerta": 125, "diasDesatualizado": 45}, "hist": [{"data": "2026-10-15", "por": {"dpf-doralucia": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "dpf-martins": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "dpf-nogueira": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "dpf-olavo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}}}], "servidores": [{"acervo": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Doralúcia", "relatados": {"2026": 31}, "idadeAnos": null, "id": "dpf-doralucia"}, {"acervo": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Martins", "relatados": {"2026": 41}, "voluntarioSobreaviso": true, "idadeAnos": null, "id": "dpf-martins"}, {"acervo": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Nogueira", "relatados": {"2026": 20}, "idadeAnos": null, "id": "dpf-nogueira"}, {"acervo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": true, "extras": {"simba": 10}, "nome": "Olavo", "posse": "2006-07-01", "relatados": {"2026": 21}, "voluntarioSobreaviso": true, "idadeAnos": 48, "id": "dpf-olavo"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Chrauslay", "parId": "dpf-doralucia", "idadeAnos": null, "id": "epf-chrauslay"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Fábio", "parId": "dpf-nogueira", "voluntarioSobreaviso": true, "idadeAnos": null, "id": "epf-fabio"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Girão", "parId": "dpf-olavo", "idadeAnos": null, "id": "epf-girao"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Renato", "parId": "dpf-martins", "idadeAnos": null, "id": "epf-renato"}], "atividades": [{"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-01", "grupo": "sob-2026-09-01", "inicio": "2026-09-01", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-01-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-02", "grupo": "sob-2026-09-02", "inicio": "2026-09-02", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-02-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-03", "grupo": "sob-2026-09-03", "inicio": "2026-09-03", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-03-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-05", "grupo": "sob-2026-09-05", "inicio": "2026-09-05", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-05-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-06", "grupo": "sob-2026-09-06", "inicio": "2026-09-06", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-06-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-15", "grupo": "sob-2026-09-15", "inicio": "2026-09-15", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-15-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-16", "grupo": "sob-2026-09-16", "inicio": "2026-09-16", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-16-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-17", "grupo": "sob-2026-09-17", "inicio": "2026-09-17", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-17-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-19", "grupo": "sob-2026-09-19", "inicio": "2026-09-19", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-19-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-20", "grupo": "sob-2026-09-20", "inicio": "2026-09-20", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-20-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-22", "grupo": "sob-2026-09-22", "inicio": "2026-09-22", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-22-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-23", "grupo": "sob-2026-09-23", "inicio": "2026-09-23", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-23-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-24", "grupo": "sob-2026-09-24", "inicio": "2026-09-24", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-24-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-26", "grupo": "sob-2026-09-26", "inicio": "2026-09-26", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-26-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-27", "grupo": "sob-2026-09-27", "inicio": "2026-09-27", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-27-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-29", "grupo": "sob-2026-09-29", "inicio": "2026-09-29", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-29-martins"}]}</script><script>
+</div><div id="tip" hidden></div><div id="toast" hidden role="status"></div><script>window.__SNAPSHOT__={"geradoEm": "2026-10-15T20:19:03.805603+00:00", "cfg": {"pesos": {"IPL": 1, "NC": 1, "RE": 1, "RDF": 1, "NCV": 1}, "limiteAlerta": 125, "diasDesatualizado": 45}, "hist": [{"data": "2026-10-15", "por": {"dpf-doralucia": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "dpf-martins": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "dpf-nogueira": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "dpf-olavo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}}}], "servidores": [{"acervo": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Doralúcia", "relatados": {"2026": 31}, "idadeAnos": null, "id": "dpf-doralucia"}, {"acervo": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Martins", "relatados": {"2026": 41}, "voluntarioSobreaviso": true, "idadeAnos": null, "id": "dpf-martins"}, {"acervo": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Nogueira", "relatados": {"2026": 20}, "idadeAnos": null, "id": "dpf-nogueira"}, {"acervo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": true, "extras": {"simba": 10}, "nome": "Olavo", "posse": "2006-07-01", "relatados": {"2026": 21}, "voluntarioSobreaviso": true, "idadeAnos": 48, "id": "dpf-olavo"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Chrauslay", "parId": "dpf-doralucia", "idadeAnos": null, "id": "epf-chrauslay"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Fábio", "parId": "dpf-nogueira", "voluntarioSobreaviso": true, "idadeAnos": null, "id": "epf-fabio"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Girão", "parId": "dpf-olavo", "idadeAnos": null, "id": "epf-girao"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Renato", "parId": "dpf-martins", "idadeAnos": null, "id": "epf-renato"}], "atividades": [{"fim": "2026-03-11", "grupo": "om-10828-2026", "inicio": "2026-03-10", "servidorId": "dpf-martins", "tipo": "viagem", "id": "om-10828-2026-martins"}, {"fim": "2026-03-04", "grupo": "om-10876-2026", "inicio": "2026-03-04", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-10876-2026-chrauslay"}, {"fim": "2026-03-04", "grupo": "om-10876-2026", "inicio": "2026-03-04", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-10876-2026-doralucia"}, {"fim": "2026-03-12", "grupo": "om-13334-2026", "inicio": "2026-03-11", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-13334-2026-chrauslay"}, {"fim": "2026-03-12", "grupo": "om-13340-2026", "inicio": "2026-03-11", "servidorId": "epf-fabio", "tipo": "viagem", "id": "om-13340-2026-fabio"}, {"fim": "2026-03-12", "grupo": "om-13340-2026", "inicio": "2026-03-11", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-13340-2026-nogueira"}, {"fim": "2026-03-13", "grupo": "om-13759-2026", "inicio": "2026-03-13", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-13759-2026-fabio"}, {"fim": "2026-03-17", "grupo": "om-14499-2026", "inicio": "2026-03-17", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-14499-2026-chrauslay"}, {"fim": "2026-03-17", "grupo": "om-14499-2026", "inicio": "2026-03-17", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-14499-2026-doralucia"}, {"fim": "2026-03-17", "grupo": "om-14499-2026", "inicio": "2026-03-17", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-14499-2026-fabio"}, {"fim": "2026-03-17", "grupo": "om-14499-2026", "inicio": "2026-03-17", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-14499-2026-nogueira"}, {"fim": "2026-03-17", "grupo": "om-14499-2026", "inicio": "2026-03-17", "servidorId": "dpf-olavo", "tipo": "op_local", "id": "om-14499-2026-olavo"}, {"fim": "2026-04-01", "grupo": "om-17626-2026", "inicio": "2026-04-01", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-17626-2026-chrauslay"}, {"fim": "2026-04-01", "grupo": "om-17626-2026", "inicio": "2026-04-01", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-17626-2026-doralucia"}, {"fim": "2026-04-01", "grupo": "om-18023-2026", "inicio": "2026-03-31", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-18023-2026-fabio"}, {"fim": "2026-04-01", "grupo": "om-18023-2026", "inicio": "2026-03-31", "servidorId": "dpf-martins", "tipo": "op_local", "id": "om-18023-2026-martins"}, {"fim": "2026-04-01", "grupo": "om-18023-2026", "inicio": "2026-03-31", "servidorId": "dpf-olavo", "tipo": "op_local", "id": "om-18023-2026-olavo"}, {"fim": "2026-06-03", "grupo": "om-19997-2026", "inicio": "2026-06-01", "servidorId": "dpf-olavo", "tipo": "viagem", "id": "om-19997-2026-olavo"}, {"fim": "2026-05-30", "grupo": "om-21106-2026", "inicio": "2026-05-24", "servidorId": "dpf-olavo", "tipo": "viagem", "id": "om-21106-2026-olavo"}, {"fim": "2026-04-24", "grupo": "om-24059-2026", "inicio": "2026-04-24", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-24059-2026-fabio"}, {"fim": "2026-04-29", "grupo": "om-24821-2026", "inicio": "2026-04-29", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-24821-2026-fabio"}, {"fim": "2026-04-29", "grupo": "om-24821-2026", "inicio": "2026-04-29", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-24821-2026-nogueira"}, {"fim": "2026-07-03", "grupo": "om-25648-2026", "inicio": "2026-06-29", "servidorId": "dpf-olavo", "tipo": "viagem", "id": "om-25648-2026-olavo"}, {"fim": "2026-05-05", "grupo": "om-26252-2026", "inicio": "2026-05-04", "servidorId": "epf-renato", "tipo": "viagem", "id": "om-26252-2026-renato"}, {"fim": "2026-05-05", "grupo": "om-26253-2026", "inicio": "2026-05-04", "servidorId": "epf-fabio", "tipo": "viagem", "id": "om-26253-2026-fabio"}, {"fim": "2026-05-05", "grupo": "om-26253-2026", "inicio": "2026-05-04", "servidorId": "dpf-martins", "tipo": "viagem", "id": "om-26253-2026-martins"}, {"fim": "2026-05-05", "grupo": "om-26253-2026", "inicio": "2026-05-04", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-26253-2026-nogueira"}, {"fim": "2026-05-05", "grupo": "om-26262-2026", "inicio": "2026-05-05", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-26262-2026-chrauslay"}, {"fim": "2026-05-05", "grupo": "om-26262-2026", "inicio": "2026-05-05", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-26262-2026-doralucia"}, {"fim": "2026-05-05", "grupo": "om-26548-2026", "inicio": "2026-05-04", "servidorId": "epf-girao", "tipo": "viagem", "id": "om-26548-2026-girao"}, {"fim": "2026-05-08", "grupo": "om-27574-2026", "inicio": "2026-05-08", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-27574-2026-fabio"}, {"fim": "2026-05-12", "grupo": "om-28090-2026", "inicio": "2026-05-12", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-28090-2026-chrauslay"}, {"fim": "2026-05-12", "grupo": "om-28090-2026", "inicio": "2026-05-12", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-28090-2026-doralucia"}, {"fim": "2026-05-22", "grupo": "om-30009-2026", "inicio": "2026-05-20", "servidorId": "dpf-martins", "tipo": "viagem", "id": "om-30009-2026-martins"}, {"fim": "2026-05-21", "grupo": "om-30013-2026", "inicio": "2026-05-20", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-30013-2026-chrauslay"}, {"fim": "2026-05-21", "grupo": "om-30013-2026", "inicio": "2026-05-20", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-30013-2026-nogueira"}, {"fim": "2026-05-29", "grupo": "om-33443-2026", "inicio": "2026-05-29", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-33443-2026-fabio"}, {"fim": "2026-01-28", "grupo": "om-3474-2026", "inicio": "2026-01-26", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-3474-2026-chrauslay"}, {"fim": "2026-01-28", "grupo": "om-3474-2026", "inicio": "2026-01-26", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-3474-2026-nogueira"}, {"fim": "2026-06-09", "grupo": "om-34886-2026", "inicio": "2026-06-08", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-34886-2026-nogueira"}, {"fim": "2026-06-09", "grupo": "om-34886-2026", "inicio": "2026-06-08", "servidorId": "epf-renato", "tipo": "viagem", "id": "om-34886-2026-renato"}, {"fim": "2026-06-10", "grupo": "om-35889-2026", "inicio": "2026-06-10", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-35889-2026-fabio"}, {"fim": "2026-06-18", "grupo": "om-36225-2026", "inicio": "2026-06-17", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-36225-2026-nogueira"}, {"fim": "2026-06-23", "grupo": "om-38301-2026", "inicio": "2026-06-22", "servidorId": "epf-renato", "tipo": "viagem", "id": "om-38301-2026-renato"}, {"fim": "2026-06-23", "grupo": "om-38355-2026", "inicio": "2026-06-22", "servidorId": "dpf-olavo", "tipo": "viagem", "id": "om-38355-2026-olavo"}, {"fim": "2026-06-30", "grupo": "om-40622-2026", "inicio": "2026-06-30", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-40622-2026-chrauslay"}, {"fim": "2026-06-30", "grupo": "om-40622-2026", "inicio": "2026-06-30", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-40622-2026-doralucia"}, {"fim": "2026-06-30", "grupo": "om-40622-2026", "inicio": "2026-06-30", "servidorId": "epf-renato", "tipo": "op_local", "id": "om-40622-2026-renato"}, {"fim": "2026-07-07", "grupo": "om-42336-2026", "inicio": "2026-07-07", "servidorId": "epf-renato", "tipo": "op_local", "id": "om-42336-2026-renato"}, {"fim": "2026-07-08", "grupo": "om-42343-2026", "inicio": "2026-07-08", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-42343-2026-chrauslay"}, {"fim": "2026-07-08", "grupo": "om-42343-2026", "inicio": "2026-07-08", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-42343-2026-doralucia"}, {"fim": "2026-01-28", "grupo": "om-4271-2026", "inicio": "2026-01-28", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-4271-2026-girao"}, {"fim": "2026-07-08", "grupo": "om-42944-2026", "inicio": "2026-07-08", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-42944-2026-girao"}, {"fim": "2026-07-10", "grupo": "om-43287-2026", "inicio": "2026-07-09", "servidorId": "epf-fabio", "tipo": "viagem", "id": "om-43287-2026-fabio"}, {"fim": "2026-07-10", "grupo": "om-43287-2026", "inicio": "2026-07-09", "servidorId": "dpf-martins", "tipo": "viagem", "id": "om-43287-2026-martins"}, {"fim": "2026-07-15", "grupo": "om-43771-2026", "inicio": "2026-07-15", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-43771-2026-chrauslay"}, {"fim": "2026-07-15", "grupo": "om-43771-2026", "inicio": "2026-07-15", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-43771-2026-doralucia"}, {"fim": "2026-07-17", "grupo": "om-45341-2026", "inicio": "2026-07-17", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-45341-2026-fabio"}, {"fim": "2026-07-18", "grupo": "om-45355-2026", "inicio": "2026-07-18", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-45355-2026-fabio"}, {"fim": "2026-07-28", "grupo": "om-47347-2026", "inicio": "2026-07-27", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-47347-2026-chrauslay"}, {"fim": "2026-07-28", "grupo": "om-47347-2026", "inicio": "2026-07-27", "servidorId": "dpf-doralucia", "tipo": "viagem", "id": "om-47347-2026-doralucia"}, {"fim": "2026-07-28", "grupo": "om-47347-2026", "inicio": "2026-07-27", "servidorId": "epf-girao", "tipo": "viagem", "id": "om-47347-2026-girao"}, {"fim": "2026-07-28", "grupo": "om-47347-2026", "inicio": "2026-07-27", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-47347-2026-nogueira"}, {"fim": "2026-08-07", "grupo": "om-49575-2026", "inicio": "2026-08-06", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-49575-2026-nogueira"}, {"fim": "2026-08-06", "grupo": "om-50374-2026", "inicio": "2026-08-06", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-50374-2026-fabio"}, {"fim": "2026-08-11", "grupo": "om-50512-2026", "inicio": "2026-08-10", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-50512-2026-chrauslay"}, {"fim": "2026-08-11", "grupo": "om-50512-2026", "inicio": "2026-08-10", "servidorId": "dpf-doralucia", "tipo": "viagem", "id": "om-50512-2026-doralucia"}, {"fim": "2026-08-11", "grupo": "om-50512-2026", "inicio": "2026-08-10", "servidorId": "dpf-olavo", "tipo": "viagem", "id": "om-50512-2026-olavo"}, {"fim": "2026-08-14", "grupo": "om-52409-2026", "inicio": "2026-08-14", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-52409-2026-fabio"}, {"fim": "2026-08-25", "grupo": "om-53342-2026", "inicio": "2026-08-25", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-53342-2026-chrauslay"}, {"fim": "2026-08-25", "grupo": "om-53342-2026", "inicio": "2026-08-25", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-53342-2026-girao"}, {"fim": "2026-08-25", "grupo": "om-53342-2026", "inicio": "2026-08-25", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-53342-2026-nogueira"}, {"fim": "2026-08-25", "grupo": "om-53342-2026", "inicio": "2026-08-25", "servidorId": "epf-renato", "tipo": "op_local", "id": "om-53342-2026-renato"}, {"fim": "2026-08-21", "grupo": "om-54217-2026", "inicio": "2026-08-21", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-54217-2026-fabio"}, {"fim": "2026-02-04", "grupo": "om-5533-2026", "inicio": "2026-02-04", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-5533-2026-doralucia"}, {"fim": "2026-02-04", "grupo": "om-5533-2026", "inicio": "2026-02-04", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-5533-2026-fabio"}, {"fim": "2026-02-04", "grupo": "om-5533-2026", "inicio": "2026-02-04", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-5533-2026-girao"}, {"fim": "2026-08-31", "grupo": "om-56752-2026", "inicio": "2026-08-31", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-56752-2026-fabio"}, {"fim": "2026-09-02", "grupo": "om-56935-2026", "inicio": "2026-09-01", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-56935-2026-nogueira"}, {"fim": "2026-09-09", "grupo": "om-58072-2026", "inicio": "2026-09-08", "servidorId": "dpf-martins", "tipo": "viagem", "id": "om-58072-2026-martins"}, {"fim": "2026-09-10", "grupo": "om-59197-2026", "inicio": "2026-09-10", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-59197-2026-chrauslay"}, {"fim": "2026-09-10", "grupo": "om-59197-2026", "inicio": "2026-09-10", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-59197-2026-doralucia"}, {"fim": "2026-09-16", "grupo": "om-60534-2026", "inicio": "2026-09-16", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-60534-2026-girao"}, {"fim": "2026-09-16", "grupo": "om-60534-2026", "inicio": "2026-09-16", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-60534-2026-nogueira"}, {"fim": "2026-09-23", "grupo": "om-60548-2026", "inicio": "2026-09-21", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-60548-2026-chrauslay"}, {"fim": "2026-09-23", "grupo": "om-60548-2026", "inicio": "2026-09-21", "servidorId": "dpf-doralucia", "tipo": "viagem", "id": "om-60548-2026-doralucia"}, {"fim": "2026-09-24", "grupo": "om-62553-2026", "inicio": "2026-09-23", "servidorId": "epf-girao", "tipo": "viagem", "id": "om-62553-2026-girao"}, {"fim": "2026-09-24", "grupo": "om-62553-2026", "inicio": "2026-09-23", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-62553-2026-nogueira"}, {"fim": "2026-10-05", "grupo": "om-63825-2026", "inicio": "2026-09-30", "servidorId": "dpf-doralucia", "tipo": "viagem", "id": "om-63825-2026-doralucia"}, {"fim": "2026-10-05", "grupo": "om-63825-2026", "inicio": "2026-09-30", "servidorId": "epf-renato", "tipo": "viagem", "id": "om-63825-2026-renato"}, {"fim": "2026-10-05", "grupo": "om-63832-2026", "inicio": "2026-09-30", "servidorId": "epf-chrauslay", "tipo": "viagem", "id": "om-63832-2026-chrauslay"}, {"fim": "2026-10-05", "grupo": "om-63893-2026", "inicio": "2026-09-30", "servidorId": "dpf-martins", "tipo": "viagem", "id": "om-63893-2026-martins"}, {"fim": "2026-10-04", "grupo": "om-63900-2026", "inicio": "2026-09-30", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-63900-2026-nogueira"}, {"fim": "2026-10-05", "grupo": "om-63906-2026", "inicio": "2026-09-30", "servidorId": "epf-fabio", "tipo": "viagem", "id": "om-63906-2026-fabio"}, {"fim": "2026-10-05", "grupo": "om-63966-2026", "inicio": "2026-09-30", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-63966-2026-girao"}, {"fim": "2026-10-05", "grupo": "om-63966-2026", "inicio": "2026-09-30", "servidorId": "dpf-olavo", "tipo": "op_local", "id": "om-63966-2026-olavo"}, {"fim": "2026-10-03", "grupo": "om-66151-2026", "inicio": "2026-10-03", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-66151-2026-girao"}, {"fim": "2026-10-03", "grupo": "om-66166-2026", "inicio": "2026-10-03", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-66166-2026-fabio"}, {"fim": "2026-10-03", "grupo": "om-66167-2026", "inicio": "2026-10-03", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-66167-2026-nogueira"}, {"fim": "2026-10-07", "grupo": "om-67118-2026", "inicio": "2026-10-07", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-67118-2026-girao"}, {"fim": "2026-10-08", "grupo": "om-67364-2026", "inicio": "2026-10-08", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-67364-2026-chrauslay"}, {"fim": "2026-10-08", "grupo": "om-67364-2026", "inicio": "2026-10-08", "servidorId": "dpf-doralucia", "tipo": "op_local", "id": "om-67364-2026-doralucia"}, {"fim": "2026-10-08", "grupo": "om-67364-2026", "inicio": "2026-10-08", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-67364-2026-girao"}, {"fim": "2026-10-08", "grupo": "om-67364-2026", "inicio": "2026-10-08", "servidorId": "dpf-olavo", "tipo": "op_local", "id": "om-67364-2026-olavo"}, {"fim": "2026-10-14", "grupo": "om-68173-2026", "inicio": "2026-10-14", "servidorId": "epf-chrauslay", "tipo": "op_local", "id": "om-68173-2026-chrauslay"}, {"fim": "2026-10-14", "grupo": "om-68173-2026", "inicio": "2026-10-14", "servidorId": "dpf-martins", "tipo": "op_local", "id": "om-68173-2026-martins"}, {"fim": "2026-10-14", "grupo": "om-68173-2026", "inicio": "2026-10-14", "servidorId": "dpf-nogueira", "tipo": "op_local", "id": "om-68173-2026-nogueira"}, {"fim": "2026-10-14", "grupo": "om-68173-2026", "inicio": "2026-10-14", "servidorId": "epf-renato", "tipo": "op_local", "id": "om-68173-2026-renato"}, {"fim": "2026-02-13", "grupo": "om-7592-2026", "inicio": "2026-02-13", "servidorId": "epf-fabio", "tipo": "op_local", "id": "om-7592-2026-fabio"}, {"fim": "2026-02-13", "grupo": "om-7592-2026", "inicio": "2026-02-13", "servidorId": "epf-girao", "tipo": "op_local", "id": "om-7592-2026-girao"}, {"fim": "2026-03-12", "grupo": "om-9613-2026", "inicio": "2026-03-10", "servidorId": "dpf-olavo", "tipo": "viagem", "id": "om-9613-2026-olavo"}, {"fim": "2026-03-02", "grupo": "om-9685-2026", "inicio": "2026-02-27", "servidorId": "dpf-nogueira", "tipo": "viagem", "id": "om-9685-2026-nogueira"}, {"fim": "2026-09-01", "grupo": "sob-2026-09-01", "inicio": "2026-09-01", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-01-martins"}, {"fim": "2026-09-02", "grupo": "sob-2026-09-02", "inicio": "2026-09-02", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-02-martins"}, {"fim": "2026-09-03", "grupo": "sob-2026-09-03", "inicio": "2026-09-03", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-03-martins"}, {"fim": "2026-09-05", "grupo": "sob-2026-09-05", "inicio": "2026-09-05", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-05-martins"}, {"fim": "2026-09-06", "grupo": "sob-2026-09-06", "inicio": "2026-09-06", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-06-martins"}, {"fim": "2026-09-15", "grupo": "sob-2026-09-15", "inicio": "2026-09-15", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-15-martins"}, {"fim": "2026-09-16", "grupo": "sob-2026-09-16", "inicio": "2026-09-16", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-16-martins"}, {"fim": "2026-09-17", "grupo": "sob-2026-09-17", "inicio": "2026-09-17", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-17-martins"}, {"fim": "2026-09-19", "grupo": "sob-2026-09-19", "inicio": "2026-09-19", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-19-martins"}, {"fim": "2026-09-20", "grupo": "sob-2026-09-20", "inicio": "2026-09-20", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-20-martins"}, {"fim": "2026-09-22", "grupo": "sob-2026-09-22", "inicio": "2026-09-22", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-22-martins"}, {"fim": "2026-09-23", "grupo": "sob-2026-09-23", "inicio": "2026-09-23", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-23-martins"}, {"fim": "2026-09-24", "grupo": "sob-2026-09-24", "inicio": "2026-09-24", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-24-martins"}, {"fim": "2026-09-26", "grupo": "sob-2026-09-26", "inicio": "2026-09-26", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-26-martins"}, {"fim": "2026-09-27", "grupo": "sob-2026-09-27", "inicio": "2026-09-27", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-27-martins"}, {"fim": "2026-09-29", "grupo": "sob-2026-09-29", "inicio": "2026-09-29", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-29-martins"}]}</script><script>
 const SNAP=window.__SNAPSHOT__||null;
 const SRC_SCRIPT=document.currentScript?document.currentScript.textContent:"";
 const PRISTINE=document.getElementById("app").outerHTML;
@@ -578,6 +660,7 @@ const ATIV=[
 const ATIV_N=Object.fromEntries(ATIV.map(t=>[t.k,t.n])),ATIV_C=Object.fromEntries(ATIV.map(t=>[t.k,t.c]));
 const SECS=[
  {k:"painel",n:"Visão geral",c:"Geral",d:"Indicadores, alertas e síntese da unidade",i:"grid"},
+ {k:"viagens",n:"Viagens e operações",c:"Viagens",d:"Missões fora da sede e operações: distribuição entre os servidores",i:"route"},
  {k:"acervo",n:"Acervo",c:"Acervo",d:"Inquéritos e procedimentos especiais por delegado, com histórico",i:"folder"},
  {k:"efetivo",n:"Efetivo",c:"Efetivo",d:"Delegados, escrivães e agentes da unidade",i:"users"},
  {k:"ativ",n:"Atividades",c:"Ativid.",d:"Operações, missões, cursos, treinamentos, reuniões e encontros",i:"cal",chefia:true},
@@ -586,6 +669,8 @@ const SECS=[
  {k:"rel",n:"Relatórios",c:"Relat.",d:"Relatório gerencial, metodologia e exportações",i:"file"},
  {k:"cfg",n:"Configurações",c:"Config.",d:"Pesos, critérios de alerta, publicação e auditoria",i:"gear",chefia:true}];
 const ICONS={
+ route:'<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"/>',
+ dots:'<circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/>',
  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
  folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.6 14.8c1.7.8 2.8 2.6 3.1 5.2"/>',
@@ -618,8 +703,8 @@ let db=null,dl=null,userNS=null,uid=null,podeEditar=false,EDIT=false;
 let servidores=[],atividades=[],hist=[],auditoria=[];
 let cfg={pesos:{IPL:1,NC:1,RE:1,RDF:1,NCV:1},limiteAlerta:125,diasDesatualizado:45,atualizadoEm:null};
 let periodo="ano:"+new Date().getFullYear();
-let sec="painel",cargaCargo="DPF",ativView="cal";
-let calMes=hoje().slice(0,7),sobMes=null;
+let sec="painel",cargaCargo="DPF",ativView="cal",vgCargo="DPF",vgAll=false;
+let calMes=null,sobMes=null;
 let editGrupo=null,editServ=null,flashId=null;
 let sortAc={k:"total",d:-1};
 const draft={},selPart=new Set();
@@ -678,7 +763,8 @@ const cw=el=>Math.max(260,Math.floor(el.clientWidth||600));
 const tipAttr=h=>`data-tip="${esc(h)}"`;
 function barPath(x,y,w,h,r){r=Math.min(r,w,h/2);return `M${x},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x}Z`}
 function trunc(s,px){const max=Math.max(6,Math.floor(px/7.2));return s.length>max?s.slice(0,max-1)+"…":s}
-function hbarChart(host,{rows,mean,label}){
+function hbarChart(host,{rows,mean,label,vazio}){
+  if(vazio&&!rows.some(r=>!r.group&&r.value>0)){host.innerHTML=`<div class="empty">${esc(vazio)}</div>`;return}
   const w=cw(host),lw=Math.min(140,Math.round(w*.3)),rw=w<420?80:112,bh=mobile()?22:20,gap=12,top=26,gh=24;
   const vals=rows.filter(r=>!r.group).map(r=>r.value);
   const {top:mx,t}=ticksFor(Math.max(1,mean||0,...vals),w<420?3:4);
@@ -690,7 +776,7 @@ function hbarChart(host,{rows,mean,label}){
     body+=`<g ${tipAttr(r.tip||"")}><rect class="hit" x="0" y="${y-gap/2}" width="${w}" height="${bh+gap}"/>`+
       `<text class="lb" x="${lw-10}" y="${y+bh/2+4.5}" text-anchor="end">${esc(trunc(r.label,lw))}</text>`+
       (bw?`<path d="${barPath(lw,y,bw,bh,4)}" style="fill:var(--navy)"/>`:"")+
-      `<text class="vl" x="${lw+bw+8}" y="${y+bh/2+4.5}">${fmt(r.value)}<tspan class="vl2" dx="6">${r.pct!=null?r.pct+"%":""}</tspan></text></g>`;
+      `<text class="vl" x="${lw+bw+8}" y="${y+bh/2+4.5}">${fmt(r.value)}<tspan class="vl2" dx="6">${r.pct!=null&&r.value>0?r.pct+"%":""}</tspan></text></g>`;
     y+=bh+gap;
   }
   const h=y+4;
@@ -751,6 +837,7 @@ function grupoChart(host,infoEl,{fn,un,dec,grupos}){
     medias.push([nome,com.reduce((a,x)=>a+fn(x),0)/com.length]);
   }
   if(!rows.length){host.innerHTML=`<div class="empty">Sem dados lançados.</div>`;if(infoEl)infoEl.textContent=faltam.length?"Sem dado: "+faltam.join(", "):"";return}
+  if(!rows.some(r=>!r.group&&r.value>0)){host.innerHTML=`<div class="empty">Nenhum registro no período.</div>`;if(infoEl)infoEl.textContent="";return}
   hbarChart(host,{rows,mean:0,label:un});
   if(infoEl)infoEl.textContent="Média: "+medias.map(([n,m])=>`${n.toLowerCase()} ${m==null?"—":fmt(m)+" "+un}`).join(" · ")+(faltam.length?` · sem dado: ${faltam.join(", ")}`:"");
 }
@@ -799,8 +886,11 @@ function audit(acao,detalhe){
 }
 
 /* ================= navegação ================= */
+const PRIM=["painel","viagens","acervo","sob"];
 function renderNav(){
-  $("#nav").innerHTML=SECS.filter(s=>!s.chefia||EDIT).map(s=>`<a href="#${s.k}" data-sec="${s.k}" ${s.k===sec?'aria-current="page"':""}>${ico(s.i)}<span class="lf">${s.n}</span><span class="ls">${s.c}</span>${s.chefia?'<span class="lock">chefia</span>':""}</a>`).join("");
+  const vis=SECS.filter(s=>!s.chefia||EDIT);
+  const lk=s=>`<a href="#${s.k}" data-sec="${s.k}" class="${PRIM.includes(s.k)?"":"xtra"}" ${s.k===sec?'aria-current="page"':""}>${ico(s.i)}<span class="lf">${s.n}</span><span class="ls">${s.c}</span>${s.chefia?'<span class="lock">chefia</span>':""}</a>`;
+  $("#nav").innerHTML=vis.map(lk).join("")+`<button type="button" class="mais" id="mais" aria-expanded="false" aria-controls="sheet" ${PRIM.includes(sec)?"":'aria-current="page"'}>${ico("dots")}<span>Mais</span></button><div id="sheet" hidden>${vis.filter(s=>!PRIM.includes(s.k)).map(lk).join("")}</div>`;
 }
 function irPara(k){
   const s=SECS.find(x=>x.k===k)||SECS[0];
@@ -810,6 +900,7 @@ function irPara(k){
   $("#sec-title").textContent=S.k==="painel"?"Gestão DELINST":S.n;
   $("#sec-desc").textContent=S.k==="painel"?"Visão geral · "+S.d:S.d;
   $$("#nav a").forEach(a=>{if(a.dataset.sec===sec)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  const mb=$("#mais"),sh=$("#sheet");if(mb){mb.toggleAttribute("aria-current",!PRIM.includes(sec));if(!PRIM.includes(sec))mb.setAttribute("aria-current","page");mb.setAttribute("aria-expanded","false")}if(sh)sh.hidden=true;
   renderPage();
 }
 addEventListener("hashchange",()=>{const k=location.hash.slice(1);if(k&&k!==sec){irPara(k);scrollTo(0,0)}});
@@ -836,7 +927,7 @@ async function renderWho(){
 /* ================= páginas ================= */
 function renderPage(){
   const C=calc();renderStatus(C);
-  ({painel:pgPainel,acervo:pgAcervo,efetivo:pgEfetivo,ativ:pgAtiv,sob:pgSob,prod:pgProd,rel:pgRel,cfg:pgCfg}[sec]||pgPainel)(C);
+  ({viagens:pgViagens,painel:pgPainel,acervo:pgAcervo,efetivo:pgEfetivo,ativ:pgAtiv,sob:pgSob,prod:pgProd,rel:pgRel,cfg:pgCfg}[sec]||pgPainel)(C);
 }
 function render(){renderPeriodo();renderNav();renderPage()}
 
@@ -862,6 +953,11 @@ function alertas(C){
     const a=hs[hs.length-2],b=hs[hs.length-1],ta=tH(a),tb=tH(b);
     if(ta>0&&Math.abs(tb-ta)/ta>=0.05)A.push({nv:"info",t:`Acervo ${tb>ta?"aumentou":"diminuiu"} ${fmt(Math.abs(tb-ta)/ta*100)}% (${ta} → ${tb})`,c:"Variação de 5% ou mais entre as duas últimas atualizações",o:"Histórico do acervo",r:`${br(a.data)} → ${br(b.data)}`})}
   const sem=[...C.D,...C.E].filter(x=>!x.s.posse||idadeDe(x.s)==null).map(x=>x.s.nome);
+  for(const [nmC,L] of [["delegados",C.D],["escrivães",C.E]]){
+    const tM=L.reduce((a,x)=>a+x.at.viagem+x.at.op_local,0);
+    if(tM>=4&&L.length>1){const top=[...L].sort((a,b)=>(b.at.viagem+b.at.op_local)-(a.at.viagem+a.at.op_local))[0],sh=(top.at.viagem+top.at.op_local)/tM;
+      if(sh>=0.5)A.push({nv:"atencao",t:`${top.s.nome} concentra ${Math.round(sh*100)}% das saídas dos ${nmC}`,c:"Um servidor com 50% ou mais das missões e operações do cargo no período",o:"Viagens e operações",r:periodoLabel()});
+      const m=tM/L.length;L.filter(x=>x.at.viagem+x.at.op_local===0&&m>=2).forEach(x=>A.push({nv:"info",t:`${x.s.nome} sem missões ou operações no período`,c:`A média dos ${nmC} é ${fmt(m)} saída(s)`,o:"Viagens e operações",r:periodoLabel()}))}}
   if(sem.length)A.push({nv:"info",t:`Cadastro incompleto de ${sem.length} servidor(es)`,c:"Sem data de posse ou de nascimento: "+sem.join(", "),o:"Cadastro do efetivo",r:"atual"});
   return A;
 }
@@ -886,12 +982,23 @@ function pgPainel(C){
   if(!L.length)$("#ch-carga").innerHTML=`<div class="empty">Nenhum servidor neste cargo.</div>`;
   else hbarChart($("#ch-carga"),{rows:[...L].sort(ordem("pond")).map(x=>{const p=pct(x.pond,mc),st=status(mc>0?x.pond/mc:null);
     return {label:x.s.nome,value:x.pond,pct:p,tip:`<b>${esc(x.s.nome)}</b>${x.via?" · cartório do DPF "+esc(x.via.nome):""}<br>Carga ponderada: ${fmt(x.pond)} (${x.total} procedimentos)<br>${p==null?"":p+"% da média · "+st.t}`}}),mean:mc,label:"Carga ponderada"});
+  $("#nota-carga").textContent=PROC.every(k=>+cfg.pesos[k]===1)?"Todos os pesos estão em 1: a carga ponderada é igual ao total de procedimentos. Ajuste os pesos em Configurações.":"";
   $("#lg-carga").innerHTML=legend([{n:cargaCargo==="DPF"?"Delegados":"Escrivães (carga do cartório)",c:"--navy"},{n:"Média "+fmt(mc),cls:"dash"}]);
   $("#eb-rel").textContent="Produção em "+anoRel();
   const re=simples("rel","Relatados em "+anoRel());
   if(!re.rows.some(r=>r.value))$("#ch-rel").innerHTML=`<div class="empty">Nenhum relatório lançado para ${anoRel()}.</div>`;
   else hbarChart($("#ch-rel"),{rows:re.rows,mean:re.m,label:"Inquéritos relatados"});
   $("#lg-rel").innerHTML=legend([{n:"Média "+fmt(re.m),cls:"dash"}]);
+  // sobreaviso e atividades de campo
+  $("#eb-psob").textContent=$("#eb-pcampo").textContent=periodoLabel();
+  const mS=C.media(C.D,x=>x.at.sobreaviso);
+  hbarChart($("#ch-psob"),{rows:[...C.D].sort((a,b)=>(b.at.sobreaviso-a.at.sobreaviso)||(b.total-a.total)||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:x.at.sobreaviso,pct:pct(x.at.sobreaviso,mS),tip:`<b>${esc(x.s.nome)}</b><br>${x.at.sobreaviso} dia(s) de sobreaviso${x.s.voluntarioSobreaviso?"<br>Voluntário":""}`})),mean:mS,label:"Sobreaviso",vazio:"Nenhum dia de sobreaviso registrado no período."});
+  $("#lg-psob").innerHTML=mS>0?legend([{n:"Dias de sobreaviso",c:"--navy"},{n:"Média "+fmt(mS),cls:"dash"}]):"";
+  const T=[...C.D,...C.E],soma=f=>T.reduce((a,x)=>a+f(x),0);
+  const nOps=soma(x=>x.at.op_local),nMis=soma(x=>x.at.viagem),noi=soma(x=>x.noites);
+  $("#pcampo-resumo").innerHTML=`<div class="kpis mini3"><div class="kpi"><span class="eyebrow">Operações RMF</span><span class="v">${nOps}</span><span class="d">participações</span></div><div class="kpi"><span class="eyebrow">Missões</span><span class="v">${nMis}</span><span class="d">com deslocamento e pernoite</span></div><div class="kpi gold"><span class="eyebrow">Noites fora</span><span class="v">${noi}</span><span class="d">da sede em missão</span></div></div>`+
+    (nOps+nMis?"":`<p class="info" style="margin-top:12px">Nenhuma operação ou missão lançada${EDIT?". Registre em <b>Atividades</b> (tipo, datas e participantes).":" neste período."}</p>`);
+  $("#campo-p").hidden=!(nOps+nMis);if(nOps+nMis)campoCards(C,"#campo-p","pp");
   const A=alertas(C),nAt=A.filter(a=>a.nv==="atencao").length;
   $("#al-n").textContent=`${nAt} atenção · ${A.length-nAt} info`;
   $("#alertas").innerHTML=A.length?A.map(a=>`<div class="al ${a.nv}"><span class="ico">${ico(a.nv==="atencao"?"warn":"info")}</span><div><div class="tl"><span class="tag">${a.nv==="atencao"?"Atenção":"Informação"}</span>${esc(a.t)}</div><div class="mt">Critério: ${esc(a.c)} · Origem: ${esc(a.o)} · Referência: ${esc(a.r)}</div></div></div>`).join("")
@@ -906,10 +1013,47 @@ function pgPainel(C){
   $("#resumo").innerHTML=F.map(f=>`<li><span>${f}</span></li>`).join("");
   let feed=[];
   if(EDIT&&auditoria.length)feed=auditoria.slice(0,6).map(a=>({t:a.em,a:a.acao,d:a.detalhe}));
-  else{const g=new Map();atividades.forEach(a=>{const k=a.grupo||a.id;if(!g.has(k))g.set(k,{...a,n:0});g.get(k).n++});
-    feed=[...[...g.values()].map(a=>({t:a.criadoEm||a.inicio,a:ATIV_N[a.tipo]||a.tipo,d:`${br(a.inicio)} · ${a.n} participante(s)`})),...hist.map(h=>({t:h.data,a:"Atualização do acervo",d:"Data de referência "+br(h.data)}))]
+  else{const g=new Map();atividades.forEach(a=>{const sob=a.tipo==="sobreaviso",k=sob?"sob-"+a.inicio.slice(0,7):(a.grupo||a.id);
+      if(!g.has(k))g.set(k,{...a,n:0,ids:new Set(),t:""});const x=g.get(k);x.n++;x.ids.add(a.servidorId);const t=a.criadoEm||a.inicio;if(t>x.t)x.t=t});
+    feed=[...[...g.values()].map(a=>a.tipo==="sobreaviso"?{t:a.t,a:"Escala de sobreaviso",d:`${MESES[+a.inicio.slice(5,7)-1].toLowerCase()} de ${a.inicio.slice(0,4)} · ${a.n} dia(s) · ${a.ids.size} servidor(es)`}:{t:a.t,a:ATIV_N[a.tipo]||a.tipo,d:`${br(a.inicio)} · ${a.ids.size} participante(s)${a.descricao?" · "+a.descricao:""}`}),...hist.map(h=>({t:h.data,a:"Atualização do acervo",d:"Data de referência "+br(h.data)}))]
       .sort((a,b)=>String(b.t).localeCompare(String(a.t))).slice(0,6)}
   $("#feed").innerHTML=feed.length?feed.map(f=>`<div class="it"><time>${brc(String(f.t).slice(0,10))}</time><div>${esc(f.a)}<small>${esc(f.d||"")}</small></div></div>`).join(""):`<div class="empty">Sem registros ainda.</div>`;
+}
+
+/* ---------- Viagens e operações ---------- */
+const SAIDA=["viagem","op_local"];
+function saidasDe(id){return atividades.filter(a=>a.servidorId===id&&SAIDA.includes(a.tipo))}
+function pgViagens(C){
+  $$("[data-vc]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.vc===vgCargo));
+  const L=(vgCargo==="DPF"?C.D:C.E).map(x=>{const todas=saidasDe(x.s.id),ult=todas.map(a=>a.fim||a.inicio).sort().pop()||null;
+    const mis=x.at.viagem,op=x.at.op_local;return {...x,mis,op,sai:mis+op,ult,desde:ult?Math.max(0,Math.round((new Date(hoje())-new Date(ult))/864e5)):null}});
+  const nome=vgCargo==="DPF"?"delegados":"escrivães";
+  const tot=L.reduce((a,x)=>a+x.sai,0),totM=L.reduce((a,x)=>a+x.mis,0),totN=L.reduce((a,x)=>a+x.noites,0),totO=L.reduce((a,x)=>a+x.op,0);
+  const media=L.length?tot/L.length:0,ord=[...L].sort((a,b)=>b.sai-a.sai),mx=ord[0],mn=ord[ord.length-1];
+  $("#vg-eb").textContent=$("#vg-eb2").textContent=periodoLabel();
+  $("#vg-kpis").innerHTML=
+    `<div class="kpi"><span class="eyebrow">Missões com pernoite</span><span class="v">${totM}</span><span class="d">participações de ${nome}</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Noites fora da sede</span><span class="v">${totN}</span><span class="d">média <b>${fmt(L.length?totN/L.length:0)}</b> por servidor</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Operações RMF</span><span class="v">${totO}</span><span class="d">participações de ${nome}</span></div>`+
+    `<div class="kpi gold"><span class="eyebrow">Diferença entre extremos</span><span class="v">${tot?mx.sai-mn.sai:0}<small>saídas</small></span><span class="d">${tot?`${esc(mx.s.nome)} ${mx.sai} · ${esc(mn.s.nome)} ${mn.sai}`:"sem saídas no período"}</span></div>`;
+  const stt=x=>media>0?(x.sai>=media*1.5?{cls:"up",t:"acima"}:x.sai<=media*0.5?{cls:"low",t:"abaixo"}:{cls:"ok",t:"na média"}):{cls:"neutral",t:"—"};
+  $("#vg-tab").innerHTML=L.length?`<table><thead><tr><th>Servidor</th><th>Missões</th><th>Noites fora</th><th>Operações RMF</th><th class="sep">Total de saídas</th><th>% do total</th><th>Em relação à média</th><th class="left sep">Última saída</th></tr></thead><tbody>${ord.map(x=>{const st=stt(x);
+    return `<tr><td><b>${esc(x.s.nome)}</b>${x.s.chefe?' <span class="chip chefia">chefia</span>':""}</td><td data-l="Missões">${x.mis}</td><td data-l="Noites fora">${x.noites}</td><td data-l="Operações RMF">${x.op}</td><td class="sep tot" data-l="Total de saídas">${x.sai}</td><td data-l="% do total">${tot?fmt(x.sai/tot*100)+"%":"—"}</td><td data-l="Em relação à média"><span class="chip ${st.cls}">${st.t}</span></td><td class="left sep" data-l="Última saída">${x.ult?`${br(x.ult)} <span class="muted small">· há ${x.desde} dia(s)</span>`:'<span class="muted">nenhuma registrada</span>'}</td></tr>`}).join("")}</tbody>
+    <tfoot><tr><td>Total · média ${fmt(media)}</td><td>${totM}</td><td>${totN}</td><td>${totO}</td><td class="sep">${tot}</td><td>${tot?"100%":"—"}</td><td></td><td class="sep"></td></tr></tfoot></table>`:`<div class="empty">Nenhum servidor neste cargo.</div>`;
+  $("#vg-nota").textContent=`Acima: 150% ou mais da média de saídas do cargo. Abaixo: 50% ou menos. Noites fora = término menos início de cada missão, no mínimo uma noite.${tot?"":" Ainda não há missões ou operações registradas neste período."}`;
+  const G=[["Missões com pernoite fora da sede","missões",x=>x.mis],["Noites fora da sede em missão","noites",x=>x.noites],["Participação em operações em Fortaleza e RMF","operações",x=>x.op]];
+  $("#vg-charts").innerHTML=G.map((g,i)=>`<figure class="card"><div class="card-h"><div class="t"><span class="eyebrow">${nome} · ${esc(periodoLabel().toLowerCase())}</span><h2>${g[0]}</h2></div><div class="legend" id="vgl-${i}"></div></div><div class="chart" id="vgc-${i}"></div></figure>`).join("");
+  G.forEach(([t,un,fn],i)=>{const m=L.length?L.reduce((a,x)=>a+fn(x),0)/L.length:0;
+    hbarChart($("#vgc-"+i),{rows:[...L].sort((a,b)=>(fn(b)-fn(a))||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:fn(x),pct:pct(fn(x),m),tip:`<b>${esc(x.s.nome)}</b><br>${fn(x)} ${un}${m>0?"<br>"+pct(fn(x),m)+"% da média":""}`})),mean:m,label:t,vazio:"Nenhum registro no período."});
+    $("#vgl-"+i).innerHTML=m>0?legend([{n:"Média "+fmt(m),cls:"dash"}]):""});
+  const fila=[...L].sort((a,b)=>(a.sai-b.sai)||((a.ult||"")<(b.ult||"")?-1:(a.ult||"")>(b.ult||"")?1:0)||byNome(a.s,b.s));
+  $("#vg-fila").innerHTML=fila.map(x=>`<li><b>${esc(x.s.nome)}</b><span>${x.sai} saída(s) no período · ${x.ult?"última em "+br(x.ult):"nenhuma registrada"}</span></li>`).join("")||`<li class="muted">Nenhum servidor neste cargo.</li>`;
+  const ids=new Set(L.map(x=>x.s.id)),nm=Object.fromEntries(servidores.map(s=>[s.id,s.nome])),g=new Map();
+  atividades.filter(a=>SAIDA.includes(a.tipo)&&inPeriod(a.inicio)).forEach(a=>{const k=a.grupo||a.id;if(!g.has(k))g.set(k,{...a,ps:[]});g.get(k).ps.push(a.servidorId)});
+  const lst=[...g.values()].filter(x=>x.ps.some(i=>ids.has(i))).sort((a,b)=>b.inicio.localeCompare(a.inicio));
+  const lstV=vgAll?lst:lst.slice(0,8);
+  $("#vg-lista").innerHTML=lst.length?lstV.map(a=>`<div class="it"><time>${brc(a.inicio)}</time><div><span class="legend"><span class="sw"><i style="background:var(${ATIV_C[a.tipo]})"></i>${esc(ATIV_N[a.tipo])}</span></span>${a.descricao?`<div>${esc(a.descricao)}</div>`:""}<small>${esc(a.ps.map(i=>nm[i]||"?").join(", "))}${a.tipo==="viagem"?` · ${noites(a)} noite(s)`:""}${a.fim&&a.fim!==a.inicio?` · até ${br(a.fim)}`:""}</small></div></div>`).join("")+(lst.length>8?`<button type="button" class="quiet" id="vg-mais" style="margin-top:10px;align-self:flex-start">${vgAll?"Mostrar só as 8 mais recentes":"Ver todas ("+lst.length+")"}</button>`:"")
+    :`<div class="empty">Nenhuma viagem ou operação registrada no período.${EDIT?" Use o botão Registrar viagem ou operação.":""}</div>`;
 }
 
 /* ---------- Acervo ---------- */
@@ -923,22 +1067,34 @@ function pgAcervo(C){
   const ano=anoAcervo(),m=C.mPondD;
   const sh=(key,lbl,title)=>`<button type="button" class="sort" data-sort="${key}" ${sortAc.k===key?"data-on":""} title="${esc(title||"Ordenar")}">${lbl}${sortAc.k===key?(sortAc.d>0?" ▲":" ▼"):""}</button>`;
   const maxP={};PROC.forEach(p=>maxP[p]=Math.max(0,...C.D.map(x=>+x.ac[p]||0)));
-  const head=`<thead><tr><th>${sh("nome","Delegado")}</th>${PROC.map((p,i)=>`<th class="${i?"":"sep"}">${sh(p,p,PROC_N[p])}</th>`).join("")}<th class="sep">${sh("esp","Especiais","NC + RE + RDF + NCV")}</th><th>${sh("total","Total")}</th><th>${sh("pond","Ponderada")}</th><th>% da média</th><th class="sep">${sh("rel","Relat. "+ano,"Inquéritos relatados no ano")}</th><th>${sh("simba","SIMBA")}</th><th>Atualizado</th></tr></thead>`;
+  const pIg=PROC.every(k=>+cfg.pesos[k]===1);
+  const head=`<thead><tr><th>${sh("nome","Delegado")}</th>${PROC.map((p,i)=>`<th class="${i?"":"sep"}">${sh(p,p,PROC_N[p])}</th>`).join("")}<th class="sep">${sh("esp","Especiais","NC + RE + RDF + NCV")}</th><th>${sh("total","Total")}</th>${pIg?"":`<th>${sh("pond","Ponderada")}</th>`}<th>% da média</th><th class="sep">${sh("rel","Relat. "+ano,"Inquéritos relatados no ano")}</th><th>${sh("simba","SIMBA")}</th><th>Atualizado</th></tr></thead>`;
   const rows=L.map(x=>{const s=x.s,dr=draft[s.id]||{};const v=p=>dr[p]!=null?dr[p]:(+x.ac[p]||0);
     const inp=(p,vv,lbl)=>`<input class="cnt ${dr[p]!=null?"dirty":""}" type="number" inputmode="numeric" min="0" step="1" id="ac-${s.id}-${p}" data-sid="${s.id}" data-k="${p}" value="${vv}" aria-label="${lbl} de ${esc(s.nome)}">`;
     const relV=dr.REL!=null?dr.REL:(+((s.relatados||{})[ano])||0),simV=dr.SIMBA!=null?dr.SIMBA:(+((s.extras||{}).simba)||0);
     const tot=PROC.reduce((a,p)=>a+(+v(p)||0),0),esp=tot-(+v("IPL")||0),idx=m>0?x.pond/m:null,st=status(idx);
     const cell=(p,i)=>EDIT?`<td class="${i?"":"sep"}">${inp(p,v(p),p)}</td>`:`<td class="heat ${v(p)?"":"zero"} ${i?"":"sep"}" style="--h:${(maxP[p]?Math.min(1,v(p)/maxP[p])*.4:0).toFixed(3)}">${v(p)}</td>`;
-    return `<tr><td><b>${esc(s.nome)}</b>${s.chefe?' <span class="chip chefia">chefia</span>':""}</td>${PROC.map(cell).join("")}<td class="sep">${esp}</td><td class="tot">${tot}</td><td>${fmt(x.pond)}</td><td><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}<span class="bar"><i style="width:${idx==null?0:Math.min(100,idx*50)}%"></i></span><span class="chip ${st.cls}">${st.t}</span></div></td>`+
+    return `<tr><td><b>${esc(s.nome)}</b>${s.chefe?' <span class="chip chefia">chefia</span>':""}</td>${PROC.map(cell).join("")}<td class="sep">${esp}</td><td class="tot">${tot}</td>${pIg?"":`<td>${fmt(x.pond)}</td>`}<td><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}${EDIT?"":`<span class="bar"><i style="width:${idx==null?0:Math.min(100,idx*50)}%"></i></span>`}<span class="chip ${st.cls}">${st.t}</span></div></td>`+
       `<td class="sep">${EDIT?inp("REL",relV,"Relatados"):relV}</td><td>${EDIT?inp("SIMBA",simV,"Casos SIMBA"):simV}</td><td>${br(s.acervoEm)}</td></tr>`}).join("");
-  const foot=`<tfoot><tr><td>Unidade (${C.D.length})</td>${PROC.map((p,i)=>`<td class="${i?"":"sep"}">${C.tot[p]}</td>`).join("")}<td class="sep">${C.esp}</td><td>${C.total}</td><td>${fmt(C.D.reduce((a,x)=>a+x.pond,0))}</td><td></td><td class="sep">${C.rel}</td><td>${C.simba}</td><td>${br(C.ref)}</td></tr></tfoot>`;
-  const ae=document.activeElement,aid=ae&&ae.id;
+  const foot=`<tfoot><tr><td>Unidade (${C.D.length})</td>${PROC.map((p,i)=>`<td class="${i?"":"sep"}">${C.tot[p]}</td>`).join("")}<td class="sep">${C.esp}</td><td>${C.total}</td>${pIg?"":`<td>${fmt(C.D.reduce((a,x)=>a+x.pond,0))}</td>`}<td></td><td class="sep">${C.rel}</td><td>${C.simba}</td><td>${br(C.ref)}</td></tr></tfoot>`;
+  const ae=document.activeElement,aid=ae&&ae.id,mob=mobile();
+  $("#ac-tab").classList.toggle("bare",mob);
+  if(mob){
+    const F=[...PROC.map(p=>[p,p]),["REL","Relat."],["SIMBA","SIMBA"]];
+    $("#ac-tab").innerHTML=L.length?`<div class="acards">${L.map(x=>{const s=x.s,dr=draft[s.id]||{};
+      const val=k=>dr[k]!=null?dr[k]:k==="REL"?(+((s.relatados||{})[ano])||0):k==="SIMBA"?(+((s.extras||{}).simba)||0):(+x.ac[k]||0);
+      const tot=PROC.reduce((a,p)=>a+(+val(p)||0),0),idx=m>0?x.pond/m:null,st=status(idx);
+      return `<div class="acard"><div class="ah"><b>${esc(s.nome)}</b>${s.chefe?' <span class="chip chefia">chefia</span>':""}<span class="tt num">Total <b>${tot}</b></span></div>
+        <div class="agrid">${F.map(([k,l])=>`<label class="fld"><span>${l}</span>${EDIT?`<input class="cnt ${dr[k]!=null?"dirty":""}" type="number" inputmode="numeric" min="0" step="1" id="ac-${s.id}-${k}" data-sid="${s.id}" data-k="${k}" value="${val(k)}" aria-label="${l} de ${esc(s.nome)}">`:`<b class="num">${val(k)}</b>`}</label>`).join("")}</div>
+        <div class="info">Especiais ${tot-(+val("IPL")||0)} · ${idx==null?"—":Math.round(idx*100)+"% da média"} <span class="chip ${st.cls}">${st.t}</span> · atualizado ${br(s.acervoEm)}</div></div>`}).join("")}
+      ${q?"":`<div class="acard tot-card"><div class="ah"><b>Unidade</b><span class="tt num">Total <b>${C.total}</b></span></div><div class="info">IPL ${C.tot.IPL} · Especiais ${C.esp} · Relatados ${C.rel} · SIMBA ${C.simba}</div></div>`}</div>`:`<div class="empty">Nenhum delegado ${q?"encontrado para esse filtro":"cadastrado"}.</div>`;
+  }else
   $("#ac-tab").innerHTML=L.length?`<table>${head}<tbody>${rows}</tbody>${q?"":foot}</table>`:`<div class="empty">Nenhum delegado ${q?"encontrado para esse filtro":"cadastrado"}.</div>`;
   if(aid&&aid.startsWith("ac-")&&aid!=="ac-busca"&&aid!=="ac-data"&&document.getElementById(aid))document.getElementById(aid).focus();
   $("#ac-salvar").disabled=!Object.keys(draft).length;
-  $("#ac-nota").textContent=(EDIT?"Altere os números e clique em Salvar acervo. Cada salvamento registra a data de referência no histórico. ":"")+(mobile()?"Deslize a tabela para o lado para ver todas as colunas.":"Clique no título de uma coluna para ordenar.");
-  $("#ac-epf").innerHTML=C.E.length?`<table><thead><tr><th>Escrivão</th><th class="left">Cartório do DPF</th><th>IPL</th><th>Especiais</th><th>Total</th><th>Ponderada</th><th>% da média</th></tr></thead><tbody>${C.E.map(x=>{const idx=C.mPondE>0?x.pond/C.mPondE:null,st=status(idx);
-    return `<tr><td><b>${esc(x.s.nome)}</b></td><td class="left" data-l="Cartório do DPF">${x.via?esc(x.via.nome):'<span class="chip up">sem vínculo</span>'}</td><td data-l="IPL">${x.ipl}</td><td data-l="Especiais">${x.esp}</td><td class="tot" data-l="Total">${x.total}</td><td data-l="Ponderada">${fmt(x.pond)}</td><td data-l="% da média"><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}<span class="chip ${st.cls}">${st.t}</span></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Nenhum escrivão cadastrado.</div>`;
+  $("#ac-nota").textContent=(EDIT?"Altere os números e clique em Salvar acervo. Cada salvamento registra a data de referência no histórico. ":"")+(mobile()?"":"Clique no título de uma coluna para ordenar.");
+  $("#ac-epf").innerHTML=C.E.length?`<table><thead><tr><th>Escrivão</th><th class="left">Cartório do DPF</th><th>IPL</th><th>Especiais</th><th>Total</th>${pIg?"":"<th>Ponderada</th>"}<th>% da média</th></tr></thead><tbody>${C.E.map(x=>{const idx=C.mPondE>0?x.pond/C.mPondE:null,st=status(idx);
+    return `<tr><td><b>${esc(x.s.nome)}</b></td><td class="left" data-l="Cartório do DPF">${x.via?esc(x.via.nome):'<span class="chip up">sem vínculo</span>'}</td><td data-l="IPL">${x.ipl}</td><td data-l="Especiais">${x.esp}</td><td class="tot" data-l="Total">${x.total}</td>${pIg?"":`<td data-l="Ponderada">${fmt(x.pond)}</td>`}<td data-l="% da média"><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}<span class="chip ${st.cls}">${st.t}</span></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Nenhum escrivão cadastrado.</div>`;
   stackChart($("#ch-comp"),{rows:[...C.D].sort(ordem("total")).map(x=>({label:x.s.nome,parts:x.ac})),keys:PROC.map(k=>({k,n:k+" · "+PROC_N[k],c:PROC_C[k]})),unit:"procedimento(s)"});
   $("#lg-comp").innerHTML=legend(PROC.map(k=>({n:k,c:PROC_C[k]})));
   const hs=[...hist].sort((a,b)=>(a.data||"").localeCompare(b.data||""));
@@ -965,15 +1121,19 @@ function pgEfetivo(C){
   const dels=servidores.filter(s=>s.cargo==="DPF"&&s.ativo!==false).sort(byNome);
   const sp=$("#s-par"),v=sp.value;sp.innerHTML=`<option value="">Selecione</option>`+dels.map(d=>`<option value="${d.id}">${esc(d.nome)}</option>`).join("");sp.value=v;
   ajustaFormServ();
+  const temMat=servidores.some(s=>s.matricula);
+  const nomeCell=s=>`<b>${esc(s.nome)}</b> ${s.chefe?'<span class="chip chefia">chefe da unidade</span> ':""}${s.funcao?`<span class="chip neutral">${esc(s.funcao)}</span> `:""}${s.voluntarioSobreaviso?'<span class="chip vol">voluntário sobreaviso</span> ':""}${s.ativo===false?'<span class="chip up">fora da unidade</span>':""}`;
+  const acts=s=>`<div class="actions acts-row"><button type="button" class="quiet" data-ed="${s.id}" aria-label="Editar ${esc(s.nome)}">Editar</button></div>`;
   $("#efetivo-list").innerHTML=CARGOS.map(c=>{
     const l=servidores.filter(s=>s.cargo===c.k).sort((a,b)=>(a.ativo===false)-(b.ativo===false)||(b.chefe?1:0)-(a.chefe?1:0)||byNome(a,b));if(!l.length)return"";
-    const cols=c.proc?`${c.k==="EPF"?'<th class="left">Cartório do DPF</th>':""}<th class="left">Tempo no cargo</th><th class="left">Idade</th>${EDIT?'<th class="left">Matrícula</th>':""}`:"";
-    return `<div class="card"><div class="card-h"><div class="t"><span class="eyebrow">${l.filter(s=>s.ativo!==false).length} em exercício</span><h2>${c.n}</h2>${c.proc?"":"<p>Controle de produtividade próprio, fora dos indicadores do painel.</p>"}</div></div>
-      <div class="scroll stack"><table><thead><tr><th>Nome</th>${cols}<th class="left">Situação</th>${EDIT?"<th></th>":""}</tr></thead><tbody>${l.map(s=>{const p=parDe(s),t=tempoCargo(s),i=idadeDe(s);
-      return `<tr id="row-${s.id}" class="${flashId===s.id?"flash":""}"><td><b>${esc(s.nome)}</b> ${s.chefe?'<span class="chip chefia">chefe da unidade</span> ':""}${s.funcao?`<span class="chip neutral">${esc(s.funcao)}</span> `:""}${s.voluntarioSobreaviso?'<span class="chip vol">voluntário sobreaviso</span>':""}</td>`+
-        (c.proc?`${c.k==="EPF"?`<td class="left" data-l="Cartório do DPF">${p?esc(p.nome):'<span class="chip up">sem vínculo</span>'}</td>`:""}<td class="left" data-l="Tempo no cargo">${t==null?"—":fmt(t)+" anos"}</td><td class="left" data-l="Idade">${i==null?"—":i+" anos"}</td>${EDIT?`<td class="left" data-l="Matrícula">${esc(s.matricula||"—")}</td>`:""}`:"")+
-        `<td class="left" data-l="Situação">${s.ativo===false?'<span class="chip neutral">fora da unidade</span>':'<span class="chip ok">em exercício</span>'}</td>`+
-        (EDIT?`<td class="acts"><div class="actions" style="justify-content:flex-end;gap:6px"><button type="button" class="quiet" data-ed="${s.id}">Editar</button><button type="button" class="danger" data-toggle="${s.id}">${s.ativo===false?"Reativar":"Fora da unidade"}</button><button type="button" class="danger" data-del-serv="${s.id}">Excluir</button></div></td>`:"")+`</tr>`}).join("")}</tbody></table></div></div>`}).join("")||`<div class="empty">Nenhum servidor cadastrado.</div>`;
+    const n=l.filter(s=>s.ativo!==false).length,fora=l.length-n;
+    const head=`<div class="card-h"><div class="t"><span class="eyebrow">${n} em exercício${fora?` · ${fora} fora da unidade`:""}</span><h2>${c.n}</h2>${c.proc?"":"<p>Controle de produtividade próprio, fora dos indicadores do painel.</p>"}</div></div>`;
+    if(!c.proc)return `<div class="card">${head}<div class="agentes">${l.map(s=>`<div class="ag-it ${s.ativo===false?"off":""} ${flashId===s.id?"flash":""}" id="row-${s.id}"><div>${nomeCell(s)}</div>${EDIT?acts(s):""}</div>`).join("")}</div></div>`;
+    const cols=`${c.k==="EPF"?'<th class="left">Cartório do DPF</th>':""}<th class="left">Tempo no cargo</th><th class="left">Idade</th>${EDIT&&temMat?'<th class="left">Matrícula</th>':""}${EDIT?"<th></th>":""}`;
+    return `<div class="card">${head}<div class="scroll stack"><table><thead><tr><th>Nome</th>${cols}</tr></thead><tbody>${l.map(s=>{const p=parDe(s),t=tempoCargo(s),i=idadeDe(s);
+      return `<tr id="row-${s.id}" class="${flashId===s.id?"flash":""} ${s.ativo===false?"off":""}"><td>${nomeCell(s)}</td>`+
+        `${c.k==="EPF"?`<td class="left" data-l="Cartório do DPF">${p?esc(p.nome):'<span class="chip up">sem vínculo</span>'}</td>`:""}<td class="left" data-l="Tempo no cargo">${t==null?'<span class="muted">sem data</span>':fmt(t)+" anos"}</td><td class="left" data-l="Idade">${i==null?'<span class="muted">sem data</span>':i+" anos"}</td>${EDIT&&temMat?`<td class="left" data-l="Matrícula">${esc(s.matricula||"—")}</td>`:""}`+
+        (EDIT?`<td class="acts">${acts(s)}</td>`:"")+`</tr>`}).join("")}</tbody></table></div></div>`}).join("")||`<div class="empty">Nenhum servidor cadastrado.</div>`;
   flashId=null;
   const G=[["Delegados",C.D],["Escrivães",C.E]];
   grupoChart($("#ch-tempo"),$("#mm-tempo"),{fn:x=>tempoCargo(x.s),un:"anos",dec:true,grupos:G});
@@ -981,10 +1141,11 @@ function pgEfetivo(C){
 }
 function ajustaFormServ(){const c=$("#s-cargo").value;$("#s-par-w").hidden=c!=="EPF";$("#s-chefe-w").hidden=c!=="DPF"}
 function limpaFormServ(){editServ=null;["s-nome","s-mat","s-posse","s-nasc","s-func"].forEach(i=>$("#"+i).value="");$("#s-par").value="";$("#s-chefe").checked=false;$("#s-vol").checked=false;$("#s-cargo").value="DPF";
-  $("#fs-tit").textContent="Incluir servidor";$("#fs-eb").textContent="Cadastro";$("#s-ok").textContent="Incluir servidor";$("#fs-cancel").hidden=true;$("#s-err").textContent="";ajustaFormServ()}
+  $("#s-toggle").hidden=$("#s-del").hidden=true;$("#fs-tit").textContent="Incluir servidor";$("#fs-eb").textContent="Cadastro";$("#s-ok").textContent="Incluir servidor";$("#fs-cancel").hidden=true;$("#s-err").textContent="";ajustaFormServ()}
 function editarServ(id){const s=servidores.find(x=>x.id===id);if(!s)return;editServ=id;
   $("#s-nome").value=s.nome||"";$("#s-cargo").value=s.cargo;$("#s-mat").value=s.matricula||"";$("#s-posse").value=s.posse||"";$("#s-nasc").value=s.nascimento||"";$("#s-func").value=s.funcao||"";
   ajustaFormServ();$("#s-par").value=s.parId||"";$("#s-chefe").checked=!!s.chefe;$("#s-vol").checked=!!s.voluntarioSobreaviso;
+  $("#s-toggle").hidden=$("#s-del").hidden=false;$("#s-toggle").textContent=s.ativo===false?"Reativar":"Marcar fora da unidade";
   $("#fs-tit").textContent="Editar "+s.nome;$("#fs-eb").textContent="Edição";$("#s-ok").textContent="Salvar alterações";$("#fs-cancel").hidden=false;$("#s-err").textContent="";
   $("#f-serv").scrollIntoView({behavior:"smooth",block:"start"});$("#s-nome").focus({preventScroll:true})}
 
@@ -1008,12 +1169,16 @@ function pgAtiv(){
   fs.innerHTML=`<option value="">Todos</option>`+servidores.filter(s=>s.cargo!=="APF").sort(byNome).map(s=>`<option value="${s.id}">${esc(s.nome)}</option>`).join("");
   ft.innerHTML=`<option value="">Todos</option>`+ATIV.map(t=>`<option value="${t.k}">${t.n}</option>`).join("");fs.value=vs;ft.value=vt;
   renderParts();regraTxt();
-  $$("[data-av]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.av===ativView));
+  $$("[data-vc]").forEach(b=>b.addEventListener("click",()=>{vgCargo=b.dataset.vc;renderPage()}));
+$("#vg-lista").addEventListener("click",e=>{if(e.target.id==="vg-mais"){vgAll=!vgAll;renderPage()}});
+$("#vg-nova").addEventListener("click",()=>{limpaFormAtiv();$("#a-tipo").value="viagem";regraTxt();history.replaceState(null,"","#ativ");irPara("ativ");$("#f-ativ").scrollIntoView({behavior:"smooth",block:"start"})});
+$$("[data-av]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.av===ativView));
   $("#at-cal").hidden=ativView!=="cal";$("#at-lista").hidden=ativView!=="lista";
   const nomes=Object.fromEntries(servidores.map(s=>[s.id,s.nome]));
   const G=gruposFiltrados();
   $("#at-eb").textContent=ativView==="cal"?"Calendário mensal":periodoLabel();
   if(ativView==="cal"){
+    if(!calMes){const cur=hoje().slice(0,7),ult=atividades.map(a=>a.inicio).sort().pop();calMes=atividades.some(a=>a.inicio.slice(0,7)===cur)||!ult?cur:ult.slice(0,7)}
     const [y,m]=calMes.split("-").map(Number);
     $("#at-cal").innerHTML=`<div class="calbar" style="margin-bottom:10px"><button type="button" class="quiet" data-calnav="-1" aria-label="Mês anterior">‹</button><h3>${MESES[m-1]} de ${y}</h3><button type="button" class="quiet" data-calnav="1" aria-label="Próximo mês">›</button><button type="button" class="quiet" data-calnav="0">Hoje</button></div><div id="at-grid"></div><div class="legend" style="margin-top:10px">${legend(ATIV.map(t=>({n:t.n,c:t.c})))}</div>`;
     calendario($("#at-grid"),calMes,eventosMes(G,calMes),(a,full)=>{const ns=a.itens.map(i=>nomes[i.servidorId]||"?");return full?`<b>${esc(ATIV_N[a.tipo])}</b><br>${esc(a.descricao||"")}<br>${esc(ns.join(", "))}`:(a.tipo==="sobreaviso"?ns.join(", "):(a.descricao||ATIV_N[a.tipo]))});
@@ -1047,7 +1212,7 @@ function pgSob(C){
     `<div class="kpi"><span class="eyebrow">Escrivães voluntários</span><span class="v">${ativos().filter(s=>s.cargo==="EPF"&&s.voluntarioSobreaviso).length}</span><span class="d">${vol("EPF")}</span></div>`;
   $("#sob-eb").textContent=$("#sob-eb2").textContent=periodoLabel();
   if(!C.D.length)$("#ch-sob").innerHTML=`<div class="empty">Nenhum delegado cadastrado.</div>`;
-  else hbarChart($("#ch-sob"),{rows:[...C.D].sort((a,b)=>(b.at.sobreaviso-a.at.sobreaviso)||(b.total-a.total)||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:x.at.sobreaviso,pct:pct(x.at.sobreaviso,m),tip:`<b>${esc(x.s.nome)}</b><br>${x.at.sobreaviso} dia(s) de sobreaviso${x.s.voluntarioSobreaviso?"<br>Voluntário":""}`})),mean:m,label:"Sobreaviso por delegado"});
+  else hbarChart($("#ch-sob"),{rows:[...C.D].sort((a,b)=>(b.at.sobreaviso-a.at.sobreaviso)||(b.total-a.total)||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:x.at.sobreaviso,pct:pct(x.at.sobreaviso,m),tip:`<b>${esc(x.s.nome)}</b><br>${x.at.sobreaviso} dia(s) de sobreaviso${x.s.voluntarioSobreaviso?"<br>Voluntário":""}`})),mean:m,label:"Sobreaviso por delegado",vazio:"Nenhum dia de sobreaviso registrado no período."});
   $("#lg-sob").innerHTML=legend([{n:"Dias de sobreaviso",c:"--navy"},{n:"Média "+fmt(m),cls:"dash"}]);
   if(!sobMes){const ult=sob.map(a=>a.inicio).sort().pop();sobMes=(ult||hoje()).slice(0,7)}
   const [y,mm]=sobMes.split("-").map(Number);$("#sob-mes").textContent=`${MESES[mm-1]} de ${y}`;
@@ -1067,9 +1232,12 @@ function pgProd(C){
   if(!C.D.some(x=>x.simba))$("#ch-simba").innerHTML=`<div class="empty">Nenhum caso SIMBA lançado.</div>`;
   else hbarChart($("#ch-simba"),{rows:[...C.D].sort(ordem("simba")).map(x=>({label:x.s.nome,value:x.simba,pct:pct(x.simba,ms),tip:`<b>${esc(x.s.nome)}</b><br>${x.simba} caso(s) SIMBA`})),mean:ms,label:"SIMBA"});
   $("#lg-simba").innerHTML=legend([{n:"Média "+fmt(ms),cls:"dash"}]);
-  const M=[["Operações em Fortaleza e RMF","operações",x=>x.at.op_local],["Missões com deslocamento e pernoite","missões",x=>x.at.viagem],["Noites fora da sede em missão","noites",x=>x.noites]];
-  $("#campo").innerHTML=M.map((m,i)=>`<figure class="card"><div class="card-h"><div class="t"><span class="eyebrow">${esc(periodoLabel())}</span><h2>${m[0]}</h2></div></div><p class="info" id="pm-${i}"></p><div class="chart" id="pc-${i}"></div></figure>`).join("");
-  M.forEach(([t,un,fn],i)=>grupoChart($("#pc-"+i),$("#pm-"+i),{fn,un,dec:false,grupos:[["Delegados",C.D],["Escrivães",C.E]]}));
+  campoCards(C,"#campo","pc");
+}
+const CAMPO=[["Missões com pernoite fora da sede","missões",x=>x.at.viagem],["Noites fora da sede em missão","noites",x=>x.noites],["Participação em operações em Fortaleza e RMF","operações",x=>x.at.op_local]];
+function campoCards(C,host,pfx){
+  $(host).innerHTML=CAMPO.map((m,i)=>`<figure class="card"><div class="card-h"><div class="t"><span class="eyebrow">${esc(periodoLabel())}</span><h2>${m[0]}</h2></div></div><p class="info" id="${pfx}m-${i}"></p><div class="chart" id="${pfx}c-${i}"></div></figure>`).join("");
+  CAMPO.forEach(([t,un,fn],i)=>grupoChart($(`#${pfx}c-${i}`),$(`#${pfx}m-${i}`),{fn,un,dec:false,grupos:[["Delegados",C.D],["Escrivães",C.E]]}));
 }
 
 /* ---------- Relatórios ---------- */
@@ -1145,7 +1313,7 @@ async function gerarPublica(){
   if(!dl)return;
   const snap={geradoEm:new Date().toISOString(),cfg:{pesos:cfg.pesos,limiteAlerta:cfg.limiteAlerta,diasDesatualizado:cfg.diasDesatualizado},hist,
     servidores:servidores.filter(s=>s.cargo!=="APF").map(({matricula,nascimento,...r})=>({...r,idadeAnos:nascimento?anosInt(nascimento):(r.idadeAnos??null)})),
-    atividades:atividades.map(({criadoEm,...a})=>a)};
+    atividades:atividades.map(({criadoEm,descricao,...a})=>a)};
   const fonts=[...document.querySelectorAll('link[href*="fonts.g"]')].map(l=>l.outerHTML).join("");
   const style=document.querySelector("style").outerHTML;
   const html='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Gestão DELINST</title>'+fonts+style+
@@ -1155,7 +1323,7 @@ async function gerarPublica(){
 }
 
 /* ================= eventos ================= */
-$("#nav").addEventListener("click",e=>{const a=e.target.closest("a[data-sec]");if(!a)return;e.preventDefault();if(location.hash!=="#"+a.dataset.sec)history.replaceState(null,"","#"+a.dataset.sec);irPara(a.dataset.sec);scrollTo(0,0)});
+$("#nav").addEventListener("click",e=>{const m=e.target.closest("#mais");if(m){const sh=$("#sheet");sh.hidden=!sh.hidden;m.setAttribute("aria-expanded",String(!sh.hidden));return}const a=e.target.closest("a[data-sec]");if(!a)return;e.preventDefault();if(location.hash!=="#"+a.dataset.sec)history.replaceState(null,"","#"+a.dataset.sec);irPara(a.dataset.sec);scrollTo(0,0)});
 $("#periodo").addEventListener("change",e=>{periodo=e.target.value;try{localStorage.setItem("gd-periodo",periodo)}catch(_){}renderPage()});
 $$("[data-cg]").forEach(b=>b.addEventListener("click",()=>{cargaCargo=b.dataset.cg;renderPage()}));
 $$("[data-av]").forEach(b=>b.addEventListener("click",()=>{ativView=b.dataset.av;renderPage()}));
@@ -1166,7 +1334,7 @@ $("#busca").addEventListener("input",()=>{
   r.innerHTML=[...S,...A].join("")||`<span class="small muted" style="padding:7px 9px">Nada encontrado.</span>`;r.hidden=false;
 });
 $("#busca").addEventListener("keydown",e=>{if(e.key==="Escape"){$("#busca").value="";$("#busca-res").hidden=true}if(e.key==="ArrowDown"){const b=$("#busca-res button");if(b){e.preventDefault();b.focus()}}});
-document.addEventListener("click",e=>{if(!e.target.closest(".search"))$("#busca-res").hidden=true});
+document.addEventListener("click",e=>{if(!e.target.closest(".search"))$("#busca-res").hidden=true;if(!e.target.closest("#nav")){const sh=$("#sheet");if(sh&&!sh.hidden){sh.hidden=true;$("#mais").setAttribute("aria-expanded","false")}}});
 $("#busca-res").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#busca-res").hidden=true;$("#busca").value="";
   if(b.dataset.goS){flashId=b.dataset.goS;history.replaceState(null,"","#efetivo");irPara("efetivo");const row=document.getElementById("row-"+b.dataset.goS);if(row)row.scrollIntoView({behavior:"smooth",block:"center"})}
   if(b.dataset.goA){ativView="lista";periodo="tudo";history.replaceState(null,"","#ativ");renderPeriodo();irPara("ativ");editarGrupo(b.dataset.goA)}});
@@ -1199,6 +1367,10 @@ $("#ac-salvar").addEventListener("click",async e=>{
 });
 ["#cmp-a","#cmp-b"].forEach(s=>$(s).addEventListener("change",()=>renderPage()));
 $("#s-cargo").addEventListener("change",ajustaFormServ);
+$("#s-toggle").addEventListener("click",async e=>{const s=servidores.find(x=>x.id===editServ);if(!s||!db)return;if(s.ativo!==false&&!armed(e.currentTarget))return;
+  try{await db.doc("servidores/"+s.id).update({ativo:s.ativo===false});toast(s.ativo===false?s.nome+" reativado(a).":s.nome+" marcado(a) fora da unidade. O histórico é mantido.");audit(s.ativo===false?"Servidor reativado":"Servidor marcado fora da unidade",s.nome);flashId=s.id;limpaFormServ()}catch(err){dbErr(err)}});
+$("#s-del").addEventListener("click",async e=>{const s=servidores.find(x=>x.id===editServ);if(!s||!db)return;if(!armed(e.currentTarget))return;
+  try{await db.doc("servidores/"+s.id).delete();toast("Servidor excluído. As atividades já registradas permanecem no histórico.");audit("Servidor excluído",s.nome);limpaFormServ()}catch(err){dbErr(err)}});
 $("#fs-cancel").addEventListener("click",limpaFormServ);
 $("#f-serv").addEventListener("submit",async e=>{
   e.preventDefault();if(!db)return;const er=$("#s-err");er.textContent="";
