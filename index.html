@@ -1,98 +1,120 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Efetivo DELINST</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"><style>
-/* Layout: faixa institucional (masthead) → indicadores → gráficos de carga lado a lado → composição → atividades → evolução → tabelas de detalhe */
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Gestão DELINST</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"><style>
+/* Layout: desktop = menu lateral institucional + área de trabalho; celular = cabeçalho compacto, barra de navegação inferior, indicadores 2×2 e tabelas viradas em fichas */
 :root{
-  --bg:#edf0f5; --surface:#ffffff; --surface-2:#f3f5f9; --ink:#0d1a2d; --ink-2:#33415a; --muted:#5b6880; --line:#d3dae6; --grid:#e5eaf1;
-  --navy:#14386b; --navy-ink:#ffffff; --accent:#a8832a; --accent-soft:#f4ebd4;
-  --mast-bg:#0a1c3a; --mast-fg:#f5f7fb; --mast-muted:#a7b5cc; --mast-line:#c9a24a;
+  --bg:#eef1f6; --surface:#ffffff; --surface-2:#f4f6fa; --ink:#0d1a2d; --ink-2:#33415a; --muted:#5b6880; --line:#d6dce7; --grid:#e6eaf1;
+  --navy:#14386b; --navy-ink:#ffffff; --accent:#9a7622; --accent-soft:#f4ebd4;
+  --side-bg:#0a1c3a; --side-bg-2:#14305c; --side-fg:#eef2f8; --side-muted:#a3b3cc; --gold:#c9a24a;
   --heat:20,56,107;
   --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#6250d6;
-  --up:#b2441c; --up-soft:#fae3d9; --ok:#2c7349; --ok-soft:#dcefe3; --low:#2f669e; --low-soft:#dee9f5;
+  --warn:#8a5300; --warn-soft:#fbefd9; --info:#1f5fa8; --info-soft:#e3edf9;
+  --ok:#2c7349; --ok-soft:#dcefe3; --up:#b2441c; --up-soft:#fae3d9; --low:#2f669e; --low-soft:#dee9f5;
   --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  --shadow:0 1px 2px rgba(18,27,43,.06),0 4px 16px rgba(18,27,43,.05);
+  --shadow:0 1px 2px rgba(13,26,45,.05),0 6px 18px rgba(13,26,45,.05);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#070f1c; --surface:#0e1a2c; --surface-2:#132239; --ink:#e7ecf4; --ink-2:#c2cbd9; --muted:#91a0b8; --line:#22324b; --grid:#1a2940;
   --navy:#7ea5dc; --navy-ink:#070f1c; --accent:#d8b45e; --accent-soft:#2e2717;
-  --mast-bg:#06142c; --mast-fg:#eef2f8; --mast-muted:#97a8c2; --mast-line:#c9a24a;
+  --side-bg:#050d1b; --side-bg-2:#10254a; --side-fg:#eef2f8; --side-muted:#93a4bf; --gold:#c9a24a;
   --heat:110,155,220;
   --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9;
-  --up:#f08a62; --up-soft:#3b2219; --ok:#6fc392; --ok-soft:#163022; --low:#86b5e8; --low-soft:#16293f;
-  --shadow:0 1px 2px rgba(0,0,0,.3);
+  --warn:#e8a93c; --warn-soft:#33260f; --info:#86b5e8; --info-soft:#16293f;
+  --ok:#6fc392; --ok-soft:#163022; --up:#f08a62; --up-soft:#3b2219; --low:#86b5e8; --low-soft:#16293f;
+  --shadow:0 1px 2px rgba(0,0,0,.35);
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#070f1c; --surface:#0e1a2c; --surface-2:#132239; --ink:#e7ecf4; --ink-2:#c2cbd9; --muted:#91a0b8; --line:#22324b; --grid:#1a2940;
   --navy:#7ea5dc; --navy-ink:#070f1c; --accent:#d8b45e; --accent-soft:#2e2717;
-  --mast-bg:#06142c; --mast-fg:#eef2f8; --mast-muted:#97a8c2; --mast-line:#c9a24a;
+  --side-bg:#050d1b; --side-bg-2:#10254a; --side-fg:#eef2f8; --side-muted:#93a4bf; --gold:#c9a24a;
   --heat:110,155,220;
   --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9;
-  --up:#f08a62; --up-soft:#3b2219; --ok:#6fc392; --ok-soft:#163022; --low:#86b5e8; --low-soft:#16293f;
-  --shadow:0 1px 2px rgba(0,0,0,.3);
+  --warn:#e8a93c; --warn-soft:#33260f; --info:#86b5e8; --info-soft:#16293f;
+  --ok:#6fc392; --ok-soft:#163022; --up:#f08a62; --up-soft:#3b2219; --low:#86b5e8; --low-soft:#16293f;
+  --shadow:0 1px 2px rgba(0,0,0,.35);
   color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 56px}
-.wrap{max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;margin:0}
 h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
-h2{font-size:18px;font-weight:700;font-stretch:92%;letter-spacing:-.005em}
-h3{font-size:15px;font-weight:700;font-stretch:95%}
-.eyebrow{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h2{font-size:17px;font-weight:700;font-stretch:92%}
+h3{font-size:14.5px;font-weight:700;font-stretch:95%}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .muted{color:var(--muted)} .small{font-size:12.5px}
-.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* masthead */
-.mast{background:var(--mast-bg);color:var(--mast-fg);border-radius:6px;padding:0 24px;display:flex;flex-direction:column;gap:18px;border-top:4px solid var(--mast-line);box-shadow:0 2px 10px rgba(6,20,44,.18)}
-.gov{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 0 9px;border-bottom:1px solid rgba(201,162,74,.35);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mast-muted)}
-.gov .dot{width:4px;height:4px;border-radius:50%;background:var(--mast-line)}
-.gov .cls{margin-left:auto;color:var(--mast-line);border:1px solid var(--mast-line);padding:2px 8px;border-radius:2px;letter-spacing:.16em}
-.mast-top{padding-top:4px}
-.mast-top{display:flex;flex-wrap:wrap;gap:16px 24px;justify-content:space-between;align-items:flex-end}
-.mast .id{display:flex;flex-direction:column;gap:6px;min-width:0}
-.mast .crumb{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mast-line);font-weight:500}
-.mast h1{font-size:clamp(28px,4.4vw,40px);font-weight:800;font-stretch:84%;letter-spacing:-.015em;color:var(--mast-fg)}
-.mast .sub{color:var(--mast-muted);font-size:13px;max-width:62ch}
-.mast .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
-.mast label.fld{color:var(--mast-muted)}
-.mast select{background:transparent;color:var(--mast-fg);border-color:rgba(255,255,255,.25)}
-.mast select option{color:#121b2b;background:#fff}
-.mode{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:3px;border:1px solid rgba(255,255,255,.25);color:var(--mast-muted);white-space:nowrap}
-.vercomo{background:transparent;border:1px solid var(--mast-line);color:var(--mast-fg);padding:6px 12px;font-size:12.5px}
-.vercomo:hover{background:rgba(255,255,255,.08)}
-.mode.edit,.mode.pub{border-color:var(--mast-line);color:var(--mast-line)}
-nav.tabs{display:flex;gap:4px;overflow-x:auto;margin:0 -24px;padding:0 16px;border-top:1px solid rgba(255,255,255,.08)}
-.tab{background:none;border:none;border-bottom:3px solid transparent;margin-bottom:-3px;color:var(--mast-muted);border-radius:0;padding:10px 12px 12px;font-family:var(--f-display);font-size:14.5px;font-weight:600;font-stretch:95%;white-space:nowrap;cursor:pointer}
-.tab:hover{color:var(--mast-fg)}
-.tab[aria-selected="true"]{color:var(--mast-fg);border-bottom-color:var(--mast-line)}
+/* estrutura desktop */
+.app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:env(safe-area-inset-top,0px);height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow:auto;background:var(--side-bg);color:var(--side-fg);
+  padding-block:20px 16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;display:flex;flex-direction:column;gap:20px;border-right:2px solid var(--gold)}
+.brand{display:flex;gap:12px;align-items:center;padding-bottom:18px;border-bottom:1px solid rgba(201,162,74,.3)}
+.mark{width:42px;height:42px;border:1.5px solid var(--gold);border-radius:6px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-stretch:85%;font-size:17px;color:var(--gold);flex:none}
+.brand b{display:block;font-family:var(--f-display);font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1.2}
+.brand small{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;color:var(--side-muted);text-transform:uppercase;margin-top:2px}
+nav.menu{display:flex;flex-direction:column;gap:2px}
+nav.menu a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:5px;color:var(--side-muted);text-decoration:none;font-weight:500;font-size:14px;border-left:3px solid transparent}
+nav.menu a:hover{background:rgba(255,255,255,.06);color:var(--side-fg)}
+nav.menu a[aria-current="page"]{background:var(--side-bg-2);color:var(--side-fg);border-left-color:var(--gold);font-weight:600}
+nav.menu a .ls{display:none}
+nav.menu a .lock{margin-left:auto;font-family:var(--f-mono);font-size:9px;letter-spacing:.1em;color:var(--gold);border:1px solid rgba(201,162,74,.5);padding:0 5px;border-radius:2px}
+.side-foot{margin-top:auto;font-size:11.5px;color:var(--side-muted);display:flex;flex-direction:column;gap:6px;border-top:1px solid rgba(201,162,74,.25);padding-top:14px}
+.side-foot b{color:var(--gold);font-weight:600;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.main{min-width:0;padding-left:32px;padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px;display:flex;flex-direction:column;gap:20px;max-width:1440px}
+.top{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justify-content:space-between;padding-top:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.top .tt{display:flex;flex-direction:column;gap:5px;min-width:0}
+.mbrand{display:none}
+.crumb{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.top h1{font-size:clamp(22px,3vw,30px);font-weight:800;font-stretch:86%;letter-spacing:-.01em}
+.top p{color:var(--muted);font-size:13px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{position:relative}
+.search .ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);width:16px;height:16px}
+.search input{padding-left:32px;width:230px}
+#busca-res{position:absolute;right:0;top:calc(100% + 4px);width:300px;max-width:calc(100vw - 32px);background:var(--surface);border:1px solid var(--line);border-radius:6px;box-shadow:0 10px 30px rgba(0,0,0,.15);z-index:35;padding:6px;display:flex;flex-direction:column;gap:2px}
+#busca-res button{all:unset;cursor:pointer;padding:8px 9px;border-radius:4px;display:flex;flex-direction:column;gap:1px;font-size:13px}
+#busca-res button:hover,#busca-res button:focus-visible{background:var(--surface-2);outline:none}
+#busca-res small{color:var(--muted);font-size:11.5px}
+.who{display:flex;align-items:center;gap:8px;padding:4px 10px 4px 4px;border:1px solid var(--line);border-radius:20px;background:var(--surface);font-size:12.5px;white-space:nowrap}
+.who img{width:26px;height:26px;border-radius:50%}
+.who .role{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.who .role.edit{color:var(--accent)}
+.status{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;color:var(--muted);margin-top:-8px}
+.status b{color:var(--ink-2);font-weight:500}
 
+/* controles */
 label.fld{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);font-weight:500}
 input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:7px 9px;min-width:0}
-textarea{resize:vertical}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-button{font:inherit;font-weight:600;cursor:pointer;border-radius:5px;padding:8px 15px;border:1px solid var(--navy);background:var(--navy);color:var(--navy-ink)}
+button{font:inherit;font-weight:600;cursor:pointer;border-radius:5px;padding:8px 15px;border:1px solid var(--navy);background:var(--navy);color:var(--navy-ink);display:inline-flex;align-items:center;gap:7px}
 button.ghost{background:transparent;color:var(--navy)}
+button.gold{background:var(--accent);border-color:var(--accent);color:#fff}
+button.quiet{background:transparent;border-color:var(--line);color:var(--ink-2);padding:5px 10px;font-size:12.5px;font-weight:500}
 button.danger{background:transparent;border-color:var(--line);color:var(--muted);padding:4px 9px;font-size:12px;font-weight:500}
 button.danger.armed{border-color:var(--up);color:var(--up);background:var(--up-soft)}
-button:disabled{opacity:.5;cursor:default}
+button:disabled{opacity:.45;cursor:default}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;padding:2px;background:var(--surface-2);gap:2px}
+.seg button{background:transparent;border:none;color:var(--muted);padding:5px 12px;font-size:12.5px;font-weight:600;border-radius:4px}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.notice{padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);border-radius:6px;font-size:13px}
+.empty{padding:26px;text-align:center;border:1px dashed var(--line);border-radius:8px;color:var(--muted);background:var(--surface-2);font-size:13px}
 
-.notice{padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--surface);border-radius:6px}
-.empty{padding:32px;text-align:center;border:1px dashed var(--line);border-radius:8px;color:var(--muted);background:var(--surface)}
-
-/* cards & KPIs */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px;min-width:0;margin:0}
-.card-h{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
-.card-h .t{display:flex;flex-direction:column;gap:2px;min-width:0;padding-left:12px;border-left:3px solid var(--accent)}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+/* blocos */
+.page{display:flex;flex-direction:column;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0;margin:0}
+.card-h{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:flex-start;justify-content:space-between}
+.card-h .t{display:flex;flex-direction:column;gap:3px;min-width:0;padding-left:12px;border-left:3px solid var(--accent)}
+.card-h .t p{font-size:12.5px;color:var(--muted)}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:18px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:6px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
-.kpi .v{font-family:var(--f-display);font-size:32px;font-weight:800;font-stretch:82%;line-height:1;font-variant-numeric:tabular-nums}
-.kpi .v small{font-size:15px;font-weight:600;color:var(--muted);font-stretch:95%}
-.kpi .d{font-size:12px;color:var(--muted)}
-.kpi.chefe{border-color:var(--accent);background:linear-gradient(var(--accent-soft),var(--accent-soft)) top/100% 3px no-repeat,var(--surface)}
-.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px 28px}
-.mini{display:flex;flex-direction:column;gap:6px;min-width:0}
-.mini h3{font-size:14px}
-.mini .m{font-size:12px;color:var(--muted)}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:16px}
+.kpi.gold{border-top-color:var(--accent)}
+.kpi .v{font-family:var(--f-display);font-size:34px;font-weight:800;font-stretch:82%;line-height:1;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:15px;font-weight:600;color:var(--muted);font-stretch:95%;margin-left:3px}
+.kpi .d{font-size:12px;color:var(--muted);line-height:1.4}
+.kpi .d b{color:var(--ink-2);font-family:var(--f-mono);font-weight:500}
 .chart{width:100%;min-width:0;overflow:hidden}
 .chart svg{display:block;max-width:100%;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2)}
@@ -100,298 +122,517 @@ button:disabled{opacity:.5;cursor:default}
 .legend .sw i{width:10px;height:10px;border-radius:2px;display:inline-block}
 .legend .sw i.line{height:2px;width:16px;border-radius:0}
 .legend .sw i.dash{height:0;width:16px;border-top:2px dashed var(--ink);border-radius:0;background:none!important}
+.info{font-size:12.5px;color:var(--muted)}
 
-/* svg text */
+/* rosca */
+.donut{display:flex;flex-direction:column;align-items:center;gap:16px}
+.donut .lg{display:flex;flex-direction:column;gap:7px;min-width:0;width:100%}
+.donut .row{display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;gap:10px;align-items:center;font-size:13px}
+.donut .row i{width:10px;height:10px;border-radius:2px}
+.donut .row span:nth-child(2){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.donut .row span:nth-child(2) em{font-style:normal;color:var(--muted)}
+.donut .row span:nth-child(3){font-family:var(--f-mono);color:var(--muted);font-size:12px;text-align:right}
+.donut .row > b{font-family:var(--f-mono);font-weight:600;text-align:right;min-width:32px}
+
+/* svg */
 .ax{font-family:var(--f-mono);font-size:10.5px;fill:var(--muted)}
 .lb{font-family:var(--f-body);font-size:12.5px;fill:var(--ink);font-weight:500}
-.lb.ch{font-weight:700}
 .vl{font-family:var(--f-mono);font-size:11.5px;fill:var(--ink);font-variant-numeric:tabular-nums}
 .vl2{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
 .gh{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;fill:var(--muted);text-transform:uppercase}
+.big{font-family:var(--f-display);font-weight:800;font-stretch:82%;fill:var(--ink)}
 .gridl{stroke:var(--grid);stroke-width:1}
 .base{stroke:var(--line);stroke-width:1}
 .meanl{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:4 3}
-.seg{stroke:var(--surface);stroke-width:2}
-[data-tip]{cursor:default}
+.seg-r{stroke:var(--surface);stroke-width:2}
 .hit{fill:transparent}
-#tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;line-height:1.4;padding:7px 10px;border-radius:5px;max-width:260px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+#tip{position:fixed;z-index:40;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;line-height:1.4;padding:7px 10px;border-radius:5px;max-width:270px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 #tip b{font-weight:600}
 
-/* tables */
+/* alertas, resumo, movimentações */
+.alerts{display:flex;flex-direction:column}
+.al{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.al:last-child{border-bottom:none}
+.al .ico{width:24px;height:24px;border-radius:50%;display:grid;place-items:center}
+.al .ico .ic{width:14px;height:14px}
+.al.atencao .ico{background:var(--warn-soft);color:var(--warn)}
+.al.info .ico{background:var(--info-soft);color:var(--info)}
+.al.ok .ico{background:var(--ok-soft);color:var(--ok)}
+.al .tl{font-weight:600;font-size:13.5px}
+.al .tag{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;margin-right:6px}
+.al.atencao .tag{color:var(--warn)} .al.info .tag{color:var(--info)}
+.al .mt{font-size:12px;color:var(--muted);margin-top:2px}
+.facts{display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none}
+.facts li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:9px;font-size:13.5px;line-height:1.45}
+.facts li::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:1px;margin-top:7px;margin-left:4px}
+.feed{display:flex;flex-direction:column}
+.feed .it{display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.feed .it:last-child{border-bottom:none}
+.feed .it time{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.feed .it small{display:block;color:var(--muted);font-size:12px}
+
+/* tabelas */
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
 th{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--surface-2);vertical-align:bottom}
-th.grp{text-align:center;color:var(--ink-2)}
+th button.sort{all:unset;cursor:pointer;display:inline-flex;gap:4px;align-items:center}
+th button.sort:focus-visible{outline:2px solid var(--accent)}
+th button.sort[data-on]{color:var(--ink)}
 td{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--surface);z-index:1;font-family:var(--f-body);white-space:normal;min-width:170px}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--surface);z-index:1;font-family:var(--f-body);white-space:normal;min-width:150px}
 th:first-child{background:var(--surface-2)}
-tr:last-child td{border-bottom:none}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{background:var(--surface-2);font-weight:600;border-top:2px solid var(--line);border-bottom:none}
+tfoot td:first-child{background:var(--surface-2)}
 td.sep,th.sep{border-left:1px solid var(--line)}
 td.tot{font-weight:600}
 td.left,th.left{text-align:left;font-family:var(--f-body)}
 td.heat{background:rgba(var(--heat),var(--h,0))}
 td.zero{color:var(--muted)}
-tr.chefe td{border-bottom:2px solid var(--accent)}
-tr.chefe td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
-tr.sub td{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);padding:6px 10px}
-.load{display:flex;align-items:center;gap:8px;justify-content:flex-end}
-.bar{position:relative;width:90px;height:8px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;overflow:hidden}
-.bar i{position:absolute;inset:0 auto 0 0;background:var(--navy)}
-.bar::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--ink);opacity:.55}
-.chip{display:inline-block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:3px;font-weight:500;white-space:nowrap}
+td.up{color:var(--up)} td.down{color:var(--ok)}
+tr.flash td{animation:flash 1.6s ease}
+@keyframes flash{from{background:var(--accent-soft)}}
+td input.cnt{width:62px;text-align:right;font-family:var(--f-mono);padding:4px 6px}
+td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
+.chip{display:inline-block;font-family:var(--f-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;font-weight:500;white-space:nowrap;vertical-align:1px}
 .chip.up{background:var(--up-soft);color:var(--up)}
 .chip.ok{background:var(--ok-soft);color:var(--ok)}
 .chip.low{background:var(--low-soft);color:var(--low)}
 .chip.neutral{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
-.chip.vol{background:var(--ok-soft);color:var(--ok)}
-.vols{display:flex;flex-wrap:wrap;gap:8px 22px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);font-size:13px}
-.vols b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
 .chip.chefia{background:var(--accent-soft);color:var(--accent)}
+.chip.vol{background:var(--ok-soft);color:var(--ok)}
+.load{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.bar{position:relative;width:80px;height:8px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--navy)}
+.bar::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--ink);opacity:.55}
 
-.block{display:flex;flex-direction:column;gap:12px}
-.block-h{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:14px}
-.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
-.formgrid .wide{grid-column:1/-1}
-.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+/* formulários */
+.form{display:flex;flex-direction:column;gap:14px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;align-items:end}
+.fgrid .wide{grid-column:1/-1}
+.check{flex-direction:row!important;align-items:center;gap:8px!important;color:var(--ink)!important;font-size:13px!important}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
 .parts fieldset{border:1px solid var(--line);border-radius:6px;padding:8px 10px;margin:0;min-width:0}
 .parts legend{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 4px}
-.parts label{display:flex;gap:8px;align-items:center;padding:3px 0;font-size:13px}
-.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.pchips{display:flex;flex-wrap:wrap;gap:4px;white-space:normal}
-.pchip{font-family:var(--f-body);font-size:12px;padding:1px 7px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
-td input.cnt{width:64px;text-align:right;font-family:var(--f-mono);padding:4px 6px}
-td input.cnt.dirty{border-color:var(--accent);background:var(--accent-soft)}
-.pesos{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
-.pesos input{width:72px;font-family:var(--f-mono)}
-details.how summary{cursor:pointer;color:var(--navy);font-weight:600}
-details.how p{max-width:74ch;margin:.5em 0}
-#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:5px;font-size:13px;z-index:30;max-width:calc(100% - 32px)}
-#toast.err{background:var(--up);color:#fff}
-.hidden-ro [data-edit]{display:none!important}
+.parts label{display:flex;gap:8px;align-items:center;padding:4px 0;font-size:13px}
+.err{color:var(--up);font-size:12.5px}
+.vols{display:flex;flex-wrap:wrap;gap:8px 22px;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface-2);font-size:13px}
+.vols b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-right:6px}
+
+/* calendário */
+.calbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.calbar h3{min-width:150px;text-align:center}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--line);gap:1px}
+.cal .dow{background:var(--surface-2);font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px;text-align:center}
+.cal .d{background:var(--surface);min-height:92px;padding:5px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.cal .d.out{background:var(--surface-2)}
+.cal .d .n{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.cal .d.today .n{color:var(--accent);font-weight:700}
+.cal .ev{font-size:11px;line-height:1.25;padding:2px 5px;border-radius:3px;background:var(--surface-2);border-left:3px solid var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.cal .more{font-size:10.5px;color:var(--muted);font-family:var(--f-mono)}
+.agenda{display:none}
+
+/* relatório */
+.report{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:18px;max-width:980px}
+.report h2{font-size:20px}
+.report h3{margin-top:4px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.report p,.report li{font-size:13.5px;line-height:1.6;max-width:78ch}
+.report ul{margin:0;padding-left:18px}
+.report table{font-size:12.5px}
+.report .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px;font-size:12.5px;color:var(--muted)}
+.report .meta b{color:var(--ink);font-weight:600}
+
 .foot{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;border-top:2px solid var(--navy);padding-top:12px;margin-top:8px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .foot b{color:var(--accent);font-weight:600}
-@media (max-width:560px){.mast{padding:0 16px}nav.tabs{margin:0 -16px;padding:0 8px}.gov .cls{margin-left:0}.kpi .v{font-size:28px}}
-</style><style>[hidden]{display:none!important}body{margin:0}</style></head><body><div class="wrap" id="app">
-  <header class="mast">
-    <div class="gov"><span>Ministério da Justiça e Segurança Pública</span><span class="dot"></span><span>Polícia Federal</span><span class="cls">Uso interno</span></div>
-    <div class="mast-top">
-      <div class="id">
-        <span class="crumb">Superintendência Regional no Ceará · DRPJ</span>
-        <h1>Efetivo DELINST</h1>
-        <span class="sub">Delegacia de Direitos Humanos e Defesa Institucional · painel de gestão do efetivo, acervo de procedimentos e atividades de delegados e escrivães</span>
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:6px;font-size:13px;z-index:50;max-width:calc(100% - 32px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
+#toast.err{background:var(--up);color:#fff}
+#voltar{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.ro [data-edit]{display:none!important}
+
+/* ===== tablet e celular: barra de navegação inferior ===== */
+@media (max-width:960px){
+  .app{display:block}
+  .side{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;z-index:30;flex-direction:row;gap:0;overflow-x:auto;border-right:none;border-top:2px solid var(--gold);
+    padding-block:2px calc(2px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-shadow:0 -6px 20px rgba(0,0,0,.2)}
+  .brand,.side-foot{display:none}
+  nav.menu{flex-direction:row;width:100%;gap:0}
+  nav.menu a{flex:1 0 62px;flex-direction:column;gap:3px;padding:8px 2px 7px;border-left:none;border-top:3px solid transparent;border-radius:0;font-size:10.5px;text-align:center;justify-content:center;margin-top:-2px}
+  nav.menu a[aria-current="page"]{background:transparent;border-top-color:var(--gold);color:var(--gold)}
+  nav.menu a .lf,nav.menu a .lock{display:none}
+  nav.menu a .ls{display:block}
+  nav.menu .ic{width:21px;height:21px}
+  .main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+  #toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  #voltar{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+}
+@media (max-width:640px){
+  body{font-size:14.5px}
+  .main{gap:14px}
+  .top{padding-top:14px;gap:12px;padding-bottom:12px}
+  .crumb{display:none}
+  .mbrand{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .mbrand .mark{width:24px;height:24px;font-size:10px;border-radius:4px;border-width:1.2px}
+  .top h1{font-size:22px}
+  .top p{font-size:12.5px}
+  .tools{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+  .search{grid-column:1/-1}.search input{width:100%;padding-block:10px}
+  #periodo{padding-block:9px}
+  .who{justify-self:end}.who > span:not(.role){display:none}
+  .status{margin-top:-4px;font-size:10.5px;gap:3px 12px}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .kpi{padding:12px}.kpi .v{font-size:27px}.kpi .d{font-size:11.5px}
+  .kpi:last-child:nth-child(odd){grid-column:1/-1}
+  .card{padding:14px;gap:12px;border-radius:10px}
+  .card-h .t{padding-left:10px}
+  
+  .seg{width:100%}.seg button{flex:1}
+  .actions > button{flex:1 1 auto;justify-content:center}
+  button{padding-block:10px}
+  input,select{font-size:16px}
+  td input.cnt{font-size:14px}
+  /* tabelas viram fichas */
+  .stack{border:none;background:transparent;overflow:visible}
+  .stack thead{display:none}
+  .stack table,.stack tbody,.stack tr,.stack td{display:block;width:100%}
+  .stack tr{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:10px}
+  .stack td{border:none;padding:4px 0;text-align:right;white-space:normal;position:static;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--f-body);min-width:0}
+  .stack td[data-l]::before{content:attr(data-l);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left}
+  .stack td:first-child{display:block;font-size:15px;padding-bottom:6px;margin-bottom:4px;border-bottom:1px solid var(--line);text-align:left}
+  .stack td.acts{display:block;padding-top:8px}
+  .stack .actions{justify-content:flex-start!important}
+  /* calendário: grade compacta + agenda em lista */
+  .cal .d{min-height:44px;padding:3px}
+  .cal .ev{font-size:0;height:6px;padding:0;border-left:none;background:var(--navy);border-radius:2px}
+  .cal .ev[style]{background:var(--evc,var(--navy))}
+  .cal .more{font-size:9.5px}
+  .agenda{display:flex;flex-direction:column;margin-top:12px;border-top:1px solid var(--line)}
+  .agenda .ag{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .agenda .ag time{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+  .agenda .ag i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+  .report{padding:16px}
+  .foot{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><div class="app" id="app">
+  <aside class="side">
+    <div class="brand"><span class="mark" aria-hidden="true">GD</span><div><b>Gestão DELINST</b><small>SR/PF/CE · DRPJ</small></div></div>
+    <nav class="menu" id="nav" aria-label="Seções"></nav>
+    <div class="side-foot"><b>Uso interno</b><span>Delegacia de Direitos Humanos e Defesa Institucional</span><span id="side-ref"></span></div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div class="tt">
+        <span class="mbrand"><span class="mark" aria-hidden="true">GD</span>Gestão DELINST · SR/PF/CE</span>
+        <span class="crumb">Polícia Federal · SR/PF/CE · DRPJ · DELINST</span>
+        <h1 id="sec-title">Gestão DELINST</h1>
+        <p id="sec-desc"></p>
       </div>
-      <div class="controls">
-        <label class="fld">Período das atividades
-          <select id="periodo"></select>
-        </label>
-        <span class="mode" id="mode">Carregando…</span>
-        <button type="button" class="vercomo" id="ver-como" hidden>Ver como a equipe vê</button>
-        <button type="button" class="vercomo" id="gerar-pub" data-edit hidden>Gerar página pública</button>
+      <div class="tools">
+        <div class="search"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input type="search" id="busca" placeholder="Buscar servidor ou atividade" aria-label="Buscar servidor ou atividade" autocomplete="off">
+          <div id="busca-res" hidden></div></div>
+        <select id="periodo" aria-label="Período das atividades"></select>
+        <div class="who" id="who"><span class="role">Carregando…</span></div>
       </div>
-    </div>
-    <nav class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" data-tab="painel">Painel</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="acervo">Acervo de procedimentos</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="ativ">Atividades</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="efetivo">Efetivo</button>
-    </nav>
-  </header>
+    </header>
+    <div class="status" id="status"></div>
+    <div class="notice" id="offline" hidden>Os dados ficam no claude.ai. Abra esta página pelo link do claude.ai, com sessão iniciada, para ver as informações.</div>
 
-  <div class="notice" id="offline" hidden>Os dados ficam no claude.ai. Abra esta página pelo link do claude.ai, com sessão iniciada, para ver o painel.</div>
-
-  <!-- PAINEL -->
-  <section id="p-painel" class="block" role="tabpanel" style="gap:16px">
-    <div class="kpis" id="kpis"></div>
-    <div id="painel-vazio" hidden></div>
-    <div class="grid2" id="graf-carga">
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">Carga ponderada do acervo</span><h2>Delegados</h2></div><div class="legend" id="lg-dpf"></div></div>
-        <div class="chart" id="ch-dpf"></div>
-      </figure>
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">Carga ponderada do acervo</span><h2>Escrivães</h2></div><div class="legend" id="lg-epf"></div></div>
-        <div class="chart" id="ch-epf"></div>
-      </figure>
-    </div>
-    <div class="grid2" id="graf-soma">
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">IPL</span><h2>Inquéritos em andamento</h2></div><div class="legend" id="lg-ipl"></div></div>
-        <div class="chart" id="ch-ipl"></div>
-      </figure>
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">Extra inquérito · NC + RE + RDF + NCV</span><h2>Procedimentos especiais em andamento</h2></div><div class="legend" id="lg-soma"></div></div>
-        <div class="chart" id="ch-soma"></div>
-      </figure>
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow" id="eb-rel">Produção</span><h2>Inquéritos relatados</h2></div><div class="legend" id="lg-rel"></div></div>
-        <div class="chart" id="ch-rel"></div>
-      </figure>
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">Situação atual</span><h2>Casos SIMBA</h2></div><div class="legend" id="lg-simba"></div></div>
-        <div class="chart" id="ch-simba"></div>
-      </figure>
-    </div>
-    <div class="grid4" id="card-campo"></div>
-    <div class="grid2" id="graf-pessoal">
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">Desde a posse no cargo</span><h2>Tempo no cargo</h2></div></div>
-        <div class="m muted small" id="mm-tempo"></div>
-        <div class="chart" id="ch-tempo"></div>
-      </figure>
-      <figure class="card">
-        <div class="card-h"><div class="t"><span class="eyebrow">Anos completos</span><h2>Idade</h2></div></div>
-        <div class="m muted small" id="mm-idade"></div>
-        <div class="chart" id="ch-idade"></div>
-      </figure>
-    </div>
-    <figure class="card" id="card-sob">
-      <div class="card-h"><div class="t"><span class="eyebrow" id="eb-sob">Período</span><h2>Sobreaviso · comparativo entre delegados</h2></div><div class="legend" id="lg-sob"></div></div>
-      <div class="vols" id="vols"></div>
-      <div class="chart" id="ch-sob"></div>
-    </figure>
-    <figure class="card" id="card-comp">
-      <div class="card-h"><div class="t"><span class="eyebrow">Acervo atual por tipo</span><h2>Composição do acervo</h2></div><div class="legend" id="lg-comp"></div></div>
-      <div class="chart" id="ch-comp"></div>
-    </figure>
-    <figure class="card" id="card-ativ" data-off hidden>
-      <div class="card-h"><div class="t"><span class="eyebrow" id="eb-ativ">Atividades</span><h2>Participação em atividades</h2></div><div class="legend" id="lg-ativ"></div></div>
-      <div class="chart" id="ch-ativ"></div>
-    </figure>
-    <figure class="card" id="card-hist">
-      <div class="card-h"><div class="t"><span class="eyebrow">Atualizações do acervo</span><h2>Evolução do acervo</h2></div><div class="legend" id="lg-hist"></div></div>
-      <div class="chart" id="ch-hist"></div>
-    </figure>
-    <div class="block-h" style="margin-top:6px"><h2>Quadro detalhado</h2><button class="ghost" id="csv" hidden>Exportar quadro (CSV)</button></div>
-    <div id="tabelas" class="block" style="gap:22px"></div>
-    <details class="how">
-      <summary>Como ler este painel</summary>
-      <p><b>Acervo</b> é a quantidade atual de procedimentos sob responsabilidade de cada servidor, conforme a última atualização. <b>Carga ponderada</b> soma os procedimentos multiplicados pelo peso de cada tipo (pesos ajustáveis na aba Acervo).</p>
-      <p><b>Chefia:</b> o chefe da unidade entra no cálculo da média e aparece junto com os demais delegados.</p>
-      <p><b>Escrivães:</b> a carga de cada escrivão acompanha automaticamente o acervo do delegado a que está vinculado, porque o cartório trabalha os mesmos procedimentos.</p>
-      <p><b>Inquéritos em andamento</b> conta só os IPLs. <b>Procedimentos especiais em andamento (extra inquérito)</b> soma NC, RE, RDF e NCV. O sobreaviso tem quadro próprio, comparando apenas os delegados. <b>Inquéritos relatados</b> conta os relatórios finais do ano escolhido no topo e não entra no acervo.</p>
-      <p><b>Linha tracejada</b> nos gráficos de carga marca a média do cargo. Acima de 125% da média o servidor aparece como <span class="chip up">acima</span>; abaixo de 75%, como <span class="chip low">abaixo</span>.</p>
-      <p><b>Tempo no cargo</b> conta desde a data de posse no cargo atual. <b>Idade</b> aparece em anos completos; a página pública não traz a data de nascimento, só a idade.</p>
-      <p><b>Noites fora da sede em missão</b> são calculadas pelas datas de cada missão com deslocamento e pernoite (término menos início, no mínimo uma noite).</p>
-      <p>As atividades contam participações no período escolhido no topo. Os agentes têm controle de produtividade próprio e não entram neste painel.</p>
-    </details>
-  </section>
-
-  <footer class="foot" id="foot"><span>Polícia Federal · SR/PF/CE · DRPJ · DELINST</span><span id="foot-ref"></span><span><b>Uso interno</b> · divulgação restrita aos servidores da unidade e interessados</span></footer>
-
-  <!-- ACERVO -->
-  <section id="p-acervo" class="block" role="tabpanel" hidden>
-    <div class="panel">
-      <div class="block-h"><h2>Pesos por tipo de procedimento</h2><span class="muted small">Usados no cálculo da carga ponderada</span></div>
-      <div class="pesos" id="pesos"></div>
-    </div>
-    <div class="block-h">
-      <h2>Acervo atual</h2>
-      <div class="actions" data-edit>
-        <label class="fld">Data de referência <input type="date" id="acervo-data"></label>
-        <button id="salvar-acervo" disabled>Salvar acervo</button>
+    <!-- VISÃO GERAL -->
+    <section class="page" data-page="painel">
+      <div class="kpis" id="kpis"></div>
+      <div id="vazio" hidden></div>
+      <div class="g3" data-need>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Acervo atual</span><h2>Distribuição por tipo</h2></div></div>
+          <div class="donut" id="ch-dist"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">IPL</span><h2>Inquéritos em andamento</h2></div><div class="legend" id="lg-ipl"></div></div>
+          <div class="chart" id="ch-ipl"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Extra inquérito · NC + RE + RDF + NCV</span><h2>Procedimentos especiais em andamento</h2></div><div class="legend" id="lg-esp"></div></div>
+          <div class="chart" id="ch-esp"></div>
+        </figure>
       </div>
-    </div>
-    <div id="acervo-grid" class="block" style="gap:22px"></div>
-    <div class="block">
-      <h3>Histórico de atualizações</h3>
-      <div id="hist"></div>
-    </div>
-  </section>
-
-  <!-- ATIVIDADES -->
-  <section id="p-ativ" class="block" role="tabpanel" hidden>
-    <form class="panel" id="f-ativ" data-edit>
-      <h2>Registrar atividade</h2>
-      <div class="formgrid">
-        <label class="fld">Tipo <select id="a-tipo" required></select></label>
-        <label class="fld">Início <input type="date" id="a-ini" required></label>
-        <label class="fld">Término <input type="date" id="a-fim"></label>
-        <label class="fld wide">Descrição (operação, curso, local, nº do documento)
-          <input type="text" id="a-desc" maxlength="200" placeholder="Ex.: Operação Eleições 2026 — Sobral/CE">
-        </label>
-        <p class="muted small wide" style="margin:0">Em <b>Missão com deslocamento e pernoite</b>, as noites fora da sede são contadas pelas datas: de 10 a 12 são 2 noites. Sobreaviso: lance um registro por dia de escala.</p>
-        <label hidden>
-        </label>
+      <div class="g2" data-need>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Acervo × pesos por tipo</span><h2>Carga ponderada</h2></div>
+            <div class="seg" role="group" aria-label="Cargo"><button type="button" data-cg="DPF" aria-pressed="true">Delegados</button><button type="button" data-cg="EPF" aria-pressed="false">Escrivães</button></div></div>
+          <div class="legend" id="lg-carga"></div>
+          <div class="chart" id="ch-carga"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow" id="eb-rel">Produção</span><h2>Inquéritos relatados</h2></div><div class="legend" id="lg-rel"></div></div>
+          <div class="chart" id="ch-rel"></div>
+        </figure>
       </div>
-      <div class="block" style="gap:6px">
-        <span style="font-size:12px;color:var(--muted);font-weight:500">Participantes</span>
+      <div class="g3" data-need>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Critérios explícitos</span><h2>Alertas e pontos de atenção</h2></div><span class="chip neutral" id="al-n"></span></div>
+          <div class="alerts" id="alertas"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Fatos calculados</span><h2>Resumo executivo</h2></div></div>
+          <ul class="facts" id="resumo"></ul>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Registros recentes</span><h2>Últimas movimentações</h2></div></div>
+          <div class="feed" id="feed"></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ACERVO -->
+    <section class="page" data-page="acervo" hidden>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow">Por delegado</span><h2>Acervo de procedimentos</h2><p id="ac-ref"></p></div>
+          <div class="actions">
+            <div class="search"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" id="ac-busca" placeholder="Filtrar delegado" aria-label="Filtrar delegado" style="width:180px"></div>
+            <label class="fld" data-edit>Data de referência <input type="date" id="ac-data"></label>
+            <button id="ac-salvar" data-edit disabled>Salvar acervo</button>
+          </div></div>
+        <div class="scroll" id="ac-tab"></div>
+        <p class="info" id="ac-nota"></p>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow">Carga do cartório</span><h2>Escrivães</h2><p>A carga de cada escrivão acompanha o acervo do delegado vinculado. Por isso ela não é somada aos totais da unidade.</p></div></div>
+        <div class="scroll stack" id="ac-epf"></div>
+      </div>
+      <figure class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow">Acervo atual por tipo</span><h2>Composição do acervo</h2></div><div class="legend" id="lg-comp"></div></div>
+        <div class="chart" id="ch-comp"></div>
+      </figure>
+      <div class="g2">
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Atualizações registradas</span><h2>Evolução do acervo</h2></div><div class="legend" id="lg-hist"></div></div>
+          <div class="chart" id="ch-hist"></div>
+        </figure>
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Histórico</span><h2>Comparar datas de referência</h2></div>
+            <div class="actions"><label class="fld">De <select id="cmp-a"></select></label><label class="fld">Para <select id="cmp-b"></select></label></div></div>
+          <div id="cmp"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EFETIVO -->
+    <section class="page" data-page="efetivo" hidden>
+      <form class="card form" id="f-serv" data-edit novalidate>
+        <div class="card-h"><div class="t"><span class="eyebrow" id="fs-eb">Cadastro</span><h2 id="fs-tit">Incluir servidor</h2></div><button type="button" class="quiet" id="fs-cancel" hidden>Cancelar edição</button></div>
+        <div class="fgrid">
+          <label class="fld">Nome <input type="text" id="s-nome" maxlength="120" required></label>
+          <label class="fld">Cargo <select id="s-cargo"><option value="DPF">Delegado(a)</option><option value="EPF">Escrivão(ã)</option><option value="APF">Agente</option></select></label>
+          <label class="fld" id="s-par-w">Delegado vinculado <select id="s-par"></select></label>
+          <label class="fld">Matrícula (opcional) <input type="text" id="s-mat" maxlength="30"></label>
+          <label class="fld">Posse no cargo <input type="date" id="s-posse"></label>
+          <label class="fld">Nascimento <input type="date" id="s-nasc"></label>
+          <label class="fld">Função (opcional) <input type="text" id="s-func" maxlength="40" placeholder="Ex.: chefe, substituto"></label>
+          <label class="fld check" id="s-chefe-w"><input type="checkbox" id="s-chefe"> Chefe da unidade</label>
+          <label class="fld check"><input type="checkbox" id="s-vol"> Voluntário para sobreaviso</label>
+        </div>
+        <div class="actions"><button type="submit" id="s-ok">Incluir servidor</button><span class="err" id="s-err" role="alert"></span></div>
+      </form>
+      <div id="efetivo-list" class="page"></div>
+      <div class="g2">
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Desde a posse no cargo</span><h2>Tempo no cargo</h2></div></div>
+          <p class="info" id="mm-tempo"></p><div class="chart" id="ch-tempo"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Anos completos</span><h2>Idade</h2></div></div>
+          <p class="info" id="mm-idade"></p><div class="chart" id="ch-idade"></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ATIVIDADES -->
+    <section class="page" data-page="ativ" hidden>
+      <form class="card form" id="f-ativ" data-edit novalidate>
+        <div class="card-h"><div class="t"><span class="eyebrow" id="fa-eb">Novo registro</span><h2 id="fa-tit">Registrar atividade</h2></div><button type="button" class="quiet" id="fa-cancel" hidden>Cancelar edição</button></div>
+        <div class="fgrid">
+          <label class="fld">Tipo <select id="a-tipo"></select></label>
+          <label class="fld">Início <input type="date" id="a-ini" required></label>
+          <label class="fld">Término <input type="date" id="a-fim"></label>
+          <label class="fld wide">Descrição (operação, missão, local, documento) <input type="text" id="a-desc" maxlength="200" placeholder="Ex.: Missão Eleições 2026, Sobral/CE"></label>
+        </div>
+        <p class="info" id="a-regra"></p>
         <div class="parts" id="a-parts"></div>
+        <div class="actions"><button type="submit" id="a-ok">Registrar</button><span class="info" id="a-info"></span><span class="err" id="a-err" role="alert"></span></div>
+      </form>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow" id="at-eb">Período</span><h2>Atividades registradas</h2></div>
+          <div class="actions">
+            <label class="fld">Servidor <select id="fl-serv"></select></label>
+            <label class="fld">Tipo <select id="fl-tipo"></select></label>
+            <div class="seg" role="group" aria-label="Visualização"><button type="button" data-av="cal" aria-pressed="true">Calendário</button><button type="button" data-av="lista" aria-pressed="false">Lista</button></div>
+          </div></div>
+        <div id="at-cal"></div>
+        <div id="at-lista" class="stack" hidden></div>
       </div>
-      <div class="actions">
-        <button type="submit" id="a-salvar">Registrar</button>
-        <span class="muted small" id="a-info"></span>
-      </div>
-    </form>
-    <div class="block-h">
-      <h2>Atividades no período</h2>
-      <div class="actions">
-        <label class="fld">Servidor <select id="fl-serv"></select></label>
-        <label class="fld">Tipo <select id="fl-tipo"></select></label>
-      </div>
-    </div>
-    <div id="ativ-list"></div>
-  </section>
+    </section>
 
-  <!-- EFETIVO -->
-  <section id="p-efetivo" class="block" role="tabpanel" hidden>
-    <form class="panel" id="f-serv" data-edit>
-      <h2>Incluir servidor</h2>
-      <div class="formgrid">
-        <label class="fld">Nome <input type="text" id="s-nome" required maxlength="120"></label>
-        <label class="fld">Cargo
-          <select id="s-cargo"><option value="DPF">Delegado(a)</option><option value="EPF">Escrivão(ã)</option><option value="APF">Agente</option></select>
-        </label>
-        <label class="fld">Matrícula (opcional) <input type="text" id="s-mat" maxlength="30"></label>
-        <label class="fld" style="flex-direction:row;align-items:center;gap:8px;color:var(--ink)"><input type="checkbox" id="s-chefe"> Chefe da unidade (delegado)</label>
-        <button type="submit">Incluir</button>
+    <!-- SOBREAVISO -->
+    <section class="page" data-page="sob" hidden>
+      <div class="kpis" id="sob-kpis"></div>
+      <figure class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow" id="sob-eb">Período</span><h2>Comparativo entre delegados</h2><p>Dias de sobreaviso registrados por delegado. A linha tracejada marca a média.</p></div><div class="legend" id="lg-sob"></div></div>
+        <div class="chart" id="ch-sob"></div>
+      </figure>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow">Escala</span><h2>Calendário de sobreaviso</h2></div>
+          <div class="calbar"><button type="button" class="quiet" id="sob-prev" aria-label="Mês anterior">‹</button><h3 id="sob-mes"></h3><button type="button" class="quiet" id="sob-next" aria-label="Próximo mês">›</button></div></div>
+        <div id="sob-cal"></div>
       </div>
-      <details class="how">
-        <summary>Incluir vários de uma vez</summary>
-        <p class="muted small">Uma pessoa por linha, no formato <span class="num">Nome; Cargo</span>. Cargo pode ser DPF, EPF, APF, Delegado, Escrivão ou Agente.</p>
-        <textarea id="s-lote" rows="5" style="width:100%" placeholder="Fulano de Tal; DPF&#10;Beltrana Souza; EPF"></textarea>
-        <div class="actions" style="margin-top:8px"><button type="button" class="ghost" id="s-lote-btn">Incluir lista</button></div>
-      </details>
-    </form>
-    <div id="efetivo-list"></div>
-  </section>
-</div><div id="tip" hidden></div><div id="toast" hidden></div><script>window.__SNAPSHOT__={"geradoEm": "2026-10-15T07:58:54.553015+00:00", "pesos": {"IPL": 1, "NC": 1, "RE": 1, "RDF": 1, "NCV": 1}, "hist": [{"data": "2026-10-15", "por": {"dpf-doralucia": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "dpf-martins": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "dpf-nogueira": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "dpf-olavo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}}}], "servidores": [{"acervo": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Doralúcia", "relatados": {"2026": 31}, "idadeAnos": null, "id": "dpf-doralucia"}, {"acervo": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Martins", "relatados": {"2026": 41}, "voluntarioSobreaviso": true, "idadeAnos": null, "id": "dpf-martins"}, {"acervo": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Nogueira", "relatados": {"2026": 20}, "idadeAnos": null, "id": "dpf-nogueira"}, {"acervo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": true, "extras": {"simba": 10}, "nome": "Olavo", "posse": "2006-07-01", "relatados": {"2026": 21}, "voluntarioSobreaviso": true, "idadeAnos": 48, "id": "dpf-olavo"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Chrauslay", "parId": "dpf-doralucia", "idadeAnos": null, "id": "epf-chrauslay"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Fábio", "parId": "dpf-nogueira", "voluntarioSobreaviso": true, "idadeAnos": null, "id": "epf-fabio"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Girão", "parId": "dpf-olavo", "idadeAnos": null, "id": "epf-girao"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Renato", "parId": "dpf-martins", "idadeAnos": null, "id": "epf-renato"}], "atividades": [{"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-01", "grupo": "sob-2026-09-01", "inicio": "2026-09-01", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-01-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-02", "grupo": "sob-2026-09-02", "inicio": "2026-09-02", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-02-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-03", "grupo": "sob-2026-09-03", "inicio": "2026-09-03", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-03-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-05", "grupo": "sob-2026-09-05", "inicio": "2026-09-05", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-05-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-06", "grupo": "sob-2026-09-06", "inicio": "2026-09-06", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-06-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-15", "grupo": "sob-2026-09-15", "inicio": "2026-09-15", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-15-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-16", "grupo": "sob-2026-09-16", "inicio": "2026-09-16", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-16-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-17", "grupo": "sob-2026-09-17", "inicio": "2026-09-17", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-17-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-19", "grupo": "sob-2026-09-19", "inicio": "2026-09-19", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-19-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-20", "grupo": "sob-2026-09-20", "inicio": "2026-09-20", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-20-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-22", "grupo": "sob-2026-09-22", "inicio": "2026-09-22", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-22-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-23", "grupo": "sob-2026-09-23", "inicio": "2026-09-23", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-23-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-24", "grupo": "sob-2026-09-24", "inicio": "2026-09-24", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-24-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-26", "grupo": "sob-2026-09-26", "inicio": "2026-09-26", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-26-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-27", "grupo": "sob-2026-09-27", "inicio": "2026-09-27", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-27-martins"}, {"criadoEm": "2026-10-14T21:45:00-03:00", "descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-29", "grupo": "sob-2026-09-29", "inicio": "2026-09-29", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-29-martins"}]}</script><script>
+      <figure class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow" id="sob-eb2">Período</span><h2>Escrivães</h2><p>Dias de sobreaviso registrados para os escrivães.</p></div></div>
+        <div class="chart" id="ch-sob-e"></div>
+      </figure>
+    </section>
+
+    <!-- PRODUÇÃO -->
+    <section class="page" data-page="prod" hidden>
+      <div class="g2">
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow" id="pr-eb">Ano</span><h2>Inquéritos relatados</h2></div><div class="legend" id="lg-prel"></div></div>
+          <div class="chart" id="ch-prel"></div>
+        </figure>
+        <figure class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Situação atual</span><h2>Casos SIMBA</h2></div><div class="legend" id="lg-simba"></div></div>
+          <div class="chart" id="ch-simba"></div>
+        </figure>
+      </div>
+      <div class="g3" id="campo"></div>
+    </section>
+
+    <!-- RELATÓRIOS -->
+    <section class="page" data-page="rel" hidden>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow">Exportações</span><h2>Relatório gerencial</h2><p>O relatório usa o período escolhido no topo e a data de referência do acervo. Abra o arquivo HTML no navegador para imprimir ou salvar em PDF.</p></div></div>
+        <div class="actions">
+          <button type="button" id="ex-html">Relatório (HTML para PDF)</button>
+          <button type="button" class="ghost" id="ex-xlsx">Planilha Excel</button>
+          <button type="button" class="ghost" id="ex-csv">CSV</button>
+          <button type="button" class="ghost" id="ex-json" data-edit>Cópia de segurança (JSON)</button>
+        </div>
+        <p class="info" id="ex-info"></p>
+      </div>
+      <article class="report" id="relatorio"></article>
+    </section>
+
+    <!-- CONFIGURAÇÕES -->
+    <section class="page" data-page="cfg" hidden>
+      <div class="g2">
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Carga ponderada</span><h2>Pesos por tipo de procedimento</h2><p>Carga ponderada = soma de cada tipo × seu peso. Serve para comparar servidores entre si e não mede a complexidade de cada caso.</p></div></div>
+          <div class="fgrid" id="pesos"></div>
+          <div class="actions"><button type="button" id="salvar-pesos">Salvar pesos</button></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Alertas</span><h2>Critérios dos alertas</h2><p>Ajuste os limites que geram os pontos de atenção da visão geral.</p></div></div>
+          <div class="fgrid">
+            <label class="fld">Concentração de carga (% da média) <input type="number" id="cf-lim" min="100" max="300" step="5"></label>
+            <label class="fld">Acervo desatualizado após (dias) <input type="number" id="cf-dias" min="7" max="365" step="1"></label>
+          </div>
+          <div class="actions"><button type="button" id="salvar-cf">Salvar critérios</button></div>
+        </div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Visualização</span><h2>Perfil DELINST</h2><p>Veja a página exatamente como a equipe vê: somente leitura, sem as áreas de lançamento.</p></div></div>
+          <div class="actions"><button type="button" class="ghost" id="ver-equipe">Ver como a equipe vê</button></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div class="t"><span class="eyebrow">Divulgação</span><h2>Página pública</h2><p>Gera um arquivo HTML com uma cópia dos dados atuais, sem login, para publicar num endereço próprio. Quem tiver o link vê o conteúdo. A matrícula e a data de nascimento não são incluídas.</p></div></div>
+          <div class="actions"><button type="button" class="gold" id="gerar-pub">Gerar página pública</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><div class="t"><span class="eyebrow">Auditoria</span><h2>Histórico de alterações</h2><p>Cada inclusão, alteração e exclusão feita por aqui fica registrada com data, hora e autor. Visível apenas para quem edita.</p></div></div>
+        <div class="scroll stack" id="audit"></div>
+      </div>
+    </section>
+
+    <footer class="foot"><span>Polícia Federal · SR/PF/CE · DRPJ · DELINST</span><span id="foot-ref"></span><span><b>Uso interno</b> · divulgação restrita aos servidores da unidade e interessados</span></footer>
+  </main>
+</div><div id="tip" hidden></div><div id="toast" hidden role="status"></div><script>window.__SNAPSHOT__={"geradoEm": "2026-10-15T19:06:48.379587+00:00", "cfg": {"pesos": {"IPL": 1, "NC": 1, "RE": 1, "RDF": 1, "NCV": 1}, "limiteAlerta": 125, "diasDesatualizado": 45}, "hist": [{"data": "2026-10-15", "por": {"dpf-doralucia": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "dpf-martins": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "dpf-nogueira": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "dpf-olavo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}}}], "servidores": [{"acervo": {"IPL": 72, "NC": 7, "NCV": 3, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Doralúcia", "relatados": {"2026": 31}, "idadeAnos": null, "id": "dpf-doralucia"}, {"acervo": {"IPL": 71, "NC": 1, "NCV": 3, "RDF": 1, "RE": 6}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Martins", "relatados": {"2026": 41}, "voluntarioSobreaviso": true, "idadeAnos": null, "id": "dpf-martins"}, {"acervo": {"IPL": 70, "NC": 1, "NCV": 0, "RDF": 0, "RE": 0}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": false, "nome": "Nogueira", "relatados": {"2026": 20}, "idadeAnos": null, "id": "dpf-nogueira"}, {"acervo": {"IPL": 35, "NC": 1, "NCV": 21, "RDF": 13, "RE": 4}, "acervoEm": "2026-10-15", "ativo": true, "cargo": "DPF", "chefe": true, "extras": {"simba": 10}, "nome": "Olavo", "posse": "2006-07-01", "relatados": {"2026": 21}, "voluntarioSobreaviso": true, "idadeAnos": 48, "id": "dpf-olavo"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Chrauslay", "parId": "dpf-doralucia", "idadeAnos": null, "id": "epf-chrauslay"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Fábio", "parId": "dpf-nogueira", "voluntarioSobreaviso": true, "idadeAnos": null, "id": "epf-fabio"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Girão", "parId": "dpf-olavo", "idadeAnos": null, "id": "epf-girao"}, {"acervo": {"IPL": 0, "NC": 0, "NCV": 0, "RDF": 0, "RE": 0}, "ativo": true, "cargo": "EPF", "nome": "Renato", "parId": "dpf-martins", "idadeAnos": null, "id": "epf-renato"}], "atividades": [{"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-01", "grupo": "sob-2026-09-01", "inicio": "2026-09-01", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-01-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-02", "grupo": "sob-2026-09-02", "inicio": "2026-09-02", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-02-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-03", "grupo": "sob-2026-09-03", "inicio": "2026-09-03", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-03-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-05", "grupo": "sob-2026-09-05", "inicio": "2026-09-05", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-05-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-06", "grupo": "sob-2026-09-06", "inicio": "2026-09-06", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-06-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-15", "grupo": "sob-2026-09-15", "inicio": "2026-09-15", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-15-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-16", "grupo": "sob-2026-09-16", "inicio": "2026-09-16", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-16-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-17", "grupo": "sob-2026-09-17", "inicio": "2026-09-17", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-17-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-19", "grupo": "sob-2026-09-19", "inicio": "2026-09-19", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-19-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-20", "grupo": "sob-2026-09-20", "inicio": "2026-09-20", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-20-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-22", "grupo": "sob-2026-09-22", "inicio": "2026-09-22", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-22-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-23", "grupo": "sob-2026-09-23", "inicio": "2026-09-23", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-23-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-24", "grupo": "sob-2026-09-24", "inicio": "2026-09-24", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-24-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-26", "grupo": "sob-2026-09-26", "inicio": "2026-09-26", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-26-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-27", "grupo": "sob-2026-09-27", "inicio": "2026-09-27", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-27-martins"}, {"descricao": "Escala de sobreaviso voluntário 09/2026 · SR/PF/CE", "fim": "2026-09-29", "grupo": "sob-2026-09-29", "inicio": "2026-09-29", "servidorId": "dpf-martins", "tipo": "sobreaviso", "id": "sob-2026-09-29-martins"}]}</script><script>
 const SNAP=window.__SNAPSHOT__||null;
 const SRC_SCRIPT=document.currentScript?document.currentScript.textContent:"";
 const PRISTINE=document.getElementById("app").outerHTML;
-const PROC=["IPL","NC","RE","RDF","NCV"];
+
+/* ================= domínio ================= */
+const PROC=["IPL","NC","RE","RDF","NCV"],ESP=["NC","RE","RDF","NCV"];
 const PROC_N={IPL:"Inquérito Policial",NC:"Notícia-Crime",RE:"Registro Especial",RDF:"Registro de Fato",NCV:"Notícia-Crime em Verificação"};
 const PROC_C={IPL:"--c1",NC:"--c2",RE:"--c3",RDF:"--c4",NCV:"--c5"};
 const CARGOS=[{k:"DPF",n:"Delegados",s:"Delegado(a)",proc:true},{k:"EPF",n:"Escrivães",s:"Escrivão(ã)",proc:true},{k:"APF",n:"Agentes",s:"Agente",proc:false}];
-const PAINEL=CARGOS.filter(c=>c.proc); // agentes têm controle próprio
 const ATIV=[
- {k:"sobreaviso",n:"Sobreaviso",a:"Sobreav.",c:"--c1"},
- {k:"op_local",n:"Operação em Fortaleza e RMF",a:"Op. RMF",c:"--c2"},
- {k:"viagem",n:"Missão com deslocamento e pernoite",a:"Missão",c:"--c3"},
- {k:"curso",n:"Curso",a:"Curso",c:"--c4"},
- {k:"treinamento",n:"Treinamento",a:"Trein.",c:"--c5"},
- {k:"reuniao",n:"Reunião",a:"Reunião",c:"--c6"},
- {k:"encontro",n:"Encontro",a:"Encontro",c:"--c7"}];
-const ATIV_N=Object.fromEntries(ATIV.map(t=>[t.k,t.n]));
-const $=s=>document.querySelector(s);
+ {k:"sobreaviso",n:"Sobreaviso",c:"--c7"},
+ {k:"op_local",n:"Operação em Fortaleza e RMF",c:"--c1"},
+ {k:"viagem",n:"Missão com deslocamento e pernoite",c:"--c2"},
+ {k:"curso",n:"Curso",c:"--c3"},
+ {k:"treinamento",n:"Treinamento",c:"--c4"},
+ {k:"reuniao",n:"Reunião",c:"--c5"},
+ {k:"encontro",n:"Encontro",c:"--c6"}];
+const ATIV_N=Object.fromEntries(ATIV.map(t=>[t.k,t.n])),ATIV_C=Object.fromEntries(ATIV.map(t=>[t.k,t.c]));
+const SECS=[
+ {k:"painel",n:"Visão geral",c:"Geral",d:"Indicadores, alertas e síntese da unidade",i:"grid"},
+ {k:"acervo",n:"Acervo",c:"Acervo",d:"Inquéritos e procedimentos especiais por delegado, com histórico",i:"folder"},
+ {k:"efetivo",n:"Efetivo",c:"Efetivo",d:"Delegados, escrivães e agentes da unidade",i:"users"},
+ {k:"ativ",n:"Atividades",c:"Ativid.",d:"Operações, missões, cursos, treinamentos, reuniões e encontros",i:"cal",chefia:true},
+ {k:"sob",n:"Sobreaviso",c:"Sobreav.",d:"Escala e comparativo entre delegados",i:"moon"},
+ {k:"prod",n:"Produção",c:"Produção",d:"Relatórios finais, casos SIMBA, operações e missões",i:"chart"},
+ {k:"rel",n:"Relatórios",c:"Relat.",d:"Relatório gerencial, metodologia e exportações",i:"file"},
+ {k:"cfg",n:"Configurações",c:"Config.",d:"Pesos, critérios de alerta, publicação e auditoria",i:"gear",chefia:true}];
+const ICONS={
+ grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+ folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+ users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.6 14.8c1.7.8 2.8 2.6 3.1 5.2"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+ chart:'<path d="M4 20V11M10 20V5M16 20v-7M21 20H3"/>',
+ file:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+ gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/>',
+ warn:'<path d="M12 4 2.5 20h19z"/><path d="M12 10v4.5M12 17.5h.01"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/>',
+ ok:'<path d="M5 12.5l4.5 4.5L19 7.5"/>'};
+const ico=k=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>`;
+
+/* ================= utilitários ================= */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const hoje=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
-const br=d=>d?d.split("-").reverse().join("/"):"—";
+const br=d=>d?String(d).slice(0,10).split("-").reverse().join("/"):"—";
 const brc=d=>d?d.slice(8,10)+"/"+d.slice(5,7)+"/"+d.slice(2,4):"";
+const brh=iso=>{if(!iso)return "—";const d=new Date(iso);return d.toLocaleDateString("pt-BR")+" "+d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})};
 const byNome=(a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR");
-const fmt=n=>(Math.round(n*10)/10).toLocaleString("pt-BR");
+const fmt=n=>(Math.round((+n||0)*10)/10).toLocaleString("pt-BR");
+const pct=(a,b)=>b>0?Math.round(a/b*100):null;
+const addDia=(d,n)=>{const x=new Date(d+"T12:00");x.setDate(x.getDate()+n);return x.toISOString().slice(0,10)};
+const MESES=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],_M0=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const mobile=()=>matchMedia("(max-width:640px)").matches;
 
-let db=null,dl=null,EDIT=false,podeEditar=false;
-let servidores=[],atividades=[],hist=[];
-let pesos={IPL:1,NC:1,RE:1,RDF:1,NCV:1};
+/* ================= estado ================= */
+let db=null,dl=null,userNS=null,uid=null,podeEditar=false,EDIT=false;
+let servidores=[],atividades=[],hist=[],auditoria=[];
+let cfg={pesos:{IPL:1,NC:1,RE:1,RDF:1,NCV:1},limiteAlerta:125,diasDesatualizado:45,atualizadoEm:null};
 let periodo="ano:"+new Date().getFullYear();
+let sec="painel",cargaCargo="DPF",ativView="cal";
+let calMes=hoje().slice(0,7),sobMes=null;
+let editGrupo=null,editServ=null,flashId=null;
+let sortAc={k:"total",d:-1};
 const draft={},selPart=new Set();
+let profs={};
 
-function toast(msg,err){const t=$("#toast");t.textContent=msg;t.className=err?"err":"";t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,3500)}
-function dbErr(e){const m={quota_exceeded:"Limite de armazenamento atingido.",resource_exhausted:"Muitas operações seguidas. Aguarde alguns segundos.",invalid_argument:"Sem permissão para alterar os dados, ou dado inválido."};toast(m[e&&e.code]||"Não foi possível salvar. Tente novamente.",true)}
-function noites(a){return Math.max(1,dias(a)-1)}
+/* ================= regras ================= */
 function dias(a){const i=new Date(a.inicio+"T12:00"),f=new Date((a.fim||a.inicio)+"T12:00");return Math.max(1,Math.round((f-i)/864e5)+1)}
+function noites(a){return Math.max(1,dias(a)-1)}
+function anosDec(d){if(!d)return null;const v=(Date.now()-new Date(d+"T12:00"))/(365.2425*864e5);return v>=0?v:null}
+function anosInt(d){if(!d)return null;const a=new Date(d+"T12:00"),h=new Date();let y=h.getFullYear()-a.getFullYear();
+  if(h.getMonth()<a.getMonth()||(h.getMonth()===a.getMonth()&&h.getDate()<a.getDate()))y--;return y>=0?y:null}
+const tempoCargo=s=>anosDec(s.posse);
+const idadeDe=s=>s.nascimento?anosInt(s.nascimento):(s.idadeAnos!=null?+s.idadeAnos:null);
 function inPeriod(d){
   if(!d)return false;if(periodo==="tudo")return true;
   if(periodo.startsWith("ano:"))return d.slice(0,4)===periodo.slice(4);
@@ -399,53 +640,56 @@ function inPeriod(d){
 }
 function periodoLabel(){const o=$("#periodo").selectedOptions[0];return o?o.textContent:""}
 function anoRel(){return periodo.startsWith("ano:")?periodo.slice(4):String(new Date().getFullYear())}
+const ativos=()=>servidores.filter(s=>s.ativo!==false);
+const parDe=s=>s.parId?servidores.find(o=>o.id===s.parId):null;
 function fonte(s){if(s.cargo==="EPF"){const p=parDe(s);if(p&&p.cargo==="DPF")return p}return s}
-/* tempo no cargo (anos com 1 casa) e idade (anos completos) */
-function anosDec(d){if(!d)return null;const v=(Date.now()-new Date(d+"T12:00"))/(365.2425*864e5);return v>=0?v:null}
-function anosInt(d){if(!d)return null;const a=new Date(d+"T12:00"),h=new Date();let y=h.getFullYear()-a.getFullYear();
-  if(h.getMonth()<a.getMonth()||(h.getMonth()===a.getMonth()&&h.getDate()<a.getDate()))y--;return y>=0?y:null}
-function tempoCargo(s){return anosDec(s.posse)}
-function idadeDe(s){return s.nascimento?anosInt(s.nascimento):(s.idadeAnos!=null?+s.idadeAnos:null)}
 function stats(s){
-  const f=fonte(s);const ac=f.acervo||{};let total=0,pond=0;
-  for(const k of PROC){const v=+ac[k]||0;total+=v;pond+=v*(+pesos[k]||0)}
-  const at={};ATIV.forEach(t=>at[t.k]=0);let diasViagem=0,diasSob=0,part=0;
-  for(const a of atividades){if(a.servidorId!==s.id||!inPeriod(a.inicio))continue;
-    at[a.tipo]=(at[a.tipo]||0)+1;part++;if(a.tipo==="viagem")diasViagem+=noites(a);if(a.tipo==="sobreaviso")diasSob+=dias(a)}
+  const f=fonte(s),ac=f.acervo||{};let total=0,pond=0;
+  for(const k of PROC){const v=+ac[k]||0;total+=v;pond+=v*(+cfg.pesos[k]||0)}
+  const ipl=+ac.IPL||0;
+  const at={};ATIV.forEach(t=>at[t.k]=0);let noitesM=0,part=0;
+  for(const a of atividades){if(a.servidorId!==s.id||!inPeriod(a.inicio))continue;at[a.tipo]=(at[a.tipo]||0)+1;part++;if(a.tipo==="viagem")noitesM+=noites(a)}
   const rel=+((f.relatados||{})[anoRel()])||0,simba=+((s.extras||{}).simba)||0;
-  return {ac,total,ipl:+ac.IPL||0,outros:total-(+ac.IPL||0),pond,at,diasViagem,diasSob,part,rel,simba,acervoEm:f.acervoEm,via:f!==s?f:null};
+  return {ac,total,ipl,esp:total-ipl,pond,at,noites:noitesM,part,rel,simba,acervoEm:f.acervoEm,via:f!==s?f:null};
 }
-/* ordenação: maior valor primeiro; empate → mais sobreavisos; depois nome */
 const ordem=c=>(a,b)=>(b[c]-a[c])||(b.at.sobreaviso-a.at.sobreaviso)||byNome(a.s,b.s);
+function calc(){
+  const at=ativos();
+  const D=at.filter(s=>s.cargo==="DPF").map(s=>({s,...stats(s)})).sort((a,b)=>byNome(a.s,b.s));
+  const E=at.filter(s=>s.cargo==="EPF").map(s=>({s,...stats(s)})).sort((a,b)=>byNome(a.s,b.s));
+  const tot={};PROC.forEach(k=>tot[k]=D.reduce((a,x)=>a+(+x.ac[k]||0),0));
+  const ipl=tot.IPL,esp=ESP.reduce((a,k)=>a+tot[k],0);
+  const media=(l,f)=>l.length?l.reduce((a,x)=>a+f(x),0)/l.length:0;
+  const Dsc=D.filter(x=>!x.s.chefe);
+  const ref=D.map(x=>x.s.acervoEm||"").filter(Boolean).sort().pop()||null;
+  return {D,E,Dsc,tot,ipl,esp,total:ipl+esp,media,ref,
+    rel:D.reduce((a,x)=>a+x.rel,0),simba:D.reduce((a,x)=>a+x.simba,0),
+    mPondD:media(D,x=>x.pond),mPondE:media(E,x=>x.pond)};
+}
 function status(idx){
   if(idx==null)return {cls:"neutral",t:"—"};
-  if(idx>=1.25)return {cls:"up",t:"acima"};if(idx<=0.75)return {cls:"low",t:"abaixo"};return {cls:"ok",t:"na média"};
+  if(idx*100>=cfg.limiteAlerta)return {cls:"up",t:"acima"};if(idx<=0.75)return {cls:"low",t:"abaixo"};return {cls:"ok",t:"na média"};
 }
-function heatCell(v,max,extra=""){const h=max>0?Math.min(1,v/max)*0.42:(v?0.42:0);return `<td class="heat ${v?"":"zero"} ${extra}" style="--h:${h.toFixed(3)}">${v}</td>`}
-function ativos(){return servidores.filter(s=>s.ativo!==false)}
-function chefe(){return ativos().find(s=>s.chefe&&s.cargo==="DPF")||null}
-function pares(k){const ch=chefe();return ativos().filter(s=>s.cargo===k&&s!==ch)}
-function parDe(s){return s.parId&&servidores.find(o=>o.id===s.parId)}
 
-/* ---------- gráficos (SVG próprio) ---------- */
+/* ================= gráficos ================= */
 function niceStep(max,n){const raw=max/n||1,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<=1?1:m<=2?2:m<=2.5?2.5:m<=5?5:10)*p}
 function ticksFor(max,n=4){const st=Math.max(1,niceStep(max,n));const top=Math.ceil(max/st)*st||st;const t=[];for(let v=0;v<=top+1e-9;v+=st)t.push(+v.toFixed(6));return {top,t}}
-function cw(el){return Math.max(300,Math.floor(el.clientWidth||600))}
-function tipAttr(html){return `data-tip="${esc(html)}"`}
-
-/* barras horizontais com linha da média; rows: {label, value, hl, pct, st, tip} ou {group} */
-function hbarChart(host,{rows,mean,meanLbl}){
-  const w=cw(host),lw=Math.min(150,Math.round(w*.3)),rw=w<420?92:128,bh=20,gap=12,top=26,gh=24;
+const cw=el=>Math.max(260,Math.floor(el.clientWidth||600));
+const tipAttr=h=>`data-tip="${esc(h)}"`;
+function barPath(x,y,w,h,r){r=Math.min(r,w,h/2);return `M${x},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x}Z`}
+function trunc(s,px){const max=Math.max(6,Math.floor(px/7.2));return s.length>max?s.slice(0,max-1)+"…":s}
+function hbarChart(host,{rows,mean,label}){
+  const w=cw(host),lw=Math.min(140,Math.round(w*.3)),rw=w<420?80:112,bh=mobile()?22:20,gap=12,top=26,gh=24;
   const vals=rows.filter(r=>!r.group).map(r=>r.value);
-  const {top:mx,t}=ticksFor(Math.max(1,mean||0,...vals));
+  const {top:mx,t}=ticksFor(Math.max(1,mean||0,...vals),w<420?3:4);
   const X=v=>lw+(w-lw-rw)*v/mx;
   let y=top,body="";
   for(const r of rows){
     if(r.group){body+=`<text class="gh" x="0" y="${y+15}">${esc(r.group)}</text>`;y+=gh;continue}
     const bw=Math.max(r.value>0?3:0,X(r.value)-lw);
-    body+=`<g ${tipAttr(r.tip)}><rect class="hit" x="0" y="${y-gap/2}" width="${w}" height="${bh+gap}"/>`+
-      `<text class="lb ${r.hl?"ch":""}" x="${lw-10}" y="${y+bh/2+4.5}" text-anchor="end">${esc(trunc(r.label,lw))}</text>`+
-      (bw?`<path d="${barPath(lw,y,bw,bh,4)}" style="fill:var(${r.hl?"--accent":"--navy"})"/>`:"")+
+    body+=`<g ${tipAttr(r.tip||"")}><rect class="hit" x="0" y="${y-gap/2}" width="${w}" height="${bh+gap}"/>`+
+      `<text class="lb" x="${lw-10}" y="${y+bh/2+4.5}" text-anchor="end">${esc(trunc(r.label,lw))}</text>`+
+      (bw?`<path d="${barPath(lw,y,bw,bh,4)}" style="fill:var(--navy)"/>`:"")+
       `<text class="vl" x="${lw+bw+8}" y="${y+bh/2+4.5}">${fmt(r.value)}<tspan class="vl2" dx="6">${r.pct!=null?r.pct+"%":""}</tspan></text></g>`;
     y+=bh+gap;
   }
@@ -453,38 +697,28 @@ function hbarChart(host,{rows,mean,meanLbl}){
   let grid=t.map(v=>`<line class="gridl" x1="${X(v)}" x2="${X(v)}" y1="${top-6}" y2="${h-4}"/><text class="ax" x="${X(v)}" y="${top-12}" text-anchor="middle">${fmt(v)}</text>`).join("");
   grid+=`<line class="base" x1="${lw}" x2="${lw}" y1="${top-6}" y2="${h-4}"/>`;
   const ml=mean>0?`<line class="meanl" x1="${X(mean)}" x2="${X(mean)}" y1="${top-6}" y2="${h-2}"/>`:"";
-  host.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(meanLbl||"")}">${grid}${ml}${body}</svg>`;
+  host.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label||"")}">${grid}${ml}${body}</svg>`;
 }
-function barPath(x,y,w,h,r){r=Math.min(r,w,h/2);return `M${x},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x}Z`}
-function trunc(s,px){const max=Math.max(6,Math.floor(px/7.2));return s.length>max?s.slice(0,max-1)+"…":s}
-
-/* barras empilhadas; rows: {label, parts:{k:v}, hl} ou {group}; keys:[{k,n,c}] */
 function stackChart(host,{rows,keys,unit}){
-  const w=cw(host),lw=Math.min(150,Math.round(w*.3)),rw=48,bh=20,gap=12,top=26,gh=24;
-  const tots=rows.filter(r=>!r.group).map(r=>keys.reduce((a,k)=>a+(+r.parts[k.k]||0),0));
-  const {top:mx,t}=ticksFor(Math.max(1,...tots));
+  const w=cw(host),lw=Math.min(140,Math.round(w*.3)),rw=44,bh=20,gap=12,top=26;
+  const tots=rows.map(r=>keys.reduce((a,k)=>a+(+r.parts[k.k]||0),0));
+  const {top:mx,t}=ticksFor(Math.max(1,...tots),w<420?3:4);
   const X=v=>lw+(w-lw-rw)*v/mx;
   let y=top,body="";
   for(const r of rows){
-    if(r.group){body+=`<text class="gh" x="0" y="${y+15}">${esc(r.group)}</text>`;y+=gh;continue}
     let acc=0;const tot=keys.reduce((a,k)=>a+(+r.parts[k.k]||0),0);
-    body+=`<text class="lb ${r.hl?"ch":""}" x="${lw-10}" y="${y+bh/2+4.5}" text-anchor="end">${esc(trunc(r.label,lw))}</text>`;
+    body+=`<text class="lb" x="${lw-10}" y="${y+bh/2+4.5}" text-anchor="end">${esc(trunc(r.label,lw))}</text>`;
     const segs=keys.filter(k=>+r.parts[k.k]>0);
-    segs.forEach((k,i)=>{const v=+r.parts[k.k];const x0=X(acc),x1=X(acc+v);acc+=v;
-      const last=i===segs.length-1,sw=Math.max(1.5,x1-x0);
-      body+=`<g ${tipAttr(`<b>${esc(r.label)}</b><br>${esc(k.n)}: ${v} ${unit}`)}>`+
-        (last?`<path class="seg" d="${barPath(x0,y,sw,bh,4)}" style="fill:var(${k.c})"/>`:`<rect class="seg" x="${x0}" y="${y}" width="${sw}" height="${bh}" style="fill:var(${k.c})"/>`)+`</g>`});
-    body+=`<text class="vl" x="${X(tot)+8}" y="${y+bh/2+4.5}">${tot}</text>`;
-    y+=bh+gap;
+    segs.forEach((k,i)=>{const v=+r.parts[k.k];const x0=X(acc),x1=X(acc+v);acc+=v;const sw=Math.max(1.5,x1-x0);
+      body+=`<g ${tipAttr(`<b>${esc(r.label)}</b><br>${esc(k.n)}: ${v} ${unit}`)}>`+(i===segs.length-1?`<path class="seg-r" d="${barPath(x0,y,sw,bh,4)}" style="fill:var(${k.c})"/>`:`<rect class="seg-r" x="${x0}" y="${y}" width="${sw}" height="${bh}" style="fill:var(${k.c})"/>`)+`</g>`});
+    body+=`<text class="vl" x="${X(tot)+8}" y="${y+bh/2+4.5}">${tot}</text>`;y+=bh+gap;
   }
   const h=y+4;
   const grid=t.map(v=>`<line class="gridl" x1="${X(v)}" x2="${X(v)}" y1="${top-6}" y2="${h-4}"/><text class="ax" x="${X(v)}" y="${top-12}" text-anchor="middle">${fmt(v)}</text>`).join("")+`<line class="base" x1="${lw}" x2="${lw}" y1="${top-6}" y2="${h-4}"/>`;
   host.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img">${grid}${body}</svg>`;
 }
-
-/* linhas; series:[{name,c,values}] sobre datas */
 function lineChart(host,{dates,series}){
-  const w=cw(host),h=230,l=44,r=w<420?16:110,t=16,b=30;
+  const w=cw(host),h=230,l=44,r=w<420?16:118,t=16,b=30;
   const {top:mx,t:tk}=ticksFor(Math.max(1,...series.flatMap(s=>s.values)));
   const X=i=>dates.length<2?l+(w-l-r)/2:l+(w-l-r)*i/(dates.length-1),Y=v=>t+(h-t-b)*(1-v/mx);
   let s=tk.map(v=>`<line class="gridl" x1="${l}" x2="${w-r}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${l-8}" y="${Y(v)+3.5}" text-anchor="end">${fmt(v)}</text>`).join("");
@@ -492,429 +726,597 @@ function lineChart(host,{dates,series}){
   s+=dates.map((d,i)=>i%step===0||i===dates.length-1?`<text class="ax" x="${X(i)}" y="${h-10}" text-anchor="middle">${brc(d)}</text>`:"").join("");
   for(const se of series){
     s+=`<polyline fill="none" style="stroke:var(${se.c})" stroke-width="2" stroke-linejoin="round" points="${se.values.map((v,i)=>X(i)+","+Y(v)).join(" ")}"/>`;
-    s+=se.values.map((v,i)=>`<g ${tipAttr(`<b>${esc(se.name)}</b><br>${br(dates[i])}: ${v} procedimentos`)}><circle class="hit" cx="${X(i)}" cy="${Y(v)}" r="12"/><circle cx="${X(i)}" cy="${Y(v)}" r="4.5" style="fill:var(${se.c});stroke:var(--surface)" stroke-width="2"/></g>`).join("");
+    s+=se.values.map((v,i)=>`<g ${tipAttr(`<b>${esc(se.name)}</b><br>${br(dates[i])}: ${v}`)}><circle class="hit" cx="${X(i)}" cy="${Y(v)}" r="12"/><circle cx="${X(i)}" cy="${Y(v)}" r="4.5" style="fill:var(${se.c});stroke:var(--surface)" stroke-width="2"/></g>`).join("");
     if(w>=420){const li=se.values.length-1;s+=`<text class="vl" x="${X(li)+10}" y="${Y(se.values[li])+4}">${esc(se.name)} · ${se.values[li]}</text>`}
   }
   host.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img">${s}</svg>`;
 }
-function legend(items){return items.map(i=>`<span class="sw"><i class="${i.cls||""}" style="background:var(${i.c||"--navy"})"></i>${esc(i.n)}</span>`).join("")}
-
-/* tooltip */
+function donut(host,items,center){
+  const total=items.reduce((a,i)=>a+i.v,0),sz=176,r=66,sw=24,C=2*Math.PI*r;let off=0,arcs="";
+  if(total>0)items.forEach(it=>{if(!it.v)return;const len=it.v/total*C;
+    arcs+=`<g ${tipAttr(`<b>${esc(it.n)}</b><br>${it.v} · ${fmt(it.v/total*100)}%`)}><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" style="stroke:var(${it.c})" stroke-width="${sw}" stroke-dasharray="${Math.max(0,len-2)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 ${sz/2} ${sz/2})"/></g>`;off+=len});
+  else arcs=`<circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" style="stroke:var(--grid)" stroke-width="${sw}"/>`;
+  host.innerHTML=`<svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}" role="img" aria-label="Distribuição do acervo por tipo">${arcs}<text class="big" x="${sz/2}" y="${sz/2+6}" text-anchor="middle" font-size="34">${total}</text><text class="ax" x="${sz/2}" y="${sz/2+24}" text-anchor="middle">${esc(center)}</text></svg>`+
+    `<div class="lg">${items.map(it=>`<div class="row"><i style="background:var(${it.c})"></i><span><b style="font-family:var(--f-mono);font-weight:600;min-width:0">${esc(it.k)}</b> <em>${esc(it.n)}</em></span><span>${total?fmt(it.v/total*100)+"%":"—"}</span><b>${it.v}</b></div>`).join("")}</div>`;
+}
+const legend=items=>items.map(i=>`<span class="sw"><i class="${i.cls||""}" style="background:var(${i.c||"--navy"})"></i>${esc(i.n)}</span>`).join("");
+function grupoChart(host,infoEl,{fn,un,dec,grupos}){
+  const rows=[],medias=[],faltam=[];
+  for(const [nome,l] of grupos){
+    const com=l.filter(x=>fn(x)!=null);l.filter(x=>fn(x)==null).forEach(x=>faltam.push(x.s.nome));
+    if(!com.length){medias.push([nome,null]);continue}
+    rows.push({group:nome});
+    [...com].sort((a,b)=>(fn(b)-fn(a))||(b.at.sobreaviso-a.at.sobreaviso)||byNome(a.s,b.s)).forEach(x=>{const v=fn(x);
+      rows.push({label:x.s.nome,value:dec?Math.round(v*10)/10:v,pct:null,tip:`<b>${esc(x.s.nome)}</b><br>${dec?fmt(v):v} ${un}`})});
+    medias.push([nome,com.reduce((a,x)=>a+fn(x),0)/com.length]);
+  }
+  if(!rows.length){host.innerHTML=`<div class="empty">Sem dados lançados.</div>`;if(infoEl)infoEl.textContent=faltam.length?"Sem dado: "+faltam.join(", "):"";return}
+  hbarChart(host,{rows,mean:0,label:un});
+  if(infoEl)infoEl.textContent="Média: "+medias.map(([n,m])=>`${n.toLowerCase()} ${m==null?"—":fmt(m)+" "+un}`).join(" · ")+(faltam.length?` · sem dado: ${faltam.join(", ")}`:"");
+}
+function eventosMes(lista,mes){
+  const [y,m]=mes.split("-").map(Number),ini=`${mes}-01`,fim=`${mes}-${String(new Date(y,m,0).getDate()).padStart(2,"0")}`;
+  const ev={};
+  for(const a of lista){const f=a.fim||a.inicio;if(f<ini||a.inicio>fim)continue;
+    let d=a.inicio<ini?ini:a.inicio;const ult=f>fim?fim:f;
+    while(d<=ult){(ev[d]=ev[d]||[]).push(a);d=addDia(d,1)}}
+  return ev;
+}
+function calendario(host,mes,ev,rot){
+  const [y,m]=mes.split("-").map(Number),first=new Date(y,m-1,1),nd=new Date(y,m,0).getDate(),dow=first.getDay();
+  let h=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"].map(d=>`<div class="dow">${mobile()?d[0]:d}</div>`).join("");
+  for(let i=0;i<dow;i++)h+=`<div class="d out" aria-hidden="true"></div>`;
+  const hj=hoje();
+  for(let d=1;d<=nd;d++){const ds=`${mes}-${String(d).padStart(2,"0")}`,l=ev[ds]||[];
+    h+=`<div class="d ${ds===hj?"today":""}"><span class="n">${d}</span>${l.slice(0,3).map(a=>`<span class="ev" style="border-left-color:var(${ATIV_C[a.tipo]||"--navy"});--evc:var(${ATIV_C[a.tipo]||"--navy"})" ${tipAttr(rot(a,true))}>${esc(rot(a,false))}</span>`).join("")}${l.length>3?`<span class="more">+${l.length-3}</span>`:""}</div>`}
+  const rest=(7-((dow+nd)%7))%7;for(let i=0;i<rest;i++)h+=`<div class="d out" aria-hidden="true"></div>`;
+  const dd=Object.keys(ev).sort();
+  const ag=dd.length?dd.map(d=>ev[d].map(a=>`<div class="ag"><time>${d.slice(8,10)}/${d.slice(5,7)}</time><div><i style="background:var(${ATIV_C[a.tipo]||"--navy"})"></i>${esc(rot(a,false))}<div class="small muted">${esc(ATIV_N[a.tipo]||"")}</div></div></div>`).join("")).join(""):`<div class="empty" style="margin-top:10px">Nenhum registro neste mês.</div>`;
+  host.innerHTML=`<div class="cal">${h}</div><div class="agenda">${ag}</div>`;
+}
 (function(){const tip=$("#tip");
-  document.addEventListener("pointermove",e=>{const g=e.target.closest&&e.target.closest("[data-tip]");
-    if(!g){tip.hidden=true;return}tip.innerHTML=g.getAttribute("data-tip");tip.hidden=false;
+  document.addEventListener("pointermove",e=>{if(e.pointerType==="touch")return;const g=e.target.closest&&e.target.closest("[data-tip]");
+    if(!g||!g.getAttribute("data-tip")){tip.hidden=true;return}tip.innerHTML=g.getAttribute("data-tip");tip.hidden=false;
     const r=tip.getBoundingClientRect();let x=e.clientX+14,y=e.clientY+14;
     if(x+r.width>innerWidth-8)x=e.clientX-r.width-14;if(y+r.height>innerHeight-8)y=e.clientY-r.height-14;
     tip.style.left=Math.max(8,x)+"px";tip.style.top=Math.max(8,y)+"px"});
-  document.addEventListener("pointerleave",()=>tip.hidden=true);
+  document.addEventListener("click",e=>{const g=e.target.closest&&e.target.closest("svg [data-tip],.ev[data-tip]");
+    if(!g){tip.hidden=true;return}tip.innerHTML=g.getAttribute("data-tip");tip.hidden=false;const r=tip.getBoundingClientRect();
+    tip.style.left=Math.max(8,Math.min(innerWidth-r.width-8,e.clientX-r.width/2))+"px";tip.style.top=Math.max(8,e.clientY-r.height-14)+"px"});
   addEventListener("scroll",()=>tip.hidden=true,{passive:true});
 })();
+function toast(msg,err){const t=$("#toast");t.textContent=msg;t.className=err?"err":"";t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,3800)}
+function dbErr(e){const m={quota_exceeded:"Limite de armazenamento atingido. Exporte uma cópia de segurança e exclua registros antigos.",resource_exhausted:"Muitas operações seguidas. Aguarde alguns segundos e tente de novo.",invalid_argument:"A gravação foi recusada: seu perfil não tem permissão de edição, ou o dado é inválido.",revoked:"O acesso a esta página foi alterado. Recarregue a página."};toast(m[e&&e.code]||"Não foi possível salvar. Verifique a conexão e tente de novo.",true)}
+function armed(btn){if(btn.classList.contains("armed"))return true;const t=btn.textContent;btn.classList.add("armed");btn.textContent="Confirmar?";setTimeout(()=>{btn.classList.remove("armed");btn.textContent=t},4000);return false}
 
-/* ---------- PERÍODO ---------- */
+/* ================= auditoria ================= */
+let auditQ=Promise.resolve();
+const cfgDoc=()=>({pesos:cfg.pesos,limiteAlerta:cfg.limiteAlerta,diasDesatualizado:cfg.diasDesatualizado,atualizadoEm:cfg.atualizadoEm});
+function audit(acao,detalhe){
+  if(!db)return;const em=new Date().toISOString();cfg.atualizadoEm=em;
+  auditQ=auditQ.then(async()=>{try{await db.collection("auditoria").add({em,por:uid||null,acao,detalhe:String(detalhe||"").slice(0,300)})}catch(e){}
+    try{await db.doc("config/geral").set(cfgDoc())}catch(e){}});
+}
+
+/* ================= navegação ================= */
+function renderNav(){
+  $("#nav").innerHTML=SECS.filter(s=>!s.chefia||EDIT).map(s=>`<a href="#${s.k}" data-sec="${s.k}" ${s.k===sec?'aria-current="page"':""}>${ico(s.i)}<span class="lf">${s.n}</span><span class="ls">${s.c}</span>${s.chefia?'<span class="lock">chefia</span>':""}</a>`).join("");
+}
+function irPara(k){
+  const s=SECS.find(x=>x.k===k)||SECS[0];
+  sec=(s.chefia&&!EDIT)?"painel":s.k;
+  const S=SECS.find(x=>x.k===sec);
+  $$(".page[data-page]").forEach(p=>p.hidden=p.dataset.page!==sec);
+  $("#sec-title").textContent=S.k==="painel"?"Gestão DELINST":S.n;
+  $("#sec-desc").textContent=S.k==="painel"?"Visão geral · "+S.d:S.d;
+  $$("#nav a").forEach(a=>{if(a.dataset.sec===sec)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  renderPage();
+}
+addEventListener("hashchange",()=>{const k=location.hash.slice(1);if(k&&k!==sec){irPara(k);scrollTo(0,0)}});
 function renderPeriodo(){
   const sel=$("#periodo");const anos=new Set([new Date().getFullYear()]);
   atividades.forEach(a=>a.inicio&&anos.add(+a.inicio.slice(0,4)));
   const opts=[...[...anos].sort((a,b)=>b-a).map(y=>["ano:"+y,"Ano de "+y]),["12m","Últimos 12 meses"],["90d","Últimos 90 dias"],["tudo","Todo o histórico"]];
-  sel.innerHTML=opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join("");sel.value=periodo;
+  sel.innerHTML=opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join("");sel.value=periodo;if(!sel.value){periodo=opts[0][0];sel.value=periodo}
+}
+function renderStatus(C){
+  $("#status").innerHTML=`<span>Acervo de referência <b>${br(C.ref)}</b></span><span>Atividades <b>${esc(periodoLabel())}</b></span>${SNAP?`<span>Versão publicada em <b>${brh(SNAP.geradoEm)}</b></span>`:cfg.atualizadoEm?`<span>Última alteração <b>${brh(cfg.atualizadoEm)}</b></span>`:""}`;
+  $("#foot-ref").textContent="Acervo de referência: "+br(C.ref);
+  $("#side-ref").textContent=C.ref?"Acervo em "+br(C.ref):"";
+}
+async function renderWho(){
+  const w=$("#who");
+  if(SNAP){w.innerHTML=`<span class="role">Versão publicada · leitura</span>`;return}
+  if(!userNS){w.innerHTML=`<span class="role">${db?"Leitura":"Sem conexão"}</span>`;return}
+  let me=null;try{me=await userNS.me()}catch(e){}
+  w.innerHTML=`${me?`<img src="${esc(me.avatarUrl)}" alt="">`:""}<span></span><span class="role ${EDIT?"edit":""}">${EDIT?"Chefia · edição":"Perfil DELINST · leitura"}</span>`;
+  w.querySelector("span").textContent=(me&&me.name)||"Você";
 }
 
-/* ---------- PAINEL ---------- */
-function renderPainel(){
-  const at=ativos().filter(s=>s.cargo!=="APF");
-  const vazio=!at.length;
-  ["#graf-carga","#graf-soma","#card-campo","#graf-pessoal","#card-sob","#card-comp","#card-hist"].forEach(s=>$(s).hidden=vazio);
-  $("#painel-vazio").hidden=!vazio;
-  if(vazio){$("#kpis").innerHTML="";$("#tabelas").innerHTML="";$("#csv").hidden=true;
-    $("#painel-vazio").innerHTML=`<div class="empty"><h3 style="margin-bottom:6px">Nenhum delegado ou escrivão cadastrado</h3>${EDIT?"Comece pela aba <b>Efetivo</b>.":"O painel aparece aqui assim que a chefia cadastrar o efetivo."}</div>`;return}
-  const ch=null,dpf=ativos().filter(s=>s.cargo==="DPF"),epf=ativos().filter(s=>s.cargo==="EPF"); // chefe entra na média e no mesmo grupo
-  const sDpf=dpf.map(s=>({s,...stats(s)})),sEpf=epf.map(s=>({s,...stats(s)})),sCh=ch?{s:ch,...stats(ch)}:null;
-  const media=l=>l.length?l.reduce((a,x)=>a+x.pond,0)/l.length:0;
-  const mDpf=media(sDpf),mEpf=media(sEpf);
-  const todos=[...(sCh?[sCh]:[]),...sDpf,...sEpf];
-  const sob=todos.reduce((a,x)=>a+x.at.sobreaviso,0),part=todos.reduce((a,x)=>a+x.part,0);
-  const presid=(sCh?sCh.total:0)+sDpf.reduce((a,x)=>a+x.total,0);
-  const ultima=at.map(s=>s.acervoEm||"").sort().pop();
-  const idxCh=sCh&&mDpf>0?sCh.pond/mDpf:null;
+/* ================= páginas ================= */
+function renderPage(){
+  const C=calc();renderStatus(C);
+  ({painel:pgPainel,acervo:pgAcervo,efetivo:pgEfetivo,ativ:pgAtiv,sob:pgSob,prod:pgProd,rel:pgRel,cfg:pgCfg}[sec]||pgPainel)(C);
+}
+function render(){renderPeriodo();renderNav();renderPage()}
 
-  const nD=sDpf.length,totIpl=sDpf.reduce((a,x)=>a+x.ipl,0),totOut=sDpf.reduce((a,x)=>a+x.outros,0),totRel=sDpf.reduce((a,x)=>a+x.rel,0);
-  $("#foot-ref").textContent="Acervo de referência: "+br(ultima)+(SNAP?" · versão publicada em "+new Date(SNAP.geradoEm).toLocaleDateString("pt-BR"):"");
-  $("#kpis").innerHTML=
-    `<div class="kpi"><span class="eyebrow">Inquéritos em andamento</span><span class="v">${totIpl}</span><span class="d">IPLs da DELINST</span></div>`+
-    `<div class="kpi"><span class="eyebrow">Média de inquéritos</span><span class="v">${fmt(nD?totIpl/nD:0)}</span><span class="d">por delegado · ${nD} delegados</span></div>`+
-    (()=>{const sc=sDpf.filter(x=>!x.s.chefe);return sc.length&&sc.length<nD?`<div class="kpi"><span class="eyebrow">Média de inquéritos sem a chefia</span><span class="v">${fmt(sc.reduce((a,x)=>a+x.ipl,0)/sc.length)}</span><span class="d">por delegado · ${sc.length} delegados</span></div>`:""})()+
-    `<div class="kpi"><span class="eyebrow">Procedimentos especiais em andamento</span><span class="v">${totOut}</span><span class="d">extra inquérito · NC, RE, RDF e NCV</span></div>`+
-    `<div class="kpi"><span class="eyebrow">Média de procedimentos especiais</span><span class="v">${fmt(nD?totOut/nD:0)}</span><span class="d">por delegado</span></div>`+
-    `<div class="kpi"><span class="eyebrow">Relatados em ${anoRel()}</span><span class="v">${totRel}</span><span class="d">inquéritos relatados pela DELINST</span></div>`;
-
-  // carga ponderada
-  const pctOf=(v,m)=>m>0?Math.round(v/m*100):null;
-  const rowCarga=(x,m,hl)=>{const p=pctOf(x.pond,m),st=status(m>0?x.pond/m:null);
-    return {label:x.s.nome,value:x.pond,hl,pct:p,tip:`<b>${esc(x.s.nome)}</b>${hl?" · chefe da unidade":""}<br>Carga ponderada: ${fmt(x.pond)} (${x.total} procedimentos)<br>${p==null?"":p+"% da média"+(hl?" dos demais delegados":"")+" · "+st.t}`}};
-  const rD=[];if(sCh){rD.push({group:"Chefia"},rowCarga(sCh,mDpf,true));if(sDpf.length)rD.push({group:"Demais delegados"})}
-  [...sDpf].sort(ordem("pond")).forEach(x=>rD.push(rowCarga(x,mDpf,false)));
-  hbarChart($("#ch-dpf"),{rows:rD,mean:mDpf,meanLbl:"Carga ponderada dos delegados"});
-  $("#lg-dpf").innerHTML=(sCh?legend([{n:"Chefia",c:"--accent"}]):"")+legend([{n:"Delegados",c:"--navy"},{n:"Média "+fmt(mDpf)+(sCh?" (sem chefia)":""),cls:"dash"}]);
-  hbarChart($("#ch-epf"),{rows:[...sEpf].sort(ordem("pond")).map(x=>rowCarga(x,mEpf,false)),mean:mEpf,meanLbl:"Carga ponderada dos escrivães"});
-  $("#lg-epf").innerHTML=legend([{n:"Escrivães",c:"--navy"},{n:"Média "+fmt(mEpf),cls:"dash"}]);
-  if(!sEpf.length)$("#ch-epf").innerHTML=`<p class="muted small">Nenhum escrivão cadastrado.</p>`;
-
-  // somatório e relatados (sem ponderação)
-  const simples=(campo,titulo,unid)=>{const mP=sDpf.length?sDpf.reduce((a,x)=>a+x[campo],0)/sDpf.length:0;
-    const mk=(x,hl)=>{const p=pctOf(x[campo],mP);return {label:x.s.nome,value:x[campo],hl,pct:p,tip:`<b>${esc(x.s.nome)}</b>${hl?" · chefe da unidade":""}<br>${titulo}: ${x[campo]} ${unid}${p==null?"":"<br>"+p+"% da média"+(hl?" dos demais delegados":"")}`}};
-    const r=[];if(sCh){r.push({group:"Chefia"},mk(sCh,true));if(sDpf.length)r.push({group:"Demais delegados"})}
-    [...sDpf].sort(ordem(campo)).forEach(x=>r.push(mk(x,false)));return {r,mP}};
-  const ip=simples("ipl","Inquéritos em andamento","");
-  hbarChart($("#ch-ipl"),{rows:ip.r,mean:ip.mP,meanLbl:"Inquéritos em andamento por delegado"});
-  $("#lg-ipl").innerHTML=legend([{n:"Média "+fmt(ip.mP),cls:"dash"}]);
-  const so=simples("outros","Procedimentos especiais em andamento","");
-  hbarChart($("#ch-soma"),{rows:so.r,mean:so.mP,meanLbl:"Procedimentos em andamento por delegado"});
-  $("#lg-soma").innerHTML=(sCh?legend([{n:"Chefia",c:"--accent"}]):"")+legend([{n:"Média "+fmt(so.mP)+(sCh?" (sem chefia)":""),cls:"dash"}]);
-  const re=simples("rel","Inquéritos relatados em "+anoRel(),"");
-  $("#eb-rel").textContent="Produção em "+anoRel();
-  if(!re.r.some(x=>x.value))$("#ch-rel").innerHTML=`<p class="muted small" style="margin:0">Nenhum relatório lançado para ${anoRel()}.${EDIT?" Lance na aba <b>Lançar acervo</b>.":""}</p>`;
-  else hbarChart($("#ch-rel"),{rows:re.r,mean:re.mP,meanLbl:"Inquéritos relatados por delegado"});
-  $("#lg-rel").innerHTML=(sCh?legend([{n:"Chefia",c:"--accent"}]):"")+legend([{n:"Média "+fmt(re.mP)+(sCh?" (sem chefia)":""),cls:"dash"}]);
-
-  const sb=simples("simba","Casos SIMBA","");
-  if(!sb.r.some(x=>x.value))$("#ch-simba").innerHTML=`<p class="muted small" style="margin:0">Nenhum caso SIMBA lançado.</p>`;
-  else hbarChart($("#ch-simba"),{rows:sb.r,mean:sb.mP,meanLbl:"Casos SIMBA por delegado"});
-  $("#lg-simba").innerHTML=(sCh?legend([{n:"Chefia",c:"--accent"}]):"")+legend([{n:"Média "+fmt(sb.mP)+(sCh?" (sem chefia)":""),cls:"dash"}]);
-
-  // sobreaviso, operações RMF, deslocamentos, noites fora
-  const metricas=[["Operações em Fortaleza e RMF","operações",x=>x.at.op_local],["Missões com deslocamento e pernoite","missões",x=>x.at.viagem],["Noites fora da sede em missão","noites",x=>x.diasViagem]];
-  $("#card-campo").innerHTML=metricas.map((m,i)=>`<figure class="card"><div class="card-h"><div class="t"><span class="eyebrow">${esc(periodoLabel())}</span><h2>${m[0]}</h2></div></div><div class="m muted small" id="mm-${i}"></div><div class="chart" id="mc-${i}"></div></figure>`).join("");
-  metricas.forEach(([tit,un,fn],i)=>{
-    const mk=x=>({label:x.s.nome,value:fn(x),pct:null,tip:`<b>${esc(x.s.nome)}</b><br>${tit}: ${fn(x)} ${un}`});
-    const ord=l=>[...l].sort((a,b)=>(fn(b)-fn(a))||(b.at.sobreaviso-a.at.sobreaviso)||byNome(a.s,b.s));
-    const rows=[];if(sDpf.length)rows.push({group:"Delegados"},...ord(sDpf).map(mk));if(sEpf.length)rows.push({group:"Escrivães"},...ord(sEpf).map(mk));
-    const med=l=>l.length?fmt(l.reduce((a,x)=>a+fn(x),0)/l.length):"—";
-    $("#mm-"+i).textContent=`Média: delegados ${med(sDpf)} · escrivães ${med(sEpf)}`;
-    hbarChart($("#mc-"+i),{rows,mean:0,meanLbl:tit});
-  });
-
-  // tempo no cargo e idade
-  const pessoal=(host,info,fn,un,dec)=>{
-    const rows=[],faltam=[];
-    const grupo=(nome,l)=>{const com=l.filter(x=>fn(x.s)!=null);l.filter(x=>fn(x.s)==null).forEach(x=>faltam.push(x.s.nome));
-      if(!com.length)return null;rows.push({group:nome});
-      [...com].sort((a,b)=>(fn(b.s)-fn(a.s))||byNome(a.s,b.s)).forEach(x=>{const v=fn(x.s);
-        rows.push({label:x.s.nome,value:dec?Math.round(v*10)/10:v,pct:null,tip:`<b>${esc(x.s.nome)}</b><br>${dec?fmt(v):v} ${un}`})});
-      return com.reduce((a,x)=>a+fn(x.s),0)/com.length};
-    const mD=grupo("Delegados",sDpf),mE=grupo("Escrivães",sEpf);
-    if(!rows.length){$(host).innerHTML=`<p class="muted small" style="margin:0">Sem datas lançadas.${EDIT?" Preencha na aba <b>Efetivo</b>.":""}</p>`;$(info).textContent="";return}
-    hbarChart($(host),{rows,mean:0,meanLbl:un});
-    $(info).textContent=`Média: delegados ${mD==null?"—":fmt(mD)+" "+un} · escrivães ${mE==null?"—":fmt(mE)+" "+un}`+(faltam.length?` · sem data: ${faltam.join(", ")}`:"");
-  };
-  pessoal("#ch-tempo","#mm-tempo",tempoCargo,"anos",true);
-  pessoal("#ch-idade","#mm-idade",idadeDe,"anos",false);
-
-  // sobreaviso: só delegados
-  $("#eb-sob").textContent=periodoLabel();
-  const dSob=[...(sCh?[sCh]:[]),...sDpf];const mSob=dSob.length?dSob.reduce((a,x)=>a+x.at.sobreaviso,0)/dSob.length:0;
-  hbarChart($("#ch-sob"),{rows:[...dSob].sort((a,b)=>(b.at.sobreaviso-a.at.sobreaviso)||(b.total-a.total)||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:x.at.sobreaviso,pct:mSob>0?Math.round(x.at.sobreaviso/mSob*100):null,
-    tip:`<b>${esc(x.s.nome)}</b><br>Sobreaviso: ${x.at.sobreaviso} dia(s)${x.s.voluntarioSobreaviso?"<br>Voluntário":""}`})),mean:mSob,meanLbl:"Sobreaviso por delegado"});
-  $("#lg-sob").innerHTML=legend([{n:"Dias de sobreaviso",c:"--navy"},{n:"Média "+fmt(mSob),cls:"dash"}]);
-
-  // voluntários para sobreaviso
-  const vol=k=>ativos().filter(s=>s.cargo===k&&s.voluntarioSobreaviso).sort((a,b)=>(b.chefe?1:0)-(a.chefe?1:0)||byNome(a,b)).map(s=>esc(s.nome)).join(", ")||"—";
-  $("#vols").innerHTML=`<span><b>Delegados voluntários</b>${vol("DPF")}</span><span><b>Escrivães voluntários</b>${vol("EPF")}</span>`;
-
-  // composição
-  const procKeys=PROC.map(k=>({k,n:k+" · "+PROC_N[k],c:PROC_C[k]}));
-  const rows=[];
-  const grp=(nome,l,hl)=>{if(!l.length)return;rows.push({group:nome});l.forEach(x=>rows.push({label:x.s.nome,parts:x.ac,hl}))};
-  if(sCh)grp("Chefia",[sCh],true);grp(sCh?"Demais delegados":"Delegados",[...sDpf].sort(ordem("total")),false);grp("Escrivães",[...sEpf].sort(ordem("total")),false);
-  stackChart($("#ch-comp"),{rows,keys:procKeys,unit:"procedimento(s)"});
-  $("#lg-comp").innerHTML=legend(PROC.map(k=>({n:k,c:PROC_C[k]})));
-
-  // atividades
-  $("#eb-ativ").textContent=periodoLabel();
-  const rA=[];const ga=(nome,l,hl)=>{if(!l.length)return;rA.push({group:nome});l.forEach(x=>rA.push({label:x.s.nome,parts:x.at,hl}))};
-  if(sCh)ga("Chefia",[sCh],true);ga(sCh?"Demais delegados":"Delegados",[...sDpf].sort(ordem("total")),false);ga("Escrivães",[...sEpf].sort(ordem("total")),false);
-  if(!todos.some(x=>x.part-x.at.sobreaviso>0)){$("#ch-ativ").innerHTML=`<div class="empty" style="padding:22px">Nenhuma atividade registrada em ${esc(periodoLabel().toLowerCase())}. ${EDIT?"Registre operações, viagens, cursos e sobreavisos na aba <b>Atividades</b>.":""}</div>`}
-  else{const K=ATIV.filter(t=>t.k!=="sobreaviso");stackChart($("#ch-ativ"),{rows:rA,keys:K,unit:"participação(ões)"});}
-  $("#lg-ativ").innerHTML=legend(ATIV.filter(t=>t.k!=="sobreaviso").map(t=>({n:t.n,c:t.c})));
-
-  // evolução
+/* ---------- Visão geral ---------- */
+function alertas(C){
+  const A=[];const hj=hoje();
+  if(!C.ref)A.push({nv:"atencao",t:"Acervo ainda não lançado",c:"Sem data de referência registrada para os delegados",o:"Lançamento de acervo",r:"—"});
+  else{const dd=Math.round((new Date(hj)-new Date(C.ref))/864e5);
+    if(dd>cfg.diasDesatualizado)A.push({nv:"atencao",t:`Acervo sem atualização há ${dd} dias`,c:`Mais de ${cfg.diasDesatualizado} dias desde a data de referência`,o:"Lançamento de acervo",r:br(C.ref)})}
+  const m=C.mPondD;
+  C.D.forEach(x=>{const p=pct(x.pond,m);if(p!=null&&p>=cfg.limiteAlerta)A.push({nv:"atencao",t:`Carga ponderada de ${x.s.nome} em ${p}% da média dos delegados`,c:`Carga igual ou superior a ${cfg.limiteAlerta}% da média do cargo (ajustável em Configurações)`,o:"Acervo × pesos por tipo",r:br(x.acervoEm)})});
+  if(C.Dsc.length>=2){const o=[...C.Dsc].sort((a,b)=>b.ipl-a.ipl),mx=o[0],mn=o[o.length-1],mi=C.media(C.Dsc,x=>x.ipl);
+    if(mi>0&&(mx.ipl-mn.ipl)/mi>0.3)A.push({nv:"atencao",t:`Diferença de ${mx.ipl-mn.ipl} inquéritos entre ${mx.s.nome} (${mx.ipl}) e ${mn.s.nome} (${mn.ipl})`,c:"Amplitude acima de 30% da média de inquéritos dos delegados, sem a chefia",o:"Acervo de IPL",r:br(C.ref)})}
+  C.E.forEach(x=>{const p=parDe(x.s);if(!p||p.cargo!=="DPF"||p.ativo===false)A.push({nv:"atencao",t:`${x.s.nome} sem delegado vinculado em exercício`,c:"A carga do escrivão acompanha o delegado vinculado; sem vínculo válido ela não é calculada",o:"Cadastro do efetivo",r:"atual"})});
+  C.D.forEach(x=>{const n=C.E.filter(e=>e.s.parId===x.s.id).length;
+    if(n>1)A.push({nv:"atencao",t:`${x.s.nome} com ${n} escrivães vinculados`,c:"O mesmo acervo passa a contar para mais de um escrivão",o:"Cadastro do efetivo",r:"atual"});
+    if(n===0)A.push({nv:"info",t:`${x.s.nome} sem escrivão vinculado`,c:"Nenhum escrivão em exercício aponta para este delegado",o:"Cadastro do efetivo",r:"atual"})});
+  const sobT=C.D.reduce((a,x)=>a+x.at.sobreaviso,0);
+  if(sobT>=5){const top=[...C.D].sort((a,b)=>b.at.sobreaviso-a.at.sobreaviso)[0],p=top.at.sobreaviso/sobT;
+    if(p>=0.6)A.push({nv:"info",t:`${top.s.nome} cumpriu ${Math.round(p*100)}% dos dias de sobreaviso dos delegados`,c:"Um delegado com 60% ou mais dos dias de sobreaviso no período",o:"Registros de sobreaviso",r:periodoLabel()})}
   const hs=[...hist].sort((a,b)=>(a.data||"").localeCompare(b.data||""));
-  if(hs.length<2){$("#ch-hist").innerHTML=`<p class="muted small" style="margin:0">O gráfico aparece a partir da segunda atualização do acervo. ${hs.length?"Há uma atualização registrada, em "+br(hs[0].data)+".":""}</p>`;$("#lg-hist").innerHTML=""}
-  else{
-    const cargoDe=id=>{const s=servidores.find(o=>o.id===id);return s?s.cargo:null};
-    const somaId=(r,id)=>{const ac=(r.por||{})[id];return ac?PROC.reduce((b,k)=>b+(+ac[k]||0),0):0};
-    const soma=(r,c)=>c==="DPF"?Object.keys(r.por||{}).reduce((a,id)=>cargoDe(id)==="DPF"?a+somaId(r,id):a,0)
-      :ativos().filter(s=>s.cargo==="EPF").reduce((a,s)=>a+somaId(r,(parDe(s)||s).id),0);
-    lineChart($("#ch-hist"),{dates:hs.map(r=>r.data),series:[{name:"Delegados",c:"--c1",values:hs.map(r=>soma(r,"DPF"))},{name:"Escrivães",c:"--c2",values:hs.map(r=>soma(r,"EPF"))}]});
-    $("#lg-hist").innerHTML=legend([{n:"Delegados",c:"--c1",cls:"line"},{n:"Escrivães",c:"--c2",cls:"line"}]);
-  }
-  renderTabelas(sCh,sDpf,sEpf,mDpf,mEpf);
-  $("#csv").hidden=!dl;
+  if(hs.length>=2){const tH=r=>Object.values(r.por||{}).reduce((a,ac)=>a+PROC.reduce((b,k)=>b+(+ac[k]||0),0),0);
+    const a=hs[hs.length-2],b=hs[hs.length-1],ta=tH(a),tb=tH(b);
+    if(ta>0&&Math.abs(tb-ta)/ta>=0.05)A.push({nv:"info",t:`Acervo ${tb>ta?"aumentou":"diminuiu"} ${fmt(Math.abs(tb-ta)/ta*100)}% (${ta} → ${tb})`,c:"Variação de 5% ou mais entre as duas últimas atualizações",o:"Histórico do acervo",r:`${br(a.data)} → ${br(b.data)}`})}
+  const sem=[...C.D,...C.E].filter(x=>!x.s.posse||idadeDe(x.s)==null).map(x=>x.s.nome);
+  if(sem.length)A.push({nv:"info",t:`Cadastro incompleto de ${sem.length} servidor(es)`,c:"Sem data de posse ou de nascimento: "+sem.join(", "),o:"Cadastro do efetivo",r:"atual"});
+  return A;
+}
+function pgPainel(C){
+  const vazio=!C.D.length&&!C.E.length;
+  $$('[data-page="painel"] [data-need]').forEach(e=>e.hidden=vazio);$("#vazio").hidden=!vazio;
+  if(vazio){$("#kpis").innerHTML="";$("#vazio").innerHTML=`<div class="empty"><h3 style="margin-bottom:6px">Nenhum delegado ou escrivão cadastrado</h3>${EDIT?"Comece pela área <b>Efetivo</b>.":"O painel aparece assim que a chefia cadastrar o efetivo."}</div>`;return}
+  const nD=C.D.length,mI=C.media(C.D,x=>x.ipl),mIsc=C.media(C.Dsc,x=>x.ipl),mE=C.media(C.D,x=>x.esp);
+  $("#kpis").innerHTML=
+    `<div class="kpi"><span class="eyebrow">Acervo total</span><span class="v">${C.total}</span><span class="d">procedimentos em andamento</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Inquéritos</span><span class="v">${C.ipl}</span><span class="d">média <b>${fmt(mI)}</b> por delegado${C.Dsc.length&&C.Dsc.length<nD?` · <b>${fmt(mIsc)}</b> sem a chefia`:""}</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Procedimentos especiais</span><span class="v">${C.esp}</span><span class="d">extra inquérito · média <b>${fmt(mE)}</b> por delegado</span></div>`+
+    `<div class="kpi gold"><span class="eyebrow">Relatados em ${anoRel()}</span><span class="v">${C.rel}</span><span class="d">inquéritos · média <b>${fmt(C.media(C.D,x=>x.rel))}</b> por delegado</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Efetivo ativo</span><span class="v">${nD+C.E.length}</span><span class="d"><b>${nD}</b> delegados · <b>${C.E.length}</b> escrivães</span></div>`;
+  donut($("#ch-dist"),PROC.map(k=>({k,n:PROC_N[k],v:C.tot[k],c:PROC_C[k]})),"procedimentos");
+  const simples=(campo,tit)=>{const m=C.media(C.D,x=>x[campo]);
+    return {m,rows:[...C.D].sort(ordem(campo)).map(x=>{const p=pct(x[campo],m);return {label:x.s.nome,value:x[campo],pct:p,tip:`<b>${esc(x.s.nome)}</b>${x.s.chefe?" · chefe da unidade":""}<br>${tit}: ${x[campo]}${p==null?"":"<br>"+p+"% da média"}`}})}};
+  const ip=simples("ipl","Inquéritos");hbarChart($("#ch-ipl"),{rows:ip.rows,mean:ip.m,label:"Inquéritos por delegado"});$("#lg-ipl").innerHTML=legend([{n:"Média "+fmt(ip.m),cls:"dash"}]);
+  const es=simples("esp","Procedimentos especiais");hbarChart($("#ch-esp"),{rows:es.rows,mean:es.m,label:"Procedimentos especiais por delegado"});$("#lg-esp").innerHTML=legend([{n:"Média "+fmt(es.m),cls:"dash"}]);
+  $$("[data-cg]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.cg===cargaCargo));
+  const L=cargaCargo==="DPF"?C.D:C.E,mc=cargaCargo==="DPF"?C.mPondD:C.mPondE;
+  if(!L.length)$("#ch-carga").innerHTML=`<div class="empty">Nenhum servidor neste cargo.</div>`;
+  else hbarChart($("#ch-carga"),{rows:[...L].sort(ordem("pond")).map(x=>{const p=pct(x.pond,mc),st=status(mc>0?x.pond/mc:null);
+    return {label:x.s.nome,value:x.pond,pct:p,tip:`<b>${esc(x.s.nome)}</b>${x.via?" · cartório do DPF "+esc(x.via.nome):""}<br>Carga ponderada: ${fmt(x.pond)} (${x.total} procedimentos)<br>${p==null?"":p+"% da média · "+st.t}`}}),mean:mc,label:"Carga ponderada"});
+  $("#lg-carga").innerHTML=legend([{n:cargaCargo==="DPF"?"Delegados":"Escrivães (carga do cartório)",c:"--navy"},{n:"Média "+fmt(mc),cls:"dash"}]);
+  $("#eb-rel").textContent="Produção em "+anoRel();
+  const re=simples("rel","Relatados em "+anoRel());
+  if(!re.rows.some(r=>r.value))$("#ch-rel").innerHTML=`<div class="empty">Nenhum relatório lançado para ${anoRel()}.</div>`;
+  else hbarChart($("#ch-rel"),{rows:re.rows,mean:re.m,label:"Inquéritos relatados"});
+  $("#lg-rel").innerHTML=legend([{n:"Média "+fmt(re.m),cls:"dash"}]);
+  const A=alertas(C),nAt=A.filter(a=>a.nv==="atencao").length;
+  $("#al-n").textContent=`${nAt} atenção · ${A.length-nAt} info`;
+  $("#alertas").innerHTML=A.length?A.map(a=>`<div class="al ${a.nv}"><span class="ico">${ico(a.nv==="atencao"?"warn":"info")}</span><div><div class="tl"><span class="tag">${a.nv==="atencao"?"Atenção":"Informação"}</span>${esc(a.t)}</div><div class="mt">Critério: ${esc(a.c)} · Origem: ${esc(a.o)} · Referência: ${esc(a.r)}</div></div></div>`).join("")
+    :`<div class="al ok"><span class="ico">${ico("ok")}</span><div><div class="tl">Nenhum ponto de atenção pelos critérios atuais</div><div class="mt">Critérios ajustáveis em Configurações</div></div></div>`;
+  const tr=[...C.D].sort(ordem("rel"))[0];
+  const sobD=C.D.reduce((a,x)=>a+x.at.sobreaviso,0),ops=[...C.D,...C.E].reduce((a,x)=>a+x.at.op_local,0),mis=[...C.D,...C.E].reduce((a,x)=>a+x.at.viagem,0);
+  const F=[`Em ${br(C.ref)}, a DELINST tem <b>${C.total}</b> procedimentos em andamento: <b>${C.ipl}</b> inquéritos (${fmt(C.total?C.ipl/C.total*100:0)}%) e <b>${C.esp}</b> procedimentos especiais.`,
+    `Média de <b>${fmt(mI)}</b> inquéritos por delegado${C.Dsc.length&&C.Dsc.length<nD?`, ou <b>${fmt(mIsc)}</b> sem a chefia`:""}.`,
+    C.rel?`Em ${anoRel()}, foram relatados <b>${C.rel}</b> inquéritos; o maior número é de ${esc(tr.s.nome)} (<b>${tr.rel}</b>).`:`Nenhum inquérito relatado lançado para ${anoRel()}.`,
+    `No período (${esc(periodoLabel().toLowerCase())}): <b>${sobD}</b> dia(s) de sobreaviso de delegados, <b>${ops}</b> participação(ões) em operações em Fortaleza e RMF e <b>${mis}</b> em missões com pernoite.`,
+    nAt?`<b>${nAt}</b> ponto(s) de atenção pelos critérios configurados.`:"Nenhum ponto de atenção pelos critérios configurados."];
+  $("#resumo").innerHTML=F.map(f=>`<li><span>${f}</span></li>`).join("");
+  let feed=[];
+  if(EDIT&&auditoria.length)feed=auditoria.slice(0,6).map(a=>({t:a.em,a:a.acao,d:a.detalhe}));
+  else{const g=new Map();atividades.forEach(a=>{const k=a.grupo||a.id;if(!g.has(k))g.set(k,{...a,n:0});g.get(k).n++});
+    feed=[...[...g.values()].map(a=>({t:a.criadoEm||a.inicio,a:ATIV_N[a.tipo]||a.tipo,d:`${br(a.inicio)} · ${a.n} participante(s)`})),...hist.map(h=>({t:h.data,a:"Atualização do acervo",d:"Data de referência "+br(h.data)}))]
+      .sort((a,b)=>String(b.t).localeCompare(String(a.t))).slice(0,6)}
+  $("#feed").innerHTML=feed.length?feed.map(f=>`<div class="it"><time>${brc(String(f.t).slice(0,10))}</time><div>${esc(f.a)}<small>${esc(f.d||"")}</small></div></div>`).join(""):`<div class="empty">Sem registros ainda.</div>`;
 }
 
-function renderTabelas(sCh,sDpf,sEpf,mDpf,mEpf){
-  const blocos=[["DPF","Delegados",sDpf,mDpf,sCh],["EPF","Escrivães",sEpf,mEpf,null]];
-  $("#tabelas").innerHTML=blocos.map(([k,nome,st,media,stCh])=>{
-    st=[...st].sort((a,b)=>byNome(a.s,b.s));if(!st.length&&!stCh)return"";
-    const base=st.length?st:[stCh];
-    const maxA={};ATIV.forEach(t=>maxA[t.k]=Math.max(0,...base.map(x=>x.at[t.k])));
-    const maxP=Math.max(0,...base.map(x=>x.part)),maxDV=Math.max(0,...base.map(x=>x.diasViagem));
-    const maxProc={};PROC.forEach(p=>maxProc[p]=Math.max(0,...base.map(x=>+x.ac[p]||0)));
-    const ncols=1+PROC.length+5+ATIV.length+2;
-    const head=`<tr><th rowspan="2">Servidor</th><th class="grp sep" colspan="${PROC.length+5}">Acervo de procedimentos</th><th class="grp sep" colspan="${ATIV.length+2}">Atividades · ${esc(periodoLabel())}</th></tr><tr>${PROC.map((p,i)=>`<th class="${i?"":"sep"}" title="${PROC_N[p]}">${p}</th>`).join("")}<th>Total</th><th>Ponderada</th><th>% da média</th><th title="Inquéritos relatados no ano">Relat. ${anoRel()}</th><th title="Casos SIMBA">SIMBA</th>${ATIV.map((t,i)=>`<th class="${i?"":"sep"}" title="${t.n}">${t.a}</th>`).join("")}<th>Total</th><th title="Noites fora da sede em missão">Noites missão</th></tr>`;
-    const linha=(x,isCh)=>{const idx=media>0?x.pond/media:null,st=status(idx),par=parDe(x.s);
-      return `<tr${isCh?' class="chefe"':""}><td><b>${esc(x.s.nome)}</b>${x.s.chefe?' <span class="chip chefia">chefe da unidade</span>':""}${x.s.voluntarioSobreaviso?' <span class="chip vol">voluntário sobreaviso</span>':""}${par?`<div class="muted small">com DPF ${esc(par.nome)}</div>`:""}${x.acervoEm?`<div class="muted small">acervo em ${br(x.acervoEm)}</div>`:""}</td>`+
-        PROC.map((p,i)=>heatCell(+x.ac[p]||0,maxProc[p],i?"":"sep")).join("")+
-        `<td class="tot">${x.total}</td><td>${fmt(x.pond)}</td><td><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}<span class="bar"><i style="width:${idx==null?0:Math.min(100,idx*50)}%"></i></span><span class="chip ${st.cls}">${st.t}</span></div></td><td class="tot">${x.rel}</td><td>${x.simba||(k==="DPF"?0:"—")}</td>`+
-        ATIV.map((t,i)=>heatCell(x.at[t.k],maxA[t.k],i?"":"sep")).join("")+heatCell(x.part,maxP,"tot")+heatCell(x.diasViagem,maxDV)+`</tr>`};
-    const rows=(stCh?linha(stCh,true)+(st.length?`<tr class="sub"><td colspan="${ncols}">Demais delegados · base de cálculo da média</td></tr>`:""):"")+st.map(x=>linha(x,false)).join("");
-    return `<div class="block" style="gap:8px"><h3>${nome}</h3><div class="scroll"><table>${head}${rows}</table></div></div>`;
-  }).join("");
-}
-
-/* ---------- ACERVO ---------- */
-function renderPesos(){
-  if(document.activeElement&&document.activeElement.id&&document.activeElement.id.startsWith("peso-"))return;
-  $("#pesos").innerHTML=PROC.map(k=>`<label class="fld" title="${PROC_N[k]}">${k}<input type="number" min="0" step="0.1" id="peso-${k}" value="${pesos[k]}" ${EDIT?"":"disabled"}></label>`).join("")+(EDIT?`<button class="ghost" id="salvar-pesos" type="button">Salvar pesos</button>`:"");
-}
-function anoAcervo(){return ($("#acervo-data").value||hoje()).slice(0,4)}
-function renderAcervo(){
-  const host=$("#acervo-grid");
-  const blocos=PAINEL.map(c=>{
-    const l=ativos().filter(s=>s.cargo===c.k).sort((a,b)=>(b.chefe?1:0)-(a.chefe?1:0)||byNome(a,b));if(!l.length)return"";
-    if(c.k==="EPF"){
-      const rows=l.map(s=>{const p=parDe(s);if(p&&p.cargo==="DPF"){const ac=p.acervo||{};const tot=PROC.reduce((a,k)=>a+(+ac[k]||0),0);
-        return `<tr><td><b>${esc(s.nome)}</b></td>${PROC.map(k=>`<td class="zero">${+ac[k]||0}</td>`).join("")}<td class="tot">${tot}</td><td class="left">segue o DPF ${esc(p.nome)}</td></tr>`}
-        return `<tr><td><b>${esc(s.nome)}</b></td><td colspan="${PROC.length+1}" class="left muted">Sem delegado vinculado. Vincule na aba Efetivo.</td><td></td></tr>`}).join("");
-      return `<div class="block" style="gap:8px"><h3>${c.n} <span class="muted small" style="font-family:var(--f-body);font-weight:400">a carga do cartório acompanha automaticamente o delegado vinculado</span></h3><div class="scroll"><table><tr><th>Servidor</th>${PROC.map(k=>`<th>${k}</th>`).join("")}<th>Total</th><th class="left">Origem</th></tr>${rows}</table></div></div>`}
-    const rows=l.map(s=>{const ac=s.acervo||{},d=draft[s.id]||{};let tot=0;
-      const cells=PROC.map(k=>{const v=d[k]!=null?d[k]:(+ac[k]||0);tot+=+v||0;
-        return EDIT?`<td><input class="cnt ${d[k]!=null?"dirty":""}" type="number" min="0" step="1" id="ac-${s.id}-${k}" data-sid="${s.id}" data-k="${k}" value="${v}" aria-label="${k} de ${esc(s.nome)}"></td>`:`<td>${v}</td>`}).join("");
-      let relCell="";if(c.k==="DPF"){const ano=anoAcervo(),v=d.REL!=null?d.REL:(+((s.relatados||{})[ano])||0);
-        relCell=EDIT?`<td class="sep"><input class="cnt ${d.REL!=null?"dirty":""}" type="number" min="0" step="1" id="ac-${s.id}-REL" data-sid="${s.id}" data-k="REL" value="${v}" aria-label="Relatados de ${esc(s.nome)}"></td>`:`<td class="sep">${v}</td>`;
-        const vs=d.SIMBA!=null?d.SIMBA:(+((s.extras||{}).simba)||0);
-        relCell+=EDIT?`<td><input class="cnt ${d.SIMBA!=null?"dirty":""}" type="number" min="0" step="1" id="ac-${s.id}-SIMBA" data-sid="${s.id}" data-k="SIMBA" value="${vs}" aria-label="Casos SIMBA de ${esc(s.nome)}"></td>`:`<td>${vs}</td>`}
-      return `<tr><td><b>${esc(s.nome)}</b>${s.chefe?' <span class="chip chefia">chefia</span>':""}</td>${cells}<td class="tot">${tot}</td>${relCell}<td>${br(s.acervoEm)}</td></tr>`}).join("");
-    return `<div class="block" style="gap:8px"><h3>${c.n}</h3><div class="scroll"><table><tr><th>Servidor</th>${PROC.map(k=>`<th title="${PROC_N[k]}">${k}</th>`).join("")}<th>Total</th>${c.k==="DPF"?`<th class="sep" title="Inquéritos relatados no ano da data de referência">Relatados ${anoAcervo()}</th><th title="Casos SIMBA">SIMBA</th>`:""}<th>Atualizado em</th></tr>${rows}</table></div></div>`}).join("");
+/* ---------- Acervo ---------- */
+function anoAcervo(){return ($("#ac-data").value||hoje()).slice(0,4)}
+function pgAcervo(C){
+  $("#ac-ref").textContent=`Data de referência: ${br(C.ref)} · os totais da unidade somam apenas os delegados`;
+  const q=($("#ac-busca").value||"").toLowerCase().trim();
+  let L=C.D.filter(x=>!q||x.s.nome.toLowerCase().includes(q));
+  const k=sortAc.k,d=sortAc.d,val=(x)=>k==="nome"?x.s.nome:(k in x?x[k]:+x.ac[k]||0);
+  L.sort((a,b)=>{const va=val(a),vb=val(b);return (typeof va==="string"?va.localeCompare(vb,"pt-BR"):(va-vb))*d||byNome(a.s,b.s)});
+  const ano=anoAcervo(),m=C.mPondD;
+  const sh=(key,lbl,title)=>`<button type="button" class="sort" data-sort="${key}" ${sortAc.k===key?"data-on":""} title="${esc(title||"Ordenar")}">${lbl}${sortAc.k===key?(sortAc.d>0?" ▲":" ▼"):""}</button>`;
+  const maxP={};PROC.forEach(p=>maxP[p]=Math.max(0,...C.D.map(x=>+x.ac[p]||0)));
+  const head=`<thead><tr><th>${sh("nome","Delegado")}</th>${PROC.map((p,i)=>`<th class="${i?"":"sep"}">${sh(p,p,PROC_N[p])}</th>`).join("")}<th class="sep">${sh("esp","Especiais","NC + RE + RDF + NCV")}</th><th>${sh("total","Total")}</th><th>${sh("pond","Ponderada")}</th><th>% da média</th><th class="sep">${sh("rel","Relat. "+ano,"Inquéritos relatados no ano")}</th><th>${sh("simba","SIMBA")}</th><th>Atualizado</th></tr></thead>`;
+  const rows=L.map(x=>{const s=x.s,dr=draft[s.id]||{};const v=p=>dr[p]!=null?dr[p]:(+x.ac[p]||0);
+    const inp=(p,vv,lbl)=>`<input class="cnt ${dr[p]!=null?"dirty":""}" type="number" inputmode="numeric" min="0" step="1" id="ac-${s.id}-${p}" data-sid="${s.id}" data-k="${p}" value="${vv}" aria-label="${lbl} de ${esc(s.nome)}">`;
+    const relV=dr.REL!=null?dr.REL:(+((s.relatados||{})[ano])||0),simV=dr.SIMBA!=null?dr.SIMBA:(+((s.extras||{}).simba)||0);
+    const tot=PROC.reduce((a,p)=>a+(+v(p)||0),0),esp=tot-(+v("IPL")||0),idx=m>0?x.pond/m:null,st=status(idx);
+    const cell=(p,i)=>EDIT?`<td class="${i?"":"sep"}">${inp(p,v(p),p)}</td>`:`<td class="heat ${v(p)?"":"zero"} ${i?"":"sep"}" style="--h:${(maxP[p]?Math.min(1,v(p)/maxP[p])*.4:0).toFixed(3)}">${v(p)}</td>`;
+    return `<tr><td><b>${esc(s.nome)}</b>${s.chefe?' <span class="chip chefia">chefia</span>':""}</td>${PROC.map(cell).join("")}<td class="sep">${esp}</td><td class="tot">${tot}</td><td>${fmt(x.pond)}</td><td><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}<span class="bar"><i style="width:${idx==null?0:Math.min(100,idx*50)}%"></i></span><span class="chip ${st.cls}">${st.t}</span></div></td>`+
+      `<td class="sep">${EDIT?inp("REL",relV,"Relatados"):relV}</td><td>${EDIT?inp("SIMBA",simV,"Casos SIMBA"):simV}</td><td>${br(s.acervoEm)}</td></tr>`}).join("");
+  const foot=`<tfoot><tr><td>Unidade (${C.D.length})</td>${PROC.map((p,i)=>`<td class="${i?"":"sep"}">${C.tot[p]}</td>`).join("")}<td class="sep">${C.esp}</td><td>${C.total}</td><td>${fmt(C.D.reduce((a,x)=>a+x.pond,0))}</td><td></td><td class="sep">${C.rel}</td><td>${C.simba}</td><td>${br(C.ref)}</td></tr></tfoot>`;
   const ae=document.activeElement,aid=ae&&ae.id;
-  host.innerHTML=blocos||`<div class="empty">Cadastre delegados e escrivães na aba <b>Efetivo</b> para registrar o acervo.</div>`;
-  if(aid&&aid.startsWith("ac-")){const el=document.getElementById(aid);if(el)el.focus()}
-  $("#salvar-acervo").disabled=!Object.keys(draft).length;
-  const h=$("#hist");
-  if(!hist.length){h.innerHTML=`<p class="muted small">Cada vez que o acervo for salvo, um registro fica aqui com a data de referência.</p>`;return}
-  const cargoDe=id=>{const s=servidores.find(o=>o.id===id);return s&&s.cargo};
-  h.innerHTML=`<div class="scroll"><table><tr><th>Data</th><th>Delegados</th><th>Escrivães</th>${PROC.map(k=>`<th>${k}</th>`).join("")}</tr>${hist.map(r=>{
-    let dpf=0,epf=0;const t={};PROC.forEach(k=>t[k]=0);
-    for(const [id,ac] of Object.entries(r.por||{})){if(cargoDe(id)!=="DPF")continue;let s=0;PROC.forEach(k=>{t[k]+=+ac[k]||0;s+=+ac[k]||0});dpf+=s}
-    epf=ativos().filter(s=>s.cargo==="EPF").reduce((a,s)=>{const ac=(r.por||{})[(parDe(s)||s).id];return a+(ac?PROC.reduce((b,k)=>b+(+ac[k]||0),0):0)},0);
-    return `<tr><td>${br(r.data)}</td><td>${dpf}</td><td>${epf}</td>${PROC.map(k=>`<td>${t[k]}</td>`).join("")}</tr>`}).join("")}</table></div>`;
+  $("#ac-tab").innerHTML=L.length?`<table>${head}<tbody>${rows}</tbody>${q?"":foot}</table>`:`<div class="empty">Nenhum delegado ${q?"encontrado para esse filtro":"cadastrado"}.</div>`;
+  if(aid&&aid.startsWith("ac-")&&aid!=="ac-busca"&&aid!=="ac-data"&&document.getElementById(aid))document.getElementById(aid).focus();
+  $("#ac-salvar").disabled=!Object.keys(draft).length;
+  $("#ac-nota").textContent=(EDIT?"Altere os números e clique em Salvar acervo. Cada salvamento registra a data de referência no histórico. ":"")+(mobile()?"Deslize a tabela para o lado para ver todas as colunas.":"Clique no título de uma coluna para ordenar.");
+  $("#ac-epf").innerHTML=C.E.length?`<table><thead><tr><th>Escrivão</th><th class="left">Cartório do DPF</th><th>IPL</th><th>Especiais</th><th>Total</th><th>Ponderada</th><th>% da média</th></tr></thead><tbody>${C.E.map(x=>{const idx=C.mPondE>0?x.pond/C.mPondE:null,st=status(idx);
+    return `<tr><td><b>${esc(x.s.nome)}</b></td><td class="left" data-l="Cartório do DPF">${x.via?esc(x.via.nome):'<span class="chip up">sem vínculo</span>'}</td><td data-l="IPL">${x.ipl}</td><td data-l="Especiais">${x.esp}</td><td class="tot" data-l="Total">${x.total}</td><td data-l="Ponderada">${fmt(x.pond)}</td><td data-l="% da média"><div class="load">${idx==null?"—":Math.round(idx*100)+"%"}<span class="chip ${st.cls}">${st.t}</span></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Nenhum escrivão cadastrado.</div>`;
+  stackChart($("#ch-comp"),{rows:[...C.D].sort(ordem("total")).map(x=>({label:x.s.nome,parts:x.ac})),keys:PROC.map(k=>({k,n:k+" · "+PROC_N[k],c:PROC_C[k]})),unit:"procedimento(s)"});
+  $("#lg-comp").innerHTML=legend(PROC.map(k=>({n:k,c:PROC_C[k]})));
+  const hs=[...hist].sort((a,b)=>(a.data||"").localeCompare(b.data||""));
+  const somaH=(r,f)=>Object.values(r.por||{}).reduce((a,ac)=>a+f(ac),0);
+  if(hs.length<2){$("#ch-hist").innerHTML=`<div class="empty">O gráfico aparece a partir da segunda atualização do acervo.${hs.length?" Há uma registrada, em "+br(hs[0].data)+".":""}</div>`;$("#lg-hist").innerHTML=""}
+  else{lineChart($("#ch-hist"),{dates:hs.map(r=>r.data),series:[{name:"Inquéritos",c:"--c1",values:hs.map(r=>somaH(r,ac=>+ac.IPL||0))},{name:"Especiais",c:"--c2",values:hs.map(r=>somaH(r,ac=>ESP.reduce((b,k)=>b+(+ac[k]||0),0)))}]});
+    $("#lg-hist").innerHTML=legend([{n:"Inquéritos",c:"--c1",cls:"line"},{n:"Especiais",c:"--c2",cls:"line"}])}
+  const sa=$("#cmp-a"),sb=$("#cmp-b"),va=sa.value,vb=sb.value,opts=hs.map(r=>`<option value="${r.data}">${br(r.data)}</option>`).join("");
+  sa.innerHTML=opts;sb.innerHTML=opts;
+  sa.value=va&&hs.some(r=>r.data===va)?va:(hs.length>1?hs[hs.length-2].data:(hs[0]||{}).data||"");
+  sb.value=vb&&hs.some(r=>r.data===vb)?vb:((hs[hs.length-1]||{}).data||"");
+  const A=hs.find(r=>r.data===sa.value),B=hs.find(r=>r.data===sb.value);
+  if(!A||!B||hs.length<2){$("#cmp").innerHTML=`<div class="empty">A comparação fica disponível com duas ou mais datas de referência.</div>`;return}
+  const ids=[...new Set([...Object.keys(A.por||{}),...Object.keys(B.por||{})])];
+  const nm=id=>(servidores.find(s=>s.id===id)||{}).nome||"(excluído)";
+  const tt=ac=>ac?PROC.reduce((a,k)=>a+(+ac[k]||0),0):0,ii=ac=>ac?+ac.IPL||0:0;
+  const dc=(a,b,l)=>{const d=b-a;return `<td class="${d>0?"up":d<0?"down":""}" data-l="${l}">${d>0?"+":""}${d}</td>`};
+  $("#cmp").innerHTML=`<div class="scroll stack"><table><thead><tr><th>Delegado</th><th>IPL ${brc(A.data)}</th><th>IPL ${brc(B.data)}</th><th>Δ IPL</th><th class="sep">Total ${brc(A.data)}</th><th>Total ${brc(B.data)}</th><th>Δ total</th></tr></thead><tbody>${ids.sort((a,b)=>nm(a).localeCompare(nm(b),"pt-BR")).map(id=>{const a=(A.por||{})[id],b=(B.por||{})[id];
+    return `<tr><td>${esc(nm(id))}</td><td data-l="IPL ${brc(A.data)}">${ii(a)}</td><td data-l="IPL ${brc(B.data)}">${ii(b)}</td>${dc(ii(a),ii(b),"Δ IPL")}<td class="sep" data-l="Total ${brc(A.data)}">${tt(a)}</td><td data-l="Total ${brc(B.data)}">${tt(b)}</td>${dc(tt(a),tt(b),"Δ total")}</tr>`}).join("")}</tbody></table></div><p class="info" style="margin-top:8px">Δ positivo indica aumento do acervo entre as duas datas.</p>`;
 }
 
-/* ---------- ATIVIDADES ---------- */
+/* ---------- Efetivo ---------- */
+function pgEfetivo(C){
+  const dels=servidores.filter(s=>s.cargo==="DPF"&&s.ativo!==false).sort(byNome);
+  const sp=$("#s-par"),v=sp.value;sp.innerHTML=`<option value="">Selecione</option>`+dels.map(d=>`<option value="${d.id}">${esc(d.nome)}</option>`).join("");sp.value=v;
+  ajustaFormServ();
+  $("#efetivo-list").innerHTML=CARGOS.map(c=>{
+    const l=servidores.filter(s=>s.cargo===c.k).sort((a,b)=>(a.ativo===false)-(b.ativo===false)||(b.chefe?1:0)-(a.chefe?1:0)||byNome(a,b));if(!l.length)return"";
+    const cols=c.proc?`${c.k==="EPF"?'<th class="left">Cartório do DPF</th>':""}<th class="left">Tempo no cargo</th><th class="left">Idade</th>${EDIT?'<th class="left">Matrícula</th>':""}`:"";
+    return `<div class="card"><div class="card-h"><div class="t"><span class="eyebrow">${l.filter(s=>s.ativo!==false).length} em exercício</span><h2>${c.n}</h2>${c.proc?"":"<p>Controle de produtividade próprio, fora dos indicadores do painel.</p>"}</div></div>
+      <div class="scroll stack"><table><thead><tr><th>Nome</th>${cols}<th class="left">Situação</th>${EDIT?"<th></th>":""}</tr></thead><tbody>${l.map(s=>{const p=parDe(s),t=tempoCargo(s),i=idadeDe(s);
+      return `<tr id="row-${s.id}" class="${flashId===s.id?"flash":""}"><td><b>${esc(s.nome)}</b> ${s.chefe?'<span class="chip chefia">chefe da unidade</span> ':""}${s.funcao?`<span class="chip neutral">${esc(s.funcao)}</span> `:""}${s.voluntarioSobreaviso?'<span class="chip vol">voluntário sobreaviso</span>':""}</td>`+
+        (c.proc?`${c.k==="EPF"?`<td class="left" data-l="Cartório do DPF">${p?esc(p.nome):'<span class="chip up">sem vínculo</span>'}</td>`:""}<td class="left" data-l="Tempo no cargo">${t==null?"—":fmt(t)+" anos"}</td><td class="left" data-l="Idade">${i==null?"—":i+" anos"}</td>${EDIT?`<td class="left" data-l="Matrícula">${esc(s.matricula||"—")}</td>`:""}`:"")+
+        `<td class="left" data-l="Situação">${s.ativo===false?'<span class="chip neutral">fora da unidade</span>':'<span class="chip ok">em exercício</span>'}</td>`+
+        (EDIT?`<td class="acts"><div class="actions" style="justify-content:flex-end;gap:6px"><button type="button" class="quiet" data-ed="${s.id}">Editar</button><button type="button" class="danger" data-toggle="${s.id}">${s.ativo===false?"Reativar":"Fora da unidade"}</button><button type="button" class="danger" data-del-serv="${s.id}">Excluir</button></div></td>`:"")+`</tr>`}).join("")}</tbody></table></div></div>`}).join("")||`<div class="empty">Nenhum servidor cadastrado.</div>`;
+  flashId=null;
+  const G=[["Delegados",C.D],["Escrivães",C.E]];
+  grupoChart($("#ch-tempo"),$("#mm-tempo"),{fn:x=>tempoCargo(x.s),un:"anos",dec:true,grupos:G});
+  grupoChart($("#ch-idade"),$("#mm-idade"),{fn:x=>idadeDe(x.s),un:"anos",dec:false,grupos:G});
+}
+function ajustaFormServ(){const c=$("#s-cargo").value;$("#s-par-w").hidden=c!=="EPF";$("#s-chefe-w").hidden=c!=="DPF"}
+function limpaFormServ(){editServ=null;["s-nome","s-mat","s-posse","s-nasc","s-func"].forEach(i=>$("#"+i).value="");$("#s-par").value="";$("#s-chefe").checked=false;$("#s-vol").checked=false;$("#s-cargo").value="DPF";
+  $("#fs-tit").textContent="Incluir servidor";$("#fs-eb").textContent="Cadastro";$("#s-ok").textContent="Incluir servidor";$("#fs-cancel").hidden=true;$("#s-err").textContent="";ajustaFormServ()}
+function editarServ(id){const s=servidores.find(x=>x.id===id);if(!s)return;editServ=id;
+  $("#s-nome").value=s.nome||"";$("#s-cargo").value=s.cargo;$("#s-mat").value=s.matricula||"";$("#s-posse").value=s.posse||"";$("#s-nasc").value=s.nascimento||"";$("#s-func").value=s.funcao||"";
+  ajustaFormServ();$("#s-par").value=s.parId||"";$("#s-chefe").checked=!!s.chefe;$("#s-vol").checked=!!s.voluntarioSobreaviso;
+  $("#fs-tit").textContent="Editar "+s.nome;$("#fs-eb").textContent="Edição";$("#s-ok").textContent="Salvar alterações";$("#fs-cancel").hidden=false;$("#s-err").textContent="";
+  $("#f-serv").scrollIntoView({behavior:"smooth",block:"start"});$("#s-nome").focus({preventScroll:true})}
+
+/* ---------- Atividades ---------- */
+function regraTxt(){const t=$("#a-tipo").value;
+  $("#a-regra").textContent=t==="sobreaviso"?"Sobreaviso: cada dia do intervalo vira um registro por servidor. Dias já registrados para o mesmo servidor são ignorados.":
+    t==="viagem"?"Missão: as noites fora da sede são contadas pelas datas (término menos início, no mínimo uma noite).":"Cada participante marcado recebe um registro desta atividade."}
 function renderParts(){
-  $("#a-parts").innerHTML=PAINEL.map(c=>{const l=ativos().filter(s=>s.cargo===c.k).sort(byNome);if(!l.length)return"";
-    return `<fieldset><legend>${c.n}</legend>${l.map(s=>`<label><input type="checkbox" id="p-${s.id}" data-pid="${s.id}" ${selPart.has(s.id)?"checked":""}>${esc(s.nome)}</label>`).join("")}</fieldset>`}).join("")||`<p class="muted small">Cadastre o efetivo primeiro.</p>`;
+  $("#a-parts").innerHTML=CARGOS.filter(c=>c.proc).map(c=>{const l=ativos().filter(s=>s.cargo===c.k).sort(byNome);if(!l.length)return"";
+    return `<fieldset><legend>${c.n}</legend>${l.map(s=>`<label><input type="checkbox" id="p-${s.id}" data-pid="${s.id}" ${selPart.has(s.id)?"checked":""}>${esc(s.nome)}</label>`).join("")}</fieldset>`}).join("")||`<div class="empty">Cadastre o efetivo primeiro.</div>`;
   $("#a-info").textContent=selPart.size?`${selPart.size} participante(s) selecionado(s)`:"";
 }
-function renderFiltros(){
+function gruposFiltrados(){
+  const fs=$("#fl-serv").value,ft=$("#fl-tipo").value,g=new Map();
+  for(const a of atividades){if(ft&&a.tipo!==ft)continue;const k=a.grupo||a.id;if(!g.has(k))g.set(k,{...a,k,itens:[]});g.get(k).itens.push(a)}
+  let L=[...g.values()];if(fs)L=L.filter(x=>x.itens.some(i=>i.servidorId===fs));return L;
+}
+function pgAtiv(){
+  if(!EDIT)return;
   const fs=$("#fl-serv"),ft=$("#fl-tipo"),vs=fs.value,vt=ft.value;
   fs.innerHTML=`<option value="">Todos</option>`+servidores.filter(s=>s.cargo!=="APF").sort(byNome).map(s=>`<option value="${s.id}">${esc(s.nome)}</option>`).join("");
-  ft.innerHTML=`<option value="">Todos</option>`+ATIV.map(t=>`<option value="${t.k}">${t.n}</option>`).join("");
-  fs.value=vs;ft.value=vt;
-}
-function renderAtiv(){
-  const fs=$("#fl-serv").value,ft=$("#fl-tipo").value;
+  ft.innerHTML=`<option value="">Todos</option>`+ATIV.map(t=>`<option value="${t.k}">${t.n}</option>`).join("");fs.value=vs;ft.value=vt;
+  renderParts();regraTxt();
+  $$("[data-av]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.av===ativView));
+  $("#at-cal").hidden=ativView!=="cal";$("#at-lista").hidden=ativView!=="lista";
   const nomes=Object.fromEntries(servidores.map(s=>[s.id,s.nome]));
-  const grupos=new Map();
-  for(const a of atividades){if(!inPeriod(a.inicio)||(ft&&a.tipo!==ft))continue;
-    const g=a.grupo||a.id;if(!grupos.has(g))grupos.set(g,{...a,itens:[]});grupos.get(g).itens.push(a)}
-  let lista=[...grupos.values()];if(fs)lista=lista.filter(g=>g.itens.some(i=>i.servidorId===fs));
-  lista.sort((a,b)=>(b.inicio||"").localeCompare(a.inicio||""));
-  if(!lista.length){$("#ativ-list").innerHTML=`<div class="empty">Nenhuma atividade registrada neste período${fs||ft?" com esses filtros":""}.</div>`;return}
-  const cor=Object.fromEntries(ATIV.map(t=>[t.k,t.c]));
-  $("#ativ-list").innerHTML=`<div class="scroll"><table><tr><th>Período</th><th class="left">Tipo</th><th class="left">Descrição</th><th class="left">Participantes</th><th>Dias</th>${EDIT?"<th></th>":""}</tr>${lista.map(g=>`<tr>
-    <td style="text-align:left;min-width:130px">${br(g.inicio)}${g.fim&&g.fim!==g.inicio?" a "+br(g.fim):""}</td>
-    <td class="left"><span class="legend"><span class="sw"><i style="background:var(${cor[g.tipo]||"--navy"})"></i>${esc(ATIV_N[g.tipo]||g.tipo)}</span></span></td>
-    <td class="left" style="white-space:normal;min-width:200px">${esc(g.descricao||"")}</td>
-    <td class="left" style="min-width:200px"><div class="pchips">${g.itens.map(i=>`<span class="pchip">${esc(nomes[i.servidorId]||"(removido)")}${EDIT?` <button type="button" class="danger" style="padding:0 5px;border:none" data-del-one="${i.id}" aria-label="Retirar participante">×</button>`:""}</span>`).join("")}</div></td>
-    <td>${dias(g)}</td>${EDIT?`<td><button type="button" class="danger" data-del-grupo="${esc(g.grupo||g.id)}">Excluir</button></td>`:""}</tr>`).join("")}</table></div>`;
+  const G=gruposFiltrados();
+  $("#at-eb").textContent=ativView==="cal"?"Calendário mensal":periodoLabel();
+  if(ativView==="cal"){
+    const [y,m]=calMes.split("-").map(Number);
+    $("#at-cal").innerHTML=`<div class="calbar" style="margin-bottom:10px"><button type="button" class="quiet" data-calnav="-1" aria-label="Mês anterior">‹</button><h3>${MESES[m-1]} de ${y}</h3><button type="button" class="quiet" data-calnav="1" aria-label="Próximo mês">›</button><button type="button" class="quiet" data-calnav="0">Hoje</button></div><div id="at-grid"></div><div class="legend" style="margin-top:10px">${legend(ATIV.map(t=>({n:t.n,c:t.c})))}</div>`;
+    calendario($("#at-grid"),calMes,eventosMes(G,calMes),(a,full)=>{const ns=a.itens.map(i=>nomes[i.servidorId]||"?");return full?`<b>${esc(ATIV_N[a.tipo])}</b><br>${esc(a.descricao||"")}<br>${esc(ns.join(", "))}`:(a.tipo==="sobreaviso"?ns.join(", "):(a.descricao||ATIV_N[a.tipo]))});
+    return;
+  }
+  const L=G.filter(x=>inPeriod(x.inicio)).sort((a,b)=>(b.inicio||"").localeCompare(a.inicio||""));
+  $("#at-lista").innerHTML=L.length?`<div class="scroll stack"><table><thead><tr><th>Período</th><th class="left">Tipo</th><th class="left">Descrição</th><th class="left">Participantes</th><th>Dias</th><th>Noites</th><th></th></tr></thead><tbody>${L.map(g=>`<tr>
+    <td style="min-width:120px"><b>${br(g.inicio)}${g.fim&&g.fim!==g.inicio?" a "+br(g.fim):""}</b></td>
+    <td class="left" data-l="Tipo"><span class="legend"><span class="sw"><i style="background:var(${ATIV_C[g.tipo]||"--navy"})"></i>${esc(ATIV_N[g.tipo]||g.tipo)}</span></span></td>
+    <td class="left" data-l="Descrição" style="white-space:normal;min-width:180px">${esc(g.descricao||"—")}</td>
+    <td class="left" data-l="Participantes" style="white-space:normal;min-width:160px">${esc(g.itens.map(i=>nomes[i.servidorId]||"(excluído)").join(", "))}</td>
+    <td data-l="Dias">${dias(g)}</td><td data-l="Noites">${g.tipo==="viagem"?noites(g):"—"}</td>
+    <td class="acts"><div class="actions" style="justify-content:flex-end;gap:6px"><button type="button" class="quiet" data-edg="${esc(g.k)}">Editar</button><button type="button" class="danger" data-delg="${esc(g.k)}">Excluir</button></div></td></tr>`).join("")}</tbody></table></div>`
+    :`<div class="empty">Nenhuma atividade no período${$("#fl-serv").value||$("#fl-tipo").value?" com esses filtros":""}.</div>`;
+}
+function limpaFormAtiv(){editGrupo=null;selPart.clear();$("#a-desc").value="";$("#a-fim").value="";$("#a-ini").value=hoje();
+  $("#fa-tit").textContent="Registrar atividade";$("#fa-eb").textContent="Novo registro";$("#a-ok").textContent="Registrar";$("#fa-cancel").hidden=true;$("#a-err").textContent="";renderParts();regraTxt()}
+function editarGrupo(k){const it=atividades.filter(a=>(a.grupo||a.id)===k);if(!it.length)return;const a=it[0];editGrupo=k;
+  $("#a-tipo").value=a.tipo;$("#a-ini").value=a.inicio;$("#a-fim").value=a.fim&&a.fim!==a.inicio?a.fim:"";$("#a-desc").value=a.descricao||"";
+  selPart.clear();it.forEach(i=>selPart.add(i.servidorId));renderParts();regraTxt();
+  $("#fa-tit").textContent="Editar atividade";$("#fa-eb").textContent="Edição";$("#a-ok").textContent="Salvar alterações";$("#fa-cancel").hidden=false;$("#a-err").textContent="";
+  $("#f-ativ").scrollIntoView({behavior:"smooth",block:"start"})}
+
+/* ---------- Sobreaviso ---------- */
+function pgSob(C){
+  const sob=atividades.filter(a=>a.tipo==="sobreaviso");
+  const eT=C.E.reduce((a,x)=>a+x.at.sobreaviso,0),m=C.media(C.D,x=>x.at.sobreaviso);
+  const vol=k=>ativos().filter(s=>s.cargo===k&&s.voluntarioSobreaviso).sort(byNome).map(s=>esc(s.nome)).join(", ")||"nenhum";
+  $("#sob-kpis").innerHTML=`<div class="kpi"><span class="eyebrow">Média por delegado</span><span class="v">${fmt(m)}<small>dias</small></span><span class="d">${esc(periodoLabel())}</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Delegados voluntários</span><span class="v">${ativos().filter(s=>s.cargo==="DPF"&&s.voluntarioSobreaviso).length}</span><span class="d">${vol("DPF")}</span></div>`+
+    `<div class="kpi"><span class="eyebrow">Escrivães voluntários</span><span class="v">${ativos().filter(s=>s.cargo==="EPF"&&s.voluntarioSobreaviso).length}</span><span class="d">${vol("EPF")}</span></div>`;
+  $("#sob-eb").textContent=$("#sob-eb2").textContent=periodoLabel();
+  if(!C.D.length)$("#ch-sob").innerHTML=`<div class="empty">Nenhum delegado cadastrado.</div>`;
+  else hbarChart($("#ch-sob"),{rows:[...C.D].sort((a,b)=>(b.at.sobreaviso-a.at.sobreaviso)||(b.total-a.total)||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:x.at.sobreaviso,pct:pct(x.at.sobreaviso,m),tip:`<b>${esc(x.s.nome)}</b><br>${x.at.sobreaviso} dia(s) de sobreaviso${x.s.voluntarioSobreaviso?"<br>Voluntário":""}`})),mean:m,label:"Sobreaviso por delegado"});
+  $("#lg-sob").innerHTML=legend([{n:"Dias de sobreaviso",c:"--navy"},{n:"Média "+fmt(m),cls:"dash"}]);
+  if(!sobMes){const ult=sob.map(a=>a.inicio).sort().pop();sobMes=(ult||hoje()).slice(0,7)}
+  const [y,mm]=sobMes.split("-").map(Number);$("#sob-mes").textContent=`${MESES[mm-1]} de ${y}`;
+  const nomes=Object.fromEntries(servidores.map(s=>[s.id,s.nome]));
+  calendario($("#sob-cal"),sobMes,eventosMes(sob,sobMes),(a,full)=>full?`<b>${esc(nomes[a.servidorId]||"?")}</b><br>${esc(a.descricao||"Sobreaviso")}`:(nomes[a.servidorId]||"?"));
+  if(!eT)$("#ch-sob-e").innerHTML=`<div class="empty">Nenhum dia de sobreaviso de escrivães no período.</div>`;
+  else hbarChart($("#ch-sob-e"),{rows:[...C.E].sort((a,b)=>(b.at.sobreaviso-a.at.sobreaviso)||byNome(a.s,b.s)).map(x=>({label:x.s.nome,value:x.at.sobreaviso,pct:null,tip:`<b>${esc(x.s.nome)}</b><br>${x.at.sobreaviso} dia(s)`})),mean:C.media(C.E,x=>x.at.sobreaviso),label:"Sobreaviso de escrivães"});
 }
 
-/* ---------- EFETIVO ---------- */
-function renderEfetivo(){
-  if(!servidores.length){$("#efetivo-list").innerHTML=`<div class="empty">Nenhum servidor cadastrado ainda.</div>`;return}
-  const dels=servidores.filter(s=>s.cargo==="DPF").sort(byNome);
-  $("#efetivo-list").innerHTML=CARGOS.map(c=>{const l=servidores.filter(s=>s.cargo===c.k).sort((a,b)=>(b.chefe?1:0)-(a.chefe?1:0)||byNome(a,b));if(!l.length)return"";
-    const datasCell=s=>{const t=tempoCargo(s),i=idadeDe(s);
-      if(EDIT)return `<td class="left"><input type="date" id="posse-${s.id}" data-campo="posse" data-sid="${s.id}" value="${esc(s.posse||"")}" aria-label="Posse no cargo de ${esc(s.nome)}"><div class="muted small">${t==null?"":fmt(t)+" anos"}</div></td>`+
-        `<td class="left"><input type="date" id="nasc-${s.id}" data-campo="nascimento" data-sid="${s.id}" value="${esc(s.nascimento||"")}" aria-label="Nascimento de ${esc(s.nome)}"><div class="muted small">${i==null?"":i+" anos"}</div></td>`;
-      return `<td class="left">${t==null?"—":fmt(t)+" anos"}</td><td class="left">${i==null?"—":i+" anos"}</td>`};
-    const parCell=s=>{if(c.k!=="EPF")return"";const p=dels.find(d=>d.id===s.parId);
-      return `<td class="left">${EDIT?`<select data-par="${s.id}" id="par-${s.id}" aria-label="Delegado vinculado a ${esc(s.nome)}"><option value="">—</option>${dels.map(d=>`<option value="${d.id}" ${d.id===s.parId?"selected":""}>${esc(d.nome)}</option>`).join("")}</select>`:esc(p?p.nome:"—")}</td>`};
-    return `<div class="block" style="margin-bottom:18px;gap:8px"><h3>${c.n} <span class="muted small" style="font-family:var(--f-body);font-weight:400">${l.filter(s=>s.ativo!==false).length} em exercício${c.proc?"":" · controle de produtividade próprio, fora do painel"}</span></h3><div class="scroll"><table><tr><th>Nome</th>${c.k==="EPF"?'<th class="left">Delegado vinculado</th>':""}<th class="left">Matrícula</th>${c.proc?(EDIT?'<th class="left">Posse no cargo</th><th class="left">Nascimento</th>':'<th class="left">Tempo no cargo</th><th class="left">Idade</th>'):""}<th class="left">Situação</th>${EDIT?"<th></th>":""}</tr>${l.map(s=>`<tr>
-      <td><b>${esc(s.nome)}</b>${s.chefe?' <span class="chip chefia">chefe da unidade</span>':""}${s.funcao?` <span class="chip neutral">${esc(s.funcao)}</span>`:""}${s.voluntarioSobreaviso?' <span class="chip vol">voluntário sobreaviso</span>':""}</td>${parCell(s)}<td class="left">${esc(s.matricula||"—")}</td>${c.proc?datasCell(s):""}
-      <td class="left">${s.ativo===false?'<span class="chip neutral">fora da unidade</span>':'<span class="chip ok">em exercício</span>'}</td>
-      ${EDIT?`<td><div class="actions" style="justify-content:flex-end;gap:6px">${c.proc?`<button type="button" class="danger" data-vol="${s.id}">${s.voluntarioSobreaviso?"Retirar voluntário":"Voluntário sobreaviso"}</button>`:""}${s.cargo==="DPF"?`<button type="button" class="danger" data-chefe="${s.id}">${s.chefe?"Remover chefia":"Definir como chefe"}</button>`:""}<button type="button" class="danger" data-toggle="${s.id}">${s.ativo===false?"Reativar":"Marcar fora da unidade"}</button><button type="button" class="danger" data-del-serv="${s.id}">Excluir</button></div></td>`:""}</tr>`).join("")}</table></div></div>`}).join("");
+/* ---------- Produção ---------- */
+function pgProd(C){
+  $("#pr-eb").textContent="Ano de "+anoRel();
+  const mr=C.media(C.D,x=>x.rel),ms=C.media(C.D,x=>x.simba);
+  if(!C.D.some(x=>x.rel))$("#ch-prel").innerHTML=`<div class="empty">Nenhum relatório lançado para ${anoRel()}.</div>`;
+  else hbarChart($("#ch-prel"),{rows:[...C.D].sort(ordem("rel")).map(x=>({label:x.s.nome,value:x.rel,pct:pct(x.rel,mr),tip:`<b>${esc(x.s.nome)}</b><br>${x.rel} inquéritos relatados em ${anoRel()}`})),mean:mr,label:"Relatados"});
+  $("#lg-prel").innerHTML=legend([{n:"Média "+fmt(mr),cls:"dash"}]);
+  if(!C.D.some(x=>x.simba))$("#ch-simba").innerHTML=`<div class="empty">Nenhum caso SIMBA lançado.</div>`;
+  else hbarChart($("#ch-simba"),{rows:[...C.D].sort(ordem("simba")).map(x=>({label:x.s.nome,value:x.simba,pct:pct(x.simba,ms),tip:`<b>${esc(x.s.nome)}</b><br>${x.simba} caso(s) SIMBA`})),mean:ms,label:"SIMBA"});
+  $("#lg-simba").innerHTML=legend([{n:"Média "+fmt(ms),cls:"dash"}]);
+  const M=[["Operações em Fortaleza e RMF","operações",x=>x.at.op_local],["Missões com deslocamento e pernoite","missões",x=>x.at.viagem],["Noites fora da sede em missão","noites",x=>x.noites]];
+  $("#campo").innerHTML=M.map((m,i)=>`<figure class="card"><div class="card-h"><div class="t"><span class="eyebrow">${esc(periodoLabel())}</span><h2>${m[0]}</h2></div></div><p class="info" id="pm-${i}"></p><div class="chart" id="pc-${i}"></div></figure>`).join("");
+  M.forEach(([t,un,fn],i)=>grupoChart($("#pc-"+i),$("#pm-"+i),{fn,un,dec:false,grupos:[["Delegados",C.D],["Escrivães",C.E]]}));
 }
 
+/* ---------- Relatórios ---------- */
+function tabelaRel(C){
+  return `<table><thead><tr><th>Delegado</th>${PROC.map(p=>`<th>${p}</th>`).join("")}<th>Especiais</th><th>Total</th><th>Ponderada</th><th>Relat. ${anoRel()}</th><th>SIMBA</th><th>Sobreaviso</th><th>Op. RMF</th><th>Missões</th><th>Noites</th></tr></thead><tbody>${C.D.map(x=>`<tr><td>${esc(x.s.nome)}${x.s.chefe?" (chefia)":""}</td>${PROC.map(p=>`<td>${+x.ac[p]||0}</td>`).join("")}<td>${x.esp}</td><td>${x.total}</td><td>${fmt(x.pond)}</td><td>${x.rel}</td><td>${x.simba}</td><td>${x.at.sobreaviso}</td><td>${x.at.op_local}</td><td>${x.at.viagem}</td><td>${x.noites}</td></tr>`).join("")}</tbody>
+  <tfoot><tr><td>Unidade</td>${PROC.map(p=>`<td>${C.tot[p]}</td>`).join("")}<td>${C.esp}</td><td>${C.total}</td><td>${fmt(C.D.reduce((a,x)=>a+x.pond,0))}</td><td>${C.rel}</td><td>${C.simba}</td><td>${C.D.reduce((a,x)=>a+x.at.sobreaviso,0)}</td><td>${C.D.reduce((a,x)=>a+x.at.op_local,0)}</td><td>${C.D.reduce((a,x)=>a+x.at.viagem,0)}</td><td>${C.D.reduce((a,x)=>a+x.noites,0)}</td></tr></tfoot></table>`;
+}
+function tabelaRelE(C){
+  return `<table><thead><tr><th>Escrivão</th><th>Cartório do DPF</th><th>IPL</th><th>Especiais</th><th>Total</th><th>Ponderada</th><th>Sobreaviso</th><th>Op. RMF</th><th>Missões</th><th>Noites</th></tr></thead><tbody>${C.E.map(x=>`<tr><td>${esc(x.s.nome)}</td><td>${x.via?esc(x.via.nome):"sem vínculo"}</td><td>${x.ipl}</td><td>${x.esp}</td><td>${x.total}</td><td>${fmt(x.pond)}</td><td>${x.at.sobreaviso}</td><td>${x.at.op_local}</td><td>${x.at.viagem}</td><td>${x.noites}</td></tr>`).join("")}</tbody></table>`;
+}
+function relatorioHTML(C){
+  const A=alertas(C);
+  return `<div><span class="eyebrow">Polícia Federal · SR/PF/CE · DRPJ · DELINST</span><h2 style="margin-top:6px">Relatório gerencial do efetivo</h2></div>
+  <div class="meta"><span>Data de referência do acervo: <b>${br(C.ref)}</b></span><span>Período das atividades: <b>${esc(periodoLabel())}</b></span><span>Ano dos relatados: <b>${anoRel()}</b></span><span>Gerado em: <b>${brh(new Date().toISOString())}</b></span></div>
+  <h3>Síntese</h3><ul>${[
+    `${C.total} procedimentos em andamento: ${C.ipl} inquéritos e ${C.esp} procedimentos especiais (NC, RE, RDF e NCV).`,
+    `Média de ${fmt(C.media(C.D,x=>x.ipl))} inquéritos por delegado${C.Dsc.length&&C.Dsc.length<C.D.length?` (${fmt(C.media(C.Dsc,x=>x.ipl))} sem a chefia)`:""}.`,
+    `${C.rel} inquéritos relatados em ${anoRel()}.`,
+    `Efetivo considerado: ${C.D.length} delegados e ${C.E.length} escrivães em exercício.`].map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
+  <h3>Delegados</h3><div class="scroll">${tabelaRel(C)}</div>
+  <h3>Escrivães</h3><div class="scroll">${tabelaRelE(C)}</div>
+  <h3>Pontos de atenção</h3>${A.length?`<ul>${A.map(a=>`<li><b>${a.nv==="atencao"?"Atenção":"Informação"}:</b> ${esc(a.t)}. <span class="muted">Critério: ${esc(a.c)}. Referência: ${esc(a.r)}.</span></li>`).join("")}</ul>`:"<p>Nenhum ponto de atenção pelos critérios configurados.</p>"}
+  <h3>Metodologia</h3><ul>
+    <li>Acervo: quantidades informadas pela chefia por delegado, na data de referência indicada. Os totais da unidade somam apenas os delegados.</li>
+    <li>Escrivães: a carga de cada um acompanha o acervo do delegado vinculado e não é somada aos totais da unidade.</li>
+    <li>Carga ponderada: soma de cada tipo multiplicado pelo peso configurado (IPL ${cfg.pesos.IPL}, NC ${cfg.pesos.NC}, RE ${cfg.pesos.RE}, RDF ${cfg.pesos.RDF}, NCV ${cfg.pesos.NCV}). Serve para comparar servidores e não mede a complexidade de cada caso.</li>
+    <li>Sobreaviso: um registro por dia de escala. Missões: noites fora da sede = término menos início, no mínimo uma noite.</li>
+    <li>Médias e comparações incluem a chefia, salvo quando indicado “sem a chefia”.</li></ul>
+  <h3>Limitações</h3><ul>
+    <li>Os números são lançados manualmente e não vêm de integração com sistemas oficiais. Confira com a fonte antes de usar em decisões formais.</li>
+    <li>Atividades não lançadas não aparecem nos indicadores do período.</li>
+    <li>Agentes têm controle de produtividade próprio e não constam deste relatório.</li></ul>`;
+}
+function pgRel(C){
+  $("#relatorio").innerHTML=relatorioHTML(C);
+  $("#ex-info").textContent=dl?"Os arquivos são baixados após a sua confirmação.":"Exportações indisponíveis nesta visualização.";
+  ["#ex-html","#ex-xlsx","#ex-csv","#ex-json"].forEach(s=>$(s).disabled=!dl);
+}
+function linhasPlanilha(C){
+  const head=["Servidor","Cargo","Chefia","Cartório do DPF","Voluntário sobreaviso",...PROC,"Especiais","Total","Carga ponderada","Relatados "+anoRel(),"SIMBA","Sobreaviso (dias)","Operações RMF","Missões","Noites em missão","Tempo no cargo (anos)","Data de referência"];
+  const L=[head];
+  for(const [cg,l,del] of [["Delegado(a)",C.D,true],["Escrivão(ã)",C.E,false]])for(const x of l){const t=tempoCargo(x.s);
+    L.push([x.s.nome,cg,x.s.chefe?"Sim":"",x.via?x.via.nome:"",x.s.voluntarioSobreaviso?"Sim":"",...PROC.map(k=>+x.ac[k]||0),x.esp,x.total,Math.round(x.pond*10)/10,del?x.rel:"",del?x.simba:"",x.at.sobreaviso,x.at.op_local,x.at.viagem,x.noites,t==null?"":Math.round(t*10)/10,x.acervoEm||""])}
+  return L;
+}
+async function salvar(filename,data){if(!dl)return false;try{await dl.save({filename,data});toast("Arquivo gerado: "+filename);return true}catch(err){if(err&&err.code!=="declined")toast("Não foi possível gerar o arquivo aqui.",true);return false}}
+function carregaXLSX(){return new Promise((ok,no)=>{if(window.XLSX)return ok(window.XLSX);const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";s.onload=()=>ok(window.XLSX);s.onerror=no;document.head.appendChild(s)})}
+
+/* ---------- Configurações ---------- */
+function pgCfg(){
+  if(!EDIT)return;
+  const ae=document.activeElement;
+  if(!(ae&&ae.id&&ae.id.startsWith("peso-")))$("#pesos").innerHTML=PROC.map(k=>`<label class="fld" title="${PROC_N[k]}">${k} · ${PROC_N[k]}<input type="number" inputmode="decimal" min="0" max="10" step="0.1" id="peso-${k}" value="${cfg.pesos[k]}"></label>`).join("");
+  if(ae!==$("#cf-lim"))$("#cf-lim").value=cfg.limiteAlerta;if(ae!==$("#cf-dias"))$("#cf-dias").value=cfg.diasDesatualizado;
+  $("#gerar-pub").disabled=!dl;
+  const ids=[...new Set(auditoria.map(a=>a.por).filter(Boolean))];
+  const nome=id=>(profs[id]&&profs[id].name)||"Editor";
+  $("#audit").innerHTML=auditoria.length?`<table><thead><tr><th>Quando</th><th class="left">Quem</th><th class="left">Ação</th><th class="left">Detalhe</th></tr></thead><tbody>${auditoria.map(a=>`<tr><td style="min-width:140px">${brh(a.em)}</td><td class="left" data-l="Quem">${esc(a.por?nome(a.por):"—")}</td><td class="left" data-l="Ação">${esc(a.acao)}</td><td class="left" data-l="Detalhe" style="white-space:normal">${esc(a.detalhe||"")}</td></tr>`).join("")}</tbody></table>`
+    :`<div class="empty">Nenhuma alteração registrada desde a ativação da auditoria.</div>`;
+  if(userNS&&ids.some(id=>!profs[id]))userNS.profiles(ids).then(p=>{profs={...profs,...p};if(sec==="cfg")pgCfg()}).catch(()=>{});
+}
 function setModo(edit){
-  EDIT=podeEditar&&edit;
-  document.body.classList.toggle("hidden-ro",!EDIT);
-  const m=$("#mode");m.classList.toggle("edit",EDIT);
-  m.textContent=EDIT?"Modo chefia · lançamentos":"Perfil DELINST · leitura";
-  const tv=$("#ver-como");tv.hidden=!podeEditar;tv.textContent=EDIT?"Ver como a equipe vê":"Voltar ao modo chefia";
-  const ta=document.querySelector('.tab[data-tab="acervo"]');ta.hidden=!EDIT;
-  const tAt=document.querySelector('.tab[data-tab="ativ"]');tAt.hidden=!EDIT;tAt.textContent="Lançar atividades";
-  if(!EDIT&&(!$("#p-acervo").hidden||!$("#p-ativ").hidden))document.querySelector('.tab[data-tab="painel"]').click();
-  ta.textContent="Lançar acervo";
-  render();
+  EDIT=podeEditar&&edit;document.body.classList.toggle("ro",!EDIT);
+  renderWho();
+  const v=$("#voltar");
+  if(!EDIT&&podeEditar){if(!v){const b=document.createElement("button");b.id="voltar";b.type="button";b.className="gold";b.textContent="Voltar ao modo chefia";b.onclick=()=>{b.remove();setModo(true)};document.body.appendChild(b)}}
+  else if(v)v.remove();
+  renderPeriodo();renderNav();irPara(location.hash.slice(1)||sec);
 }
-function render(){renderPeriodo();renderPainel();renderPesos();renderAcervo();renderParts();renderFiltros();renderAtiv();renderEfetivo()}
-let rz;new ResizeObserver(()=>{clearTimeout(rz);rz=setTimeout(()=>{if(!$("#p-painel").hidden)renderPainel()},120)}).observe($("#p-painel"));
 
-function armed(btn){if(btn.classList.contains("armed"))return true;const t=btn.textContent;btn.classList.add("armed");btn.textContent="Confirmar?";setTimeout(()=>{btn.classList.remove("armed");btn.textContent=t},4000);return false}
-
-/* ---------- página pública (estática, sem login) ---------- */
+/* ================= página pública ================= */
 async function gerarPublica(){
   if(!dl)return;
-  const snap={geradoEm:new Date().toISOString(),pesos,hist,
-    servidores:servidores.filter(s=>s.cargo!=="APF").map(({matricula,nascimento,...r})=>({...r,idadeAnos:nascimento?anosInt(nascimento):null})),
-    atividades:atividades.map(a=>({...a}))};
+  const snap={geradoEm:new Date().toISOString(),cfg:{pesos:cfg.pesos,limiteAlerta:cfg.limiteAlerta,diasDesatualizado:cfg.diasDesatualizado},hist,
+    servidores:servidores.filter(s=>s.cargo!=="APF").map(({matricula,nascimento,...r})=>({...r,idadeAnos:nascimento?anosInt(nascimento):(r.idadeAnos??null)})),
+    atividades:atividades.map(({criadoEm,...a})=>a)};
   const fonts=[...document.querySelectorAll('link[href*="fonts.g"]')].map(l=>l.outerHTML).join("");
   const style=document.querySelector("style").outerHTML;
-  const html='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Efetivo DELINST</title>'+fonts+style+
-    '<style>[hidden]{display:none!important}body{margin:0}</style></head><body>'+PRISTINE+'<div id="tip" hidden></div><div id="toast" hidden></div>'+
+  const html='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Gestão DELINST</title>'+fonts+style+
+    '<style>[hidden]{display:none!important}</style></head><body>'+PRISTINE+'<div id="tip" hidden></div><div id="toast" hidden role="status"></div>'+
     '<script>window.__SNAPSHOT__='+JSON.stringify(snap).replace(/</g,"\\u003c")+'<\/script><script>'+SRC_SCRIPT+'<\/script></body></html>';
-  try{await dl.save({filename:"index.html",data:html});toast("Página pública gerada.")}
-  catch(err){if(err&&err.code!=="declined")toast("Não foi possível gerar o arquivo aqui.",true)}
+  if(await salvar("index.html",html))audit("Página pública gerada","Cópia dos dados para divulgação");
 }
-/* ---------- eventos ---------- */
-$("#gerar-pub").addEventListener("click",gerarPublica);
-$("#ver-como").addEventListener("click",()=>setModo(!EDIT));
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
-  const tab=b.dataset.tab;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===b));
-  ["painel","acervo","ativ","efetivo"].forEach(k=>$("#p-"+k).hidden=k!==tab);
-  $("#foot").hidden=tab!=="painel";
-  if(tab==="painel")renderPainel();
-  try{localStorage.setItem("delinst-tab",tab)}catch(e){}
-}));
-$("#periodo").addEventListener("change",e=>{periodo=e.target.value;try{localStorage.setItem("delinst-periodo",periodo)}catch(_){}render()});
-$("#fl-serv").addEventListener("change",renderAtiv);$("#fl-tipo").addEventListener("change",renderAtiv);
-$("#a-tipo").innerHTML=ATIV.map(t=>`<option value="${t.k}">${t.n}</option>`).join("");
-$("#a-ini").value=hoje();$("#acervo-data").value=hoje();
-$("#acervo-data").addEventListener("change",()=>{for(const k in draft){delete draft[k].REL;if(!Object.keys(draft[k]).length)delete draft[k]}renderAcervo()});
-$("#a-parts").addEventListener("change",e=>{const id=e.target.dataset.pid;if(!id)return;e.target.checked?selPart.add(id):selPart.delete(id);$("#a-info").textContent=selPart.size?`${selPart.size} participante(s) selecionado(s)`:""});
 
-$("#acervo-grid").addEventListener("input",e=>{
-  const el=e.target;if(!el.dataset.sid)return;
-  const s=servidores.find(x=>x.id===el.dataset.sid);const orig=el.dataset.k==="SIMBA"?(+((s&&s.extras||{}).simba)||0):el.dataset.k==="REL"?(+((s&&s.relatados||{})[anoAcervo()])||0):(+((s&&s.acervo||{})[el.dataset.k])||0);
-  const v=Math.max(0,parseInt(el.value,10)||0);draft[el.dataset.sid]=draft[el.dataset.sid]||{};
-  if(v===orig){delete draft[el.dataset.sid][el.dataset.k];if(!Object.keys(draft[el.dataset.sid]).length)delete draft[el.dataset.sid];el.classList.remove("dirty")}
-  else{draft[el.dataset.sid][el.dataset.k]=v;el.classList.add("dirty")}
-  $("#salvar-acervo").disabled=!Object.keys(draft).length;
+/* ================= eventos ================= */
+$("#nav").addEventListener("click",e=>{const a=e.target.closest("a[data-sec]");if(!a)return;e.preventDefault();if(location.hash!=="#"+a.dataset.sec)history.replaceState(null,"","#"+a.dataset.sec);irPara(a.dataset.sec);scrollTo(0,0)});
+$("#periodo").addEventListener("change",e=>{periodo=e.target.value;try{localStorage.setItem("gd-periodo",periodo)}catch(_){}renderPage()});
+$$("[data-cg]").forEach(b=>b.addEventListener("click",()=>{cargaCargo=b.dataset.cg;renderPage()}));
+$$("[data-av]").forEach(b=>b.addEventListener("click",()=>{ativView=b.dataset.av;renderPage()}));
+$("#busca").addEventListener("input",()=>{
+  const q=$("#busca").value.toLowerCase().trim(),r=$("#busca-res");if(!q){r.hidden=true;return}
+  const S=servidores.filter(s=>(s.nome||"").toLowerCase().includes(q)).slice(0,6).map(s=>`<button type="button" data-go-s="${s.id}">${esc(s.nome)}<small>${(CARGOS.find(c=>c.k===s.cargo)||{}).s||""} · Efetivo</small></button>`);
+  const A=EDIT?[...new Map(atividades.filter(a=>(a.descricao||"").toLowerCase().includes(q)).map(a=>[a.grupo||a.id,a])).values()].slice(0,5).map(a=>`<button type="button" data-go-a="${esc(a.grupo||a.id)}">${esc(a.descricao)}<small>${esc(ATIV_N[a.tipo]||"")} · ${br(a.inicio)}</small></button>`):[];
+  r.innerHTML=[...S,...A].join("")||`<span class="small muted" style="padding:7px 9px">Nada encontrado.</span>`;r.hidden=false;
 });
-$("#salvar-acervo").addEventListener("click",async e=>{
-  if(!db)return;const btn=e.currentTarget;btn.disabled=true;const data=$("#acervo-data").value||hoje();
+$("#busca").addEventListener("keydown",e=>{if(e.key==="Escape"){$("#busca").value="";$("#busca-res").hidden=true}if(e.key==="ArrowDown"){const b=$("#busca-res button");if(b){e.preventDefault();b.focus()}}});
+document.addEventListener("click",e=>{if(!e.target.closest(".search"))$("#busca-res").hidden=true});
+$("#busca-res").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;$("#busca-res").hidden=true;$("#busca").value="";
+  if(b.dataset.goS){flashId=b.dataset.goS;history.replaceState(null,"","#efetivo");irPara("efetivo");const row=document.getElementById("row-"+b.dataset.goS);if(row)row.scrollIntoView({behavior:"smooth",block:"center"})}
+  if(b.dataset.goA){ativView="lista";periodo="tudo";history.replaceState(null,"","#ativ");renderPeriodo();irPara("ativ");editarGrupo(b.dataset.goA)}});
+$("#ac-busca").addEventListener("input",()=>renderPage());
+$("#ac-data").addEventListener("change",()=>{for(const k in draft){delete draft[k].REL;if(!Object.keys(draft[k]).length)delete draft[k]}renderPage()});
+$("#ac-tab").addEventListener("click",e=>{const b=e.target.closest("[data-sort]");if(!b)return;const k=b.dataset.sort;sortAc=sortAc.k===k?{k,d:-sortAc.d}:{k,d:k==="nome"?1:-1};renderPage()});
+$("#ac-tab").addEventListener("input",e=>{
+  const el=e.target;if(!el.dataset.sid)return;const s=servidores.find(x=>x.id===el.dataset.sid),k=el.dataset.k;
+  const orig=k==="SIMBA"?(+((s.extras||{}).simba)||0):k==="REL"?(+((s.relatados||{})[anoAcervo()])||0):(+((s.acervo||{})[k])||0);
+  const v=parseInt(el.value,10);if(isNaN(v)||v<0||String(v)!==el.value.trim()){el.setCustomValidity("Informe um número inteiro igual ou maior que zero");el.reportValidity();return}el.setCustomValidity("");
+  draft[s.id]=draft[s.id]||{};
+  if(v===orig){delete draft[s.id][k];if(!Object.keys(draft[s.id]).length)delete draft[s.id];el.classList.remove("dirty")}else{draft[s.id][k]=v;el.classList.add("dirty")}
+  $("#ac-salvar").disabled=!Object.keys(draft).length;
+});
+$("#ac-salvar").addEventListener("click",async e=>{
+  if(!db)return;const btn=e.currentTarget;btn.disabled=true;const data=$("#ac-data").value||hoje();
+  if(data>hoje()){toast("A data de referência não pode ser futura.",true);btn.disabled=false;return}
+  const nomes=[];
   try{
     for(const [id,d] of Object.entries(draft)){const s=servidores.find(x=>x.id===id);if(!s)continue;
       const ac={...(s.acervo||{})};PROC.forEach(k=>ac[k]=d[k]!=null?+d[k]:(+ac[k]||0));
       const upd={acervo:ac,acervoEm:data};if(d.REL!=null)upd.relatados={[data.slice(0,4)]:+d.REL};if(d.SIMBA!=null)upd.extras={simba:+d.SIMBA};
-      await db.doc("servidores/"+id).update(upd)}
-    const por={};
-    for(const s of servidores){if(s.ativo===false||s.cargo!=="DPF")continue;
-      const ac={...(s.acervo||{}),...(draft[s.id]||{})};por[s.id]=Object.fromEntries(PROC.map(k=>[k,+ac[k]||0]))}
+      await db.doc("servidores/"+id).update(upd);nomes.push(s.nome)}
+    const por={};for(const s of servidores){if(s.ativo===false||s.cargo!=="DPF")continue;const ac={...(s.acervo||{}),...(draft[s.id]||{})};por[s.id]=Object.fromEntries(PROC.map(k=>[k,+ac[k]||0]))}
     await db.doc("acervoHist/"+data).set({data,por});
     for(const k of Object.keys(draft))delete draft[k];
-    toast("Acervo salvo com data de "+br(data)+".");
+    toast("Acervo salvo com data de referência "+br(data)+".");audit("Acervo atualizado",`Referência ${br(data)} · ${nomes.join(", ")}`);
   }catch(err){dbErr(err)}
-  render();
+  renderPage();
 });
-$("#pesos").addEventListener("click",async e=>{
-  if(e.target.id!=="salvar-pesos"||!db)return;
-  const p={};PROC.forEach(k=>p[k]=Math.max(0,parseFloat($("#peso-"+k).value)||0));
-  try{await db.doc("config/geral").set({pesos:p});toast("Pesos salvos.")}catch(err){dbErr(err)}
-});
-$("#f-ativ").addEventListener("submit",async e=>{
-  e.preventDefault();if(!db)return;
-  if(!selPart.size){toast("Marque ao menos um participante.",true);return}
-  const ini=$("#a-ini").value,fim=$("#a-fim").value||ini;
-  if(fim<ini){toast("O término não pode ser anterior ao início.",true);return}
-  const base={tipo:$("#a-tipo").value,inicio:ini,fim,descricao:$("#a-desc").value.trim(),grupo:"g"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),criadoEm:new Date().toISOString()};
-  const btn=$("#a-salvar");btn.disabled=true;
-  try{for(const id of selPart)await db.collection("atividades").add({...base,servidorId:id});
-    toast(`${ATIV_N[base.tipo]} registrado para ${selPart.size} servidor(es).`);selPart.clear();$("#a-desc").value="";$("#a-fim").value="";renderParts()}
-  catch(err){dbErr(err)}
-  btn.disabled=false;
-});
-$("#ativ-list").addEventListener("click",async e=>{
-  const b=e.target.closest("button");if(!b||!db)return;
-  if(b.dataset.delOne){if(!armed(b))return;try{await db.doc("atividades/"+b.dataset.delOne).delete()}catch(err){dbErr(err)}}
-  if(b.dataset.delGrupo){if(!armed(b))return;const g=b.dataset.delGrupo;
-    try{for(const a of atividades.filter(a=>(a.grupo||a.id)===g))await db.doc("atividades/"+a.id).delete();toast("Atividade excluída.")}catch(err){dbErr(err)}}
-});
+["#cmp-a","#cmp-b"].forEach(s=>$(s).addEventListener("change",()=>renderPage()));
+$("#s-cargo").addEventListener("change",ajustaFormServ);
+$("#fs-cancel").addEventListener("click",limpaFormServ);
 $("#f-serv").addEventListener("submit",async e=>{
-  e.preventDefault();if(!db)return;const nome=$("#s-nome").value.trim();if(!nome)return;
-  const cargo=$("#s-cargo").value,ch=$("#s-chefe").checked&&cargo==="DPF";
-  try{if(ch)for(const o of servidores.filter(o=>o.chefe))await db.doc("servidores/"+o.id).update({chefe:false});
-    await db.collection("servidores").add({nome,cargo,chefe:ch,matricula:$("#s-mat").value.trim(),ativo:true,acervo:{IPL:0,NC:0,RE:0,RDF:0,NCV:0}});
-    $("#s-nome").value="";$("#s-mat").value="";$("#s-chefe").checked=false;toast(nome+" incluído(a).")}catch(err){dbErr(err)}
-});
-function cargoDeTxt(t){t=(t||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").trim();
-  if(t.startsWith("dpf")||t.startsWith("deleg"))return"DPF";if(t.startsWith("epf")||t.startsWith("escriv"))return"EPF";if(t.startsWith("apf")||t.startsWith("agent"))return"APF";return null}
-$("#s-lote-btn").addEventListener("click",async()=>{
-  if(!db)return;const linhas=$("#s-lote").value.split("\n").map(l=>l.trim()).filter(Boolean);let ok=0;const ruins=[];
-  for(const l of linhas){const [n,c]=l.split(/[;,\t]/);const cargo=cargoDeTxt(c);if(!n||!n.trim()||!cargo){ruins.push(l);continue}
-    try{await db.collection("servidores").add({nome:n.trim(),cargo,matricula:"",ativo:true,acervo:{IPL:0,NC:0,RE:0,RDF:0,NCV:0}});ok++}catch(err){dbErr(err);break}}
-  $("#s-lote").value=ruins.join("\n");
-  toast(`${ok} incluído(s).`+(ruins.length?` ${ruins.length} linha(s) sem cargo reconhecido ficaram na caixa.`:""),!!ruins.length&&!ok);
-});
-$("#efetivo-list").addEventListener("change",async e=>{
-  const campo=e.target.dataset.campo;
-  if(campo&&db){const v=e.target.value||null;if(v&&v>hoje()){toast("A data não pode ser futura.",true);return}
-    try{await db.doc("servidores/"+e.target.dataset.sid).update({[campo]:v});toast(campo==="posse"?"Data de posse salva.":"Data de nascimento salva.")}catch(err){dbErr(err)}return}
-  const id=e.target.dataset.par;if(!id||!db)return;
-  try{await db.doc("servidores/"+id).update({parId:e.target.value||null});toast("Vínculo atualizado.")}catch(err){dbErr(err)}
+  e.preventDefault();if(!db)return;const er=$("#s-err");er.textContent="";
+  const nome=$("#s-nome").value.trim(),cargo=$("#s-cargo").value,parId=cargo==="EPF"?($("#s-par").value||null):null,posse=$("#s-posse").value||null,nasc=$("#s-nasc").value||null;
+  if(!nome){er.textContent="Informe o nome.";$("#s-nome").focus();return}
+  if(servidores.some(s=>s.id!==editServ&&s.cargo===cargo&&(s.nome||"").toLowerCase()===nome.toLowerCase())){er.textContent="Já existe um servidor com esse nome neste cargo.";return}
+  if(cargo==="EPF"&&!parId){er.textContent="Escolha o delegado vinculado ao escrivão.";$("#s-par").focus();return}
+  if((posse&&posse>hoje())||(nasc&&nasc>hoje())){er.textContent="As datas não podem ser futuras.";return}
+  if(posse&&nasc&&posse<=nasc){er.textContent="A posse deve ser posterior ao nascimento.";return}
+  const chefe=cargo==="DPF"&&$("#s-chefe").checked;
+  const dados={nome,cargo,parId,posse,nascimento:nasc,matricula:$("#s-mat").value.trim(),funcao:$("#s-func").value.trim()||null,chefe,voluntarioSobreaviso:$("#s-vol").checked};
+  try{
+    if(chefe)for(const o of servidores.filter(o=>o.chefe&&o.id!==editServ))await db.doc("servidores/"+o.id).update({chefe:false});
+    if(editServ){await db.doc("servidores/"+editServ).update(dados);flashId=editServ;toast("Cadastro de "+nome+" atualizado.");audit("Servidor alterado",nome)}
+    else{const r=await db.collection("servidores").add({...dados,ativo:true,acervo:{IPL:0,NC:0,RE:0,RDF:0,NCV:0}});flashId=r.id;toast(nome+" incluído(a).");audit("Servidor incluído",`${nome} · ${cargo}`)}
+    limpaFormServ();
+  }catch(err){dbErr(err)}
 });
 $("#efetivo-list").addEventListener("click",async e=>{
   const b=e.target.closest("button");if(!b||!db)return;
-  if(b.dataset.chefe){const s=servidores.find(x=>x.id===b.dataset.chefe);const novo=!s.chefe;
-    try{if(novo)for(const o of servidores.filter(o=>o.chefe&&o.id!==s.id))await db.doc("servidores/"+o.id).update({chefe:false});
-      await db.doc("servidores/"+s.id).update({chefe:novo});toast(novo?s.nome+" definido(a) como chefe da unidade.":"Chefia removida.")}catch(err){dbErr(err)}}
-  if(b.dataset.vol){const s=servidores.find(x=>x.id===b.dataset.vol);try{await db.doc("servidores/"+s.id).update({voluntarioSobreaviso:!s.voluntarioSobreaviso})}catch(err){dbErr(err)}}
-  if(b.dataset.toggle){const s=servidores.find(x=>x.id===b.dataset.toggle);try{await db.doc("servidores/"+s.id).update({ativo:s.ativo===false})}catch(err){dbErr(err)}}
-  if(b.dataset.delServ){if(!armed(b))return;try{await db.doc("servidores/"+b.dataset.delServ).delete();toast("Servidor excluído. As atividades já registradas permanecem no histórico.")}catch(err){dbErr(err)}}
+  if(b.dataset.ed){editarServ(b.dataset.ed);return}
+  if(b.dataset.toggle){const s=servidores.find(x=>x.id===b.dataset.toggle);
+    if(s.ativo!==false&&!armed(b))return;
+    try{await db.doc("servidores/"+s.id).update({ativo:s.ativo===false});audit(s.ativo===false?"Servidor reativado":"Servidor marcado fora da unidade",s.nome)}catch(err){dbErr(err)}}
+  if(b.dataset.delServ){if(!armed(b))return;const s=servidores.find(x=>x.id===b.dataset.delServ);
+    try{await db.doc("servidores/"+s.id).delete();toast("Servidor excluído. As atividades já registradas permanecem no histórico.");audit("Servidor excluído",s.nome)}catch(err){dbErr(err)}}
 });
-$("#csv").addEventListener("click",async()=>{
-  if(!dl)return;const q=v=>`"${String(v).replace(/"/g,'""')}"`;
-  const head=["Servidor","Cargo","Delegado vinculado","Voluntário sobreaviso","Anos no cargo","Idade",...PROC,"Total","Ponderada","Relatados no ano","Casos SIMBA","Acervo em",...ATIV.map(t=>t.n),"Participações","Noites fora da sede em missão","Dias sobreaviso"];
-  const linhas=[head.map(q).join(";")];
-  for(const c of PAINEL)for(const s of ativos().filter(x=>x.cargo===c.k).sort((a,b)=>(b.chefe?1:0)-(a.chefe?1:0)||byNome(a,b))){
-    const x=stats(s),p=parDe(s);linhas.push([s.nome,s.chefe?"Delegado(a) — chefe da unidade":c.s,p?p.nome:"",s.voluntarioSobreaviso?"Sim":"Não",tempoCargo(s)==null?"":fmt(tempoCargo(s)),idadeDe(s)??"",...PROC.map(k=>+x.ac[k]||0),x.total,fmt(x.pond),x.rel,x.simba,br(x.acervoEm),...ATIV.map(t=>x.at[t.k]),x.part,x.diasViagem,x.diasSob].map(q).join(";"))}
-  try{await dl.save({filename:`efetivo-delinst-${hoje()}.csv`,data:"﻿"+linhas.join("\r\n")})}
-  catch(err){if(err&&err.code!=="declined")toast("Não foi possível gerar o arquivo aqui.",true)}
+$("#a-tipo").innerHTML=ATIV.map(t=>`<option value="${t.k}">${t.n}</option>`).join("");
+$("#a-tipo").addEventListener("change",regraTxt);
+$("#a-ini").value=hoje();$("#ac-data").value=hoje();
+$("#fa-cancel").addEventListener("click",limpaFormAtiv);
+$("#a-parts").addEventListener("change",e=>{const id=e.target.dataset.pid;if(!id)return;e.target.checked?selPart.add(id):selPart.delete(id);$("#a-info").textContent=selPart.size?`${selPart.size} participante(s) selecionado(s)`:""});
+["#fl-serv","#fl-tipo"].forEach(s=>$(s).addEventListener("change",()=>renderPage()));
+$("#at-cal").addEventListener("click",e=>{const b=e.target.closest("[data-calnav]");if(!b)return;const n=+b.dataset.calnav;
+  if(!n)calMes=hoje().slice(0,7);else{const [y,m]=calMes.split("-").map(Number),d=new Date(y,m-1+n,1);calMes=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`}renderPage()});
+$("#f-ativ").addEventListener("submit",async e=>{
+  e.preventDefault();if(!db)return;const er=$("#a-err");er.textContent="";
+  const tipo=$("#a-tipo").value,ini=$("#a-ini").value,fim=$("#a-fim").value||ini,desc=$("#a-desc").value.trim();
+  if(!ini){er.textContent="Informe a data de início.";return}
+  if(fim<ini){er.textContent="O término não pode ser anterior ao início.";return}
+  if(!selPart.size){er.textContent="Marque ao menos um participante.";return}
+  if(dias({inicio:ini,fim})>62){er.textContent="Intervalo acima de 62 dias. Confira as datas.";return}
+  const btn=$("#a-ok");btn.disabled=true;
+  try{
+    if(editGrupo){
+      const it=atividades.filter(a=>(a.grupo||a.id)===editGrupo),tem=new Set(it.map(i=>i.servidorId));
+      for(const a of it){if(selPart.has(a.servidorId))await db.doc("atividades/"+a.id).update({tipo,inicio:ini,fim,descricao:desc});else await db.doc("atividades/"+a.id).delete()}
+      for(const id of selPart)if(!tem.has(id))await db.collection("atividades").add({tipo,inicio:ini,fim,descricao:desc,grupo:editGrupo,servidorId:id,criadoEm:new Date().toISOString()});
+      toast("Atividade atualizada.");audit("Atividade alterada",`${ATIV_N[tipo]} · ${br(ini)} · ${desc}`);
+    }else if(tipo==="sobreaviso"){
+      let n=0,dup=0;
+      for(let d=ini;d<=fim;d=addDia(d,1)){const grupo="sob-"+d+"-"+Math.random().toString(36).slice(2,6);
+        for(const id of selPart){if(atividades.some(a=>a.tipo==="sobreaviso"&&a.servidorId===id&&a.inicio===d)){dup++;continue}
+          await db.collection("atividades").add({tipo,inicio:d,fim:d,descricao:desc||"Sobreaviso",grupo,servidorId:id,criadoEm:new Date().toISOString()});n++}}
+      toast(`${n} dia(s) de sobreaviso registrados${dup?`; ${dup} já existiam e foram ignorados`:""}.`,!n&&dup>0);if(n)audit("Sobreaviso registrado",`${br(ini)} a ${br(fim)} · ${n} registro(s)`);
+    }else{
+      const grupo="g"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+      for(const id of selPart)await db.collection("atividades").add({tipo,inicio:ini,fim,descricao:desc,grupo,servidorId:id,criadoEm:new Date().toISOString()});
+      toast(`${ATIV_N[tipo]} registrada para ${selPart.size} servidor(es).`);audit("Atividade registrada",`${ATIV_N[tipo]} · ${br(ini)} · ${desc}`);
+    }
+    limpaFormAtiv();
+  }catch(err){dbErr(err)}
+  btn.disabled=false;
 });
+$("#at-lista").addEventListener("click",async e=>{
+  const b=e.target.closest("button");if(!b||!db)return;
+  if(b.dataset.edg){editarGrupo(b.dataset.edg);return}
+  if(b.dataset.delg){if(!armed(b))return;const it=atividades.filter(a=>(a.grupo||a.id)===b.dataset.delg);
+    try{for(const a of it)await db.doc("atividades/"+a.id).delete();toast("Atividade excluída.");audit("Atividade excluída",`${ATIV_N[it[0].tipo]} · ${br(it[0].inicio)} · ${it[0].descricao||""}`)}catch(err){dbErr(err)}}
+});
+$("#sob-prev").addEventListener("click",()=>{const [y,m]=sobMes.split("-").map(Number),d=new Date(y,m-2,1);sobMes=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;renderPage()});
+$("#sob-next").addEventListener("click",()=>{const [y,m]=sobMes.split("-").map(Number),d=new Date(y,m,1);sobMes=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;renderPage()});
+$("#ex-csv").addEventListener("click",()=>{const L=linhasPlanilha(calc()),q=v=>`"${String(v).replace(/"/g,'""')}"`;salvar(`gestao-delinst-${hoje()}.csv`,"\ufeff"+L.map(r=>r.map(q).join(";")).join("\r\n"))});
+$("#ex-xlsx").addEventListener("click",async()=>{let X;try{X=await carregaXLSX()}catch(e){toast("Não foi possível carregar o gerador de planilhas. Use o CSV.",true);return}
+  const C=calc(),wb=X.utils.book_new(),nm=id=>(servidores.find(s=>s.id===id)||{}).nome||"(excluído)";
+  X.utils.book_append_sheet(wb,X.utils.aoa_to_sheet(linhasPlanilha(C)),"Indicadores");
+  X.utils.book_append_sheet(wb,X.utils.aoa_to_sheet([["Data de referência","Delegado",...PROC],...[...hist].sort((a,b)=>a.data.localeCompare(b.data)).flatMap(h=>Object.entries(h.por||{}).map(([id,ac])=>[h.data,nm(id),...PROC.map(k=>+ac[k]||0)]))]),"Histórico do acervo");
+  X.utils.book_append_sheet(wb,X.utils.aoa_to_sheet([["Início","Término","Tipo","Servidor","Descrição"],...atividades.filter(a=>inPeriod(a.inicio)).sort((a,b)=>a.inicio.localeCompare(b.inicio)).map(a=>[a.inicio,a.fim||a.inicio,ATIV_N[a.tipo]||a.tipo,nm(a.servidorId),a.descricao||""])]),"Atividades");
+  await salvar(`gestao-delinst-${hoje()}.xlsx`,new Uint8Array(X.write(wb,{bookType:"xlsx",type:"array"})))});
+$("#ex-html").addEventListener("click",()=>{const C=calc(),style=document.querySelector("style").outerHTML;
+  const html=`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Relatório gerencial · DELINST · ${br(C.ref)}</title>${[...document.querySelectorAll('link[href*="fonts.g"]')].map(l=>l.outerHTML).join("")}${style}<style>:root{color-scheme:light}body{background:#fff;color:#0d1a2d;padding:24px}.report{border:none;max-width:none;padding:0;background:#fff}.scroll{overflow:visible;border:none}th:first-child,td:first-child{position:static}@media print{body{padding:0}h3{break-after:avoid}tr{break-inside:avoid}}</style></head><body><article class="report">${relatorioHTML(C)}</article></body></html>`;
+  salvar(`relatorio-delinst-${C.ref||hoje()}.html`,html)});
+$("#ex-json").addEventListener("click",()=>salvar(`backup-gestao-delinst-${hoje()}.json`,JSON.stringify({geradoEm:new Date().toISOString(),config:cfgDoc(),servidores,atividades,acervoHist:hist},null,1)));
+$("#salvar-pesos").addEventListener("click",async()=>{if(!db)return;const p={};
+  for(const k of PROC){const v=parseFloat($("#peso-"+k).value);if(isNaN(v)||v<0||v>10){toast(`Peso de ${k} inválido: use um número entre 0 e 10.`,true);return}p[k]=v}
+  cfg.pesos=p;try{await db.doc("config/geral").set(cfgDoc());toast("Pesos salvos.");audit("Pesos alterados",PROC.map(k=>k+" "+p[k]).join(", "))}catch(err){dbErr(err)}});
+$("#salvar-cf").addEventListener("click",async()=>{if(!db)return;const l=+$("#cf-lim").value,d=+$("#cf-dias").value;
+  if(!(l>=100&&l<=300)||!(d>=7&&d<=365)){toast("Use um limite entre 100% e 300% e entre 7 e 365 dias.",true);return}
+  cfg.limiteAlerta=l;cfg.diasDesatualizado=d;try{await db.doc("config/geral").set(cfgDoc());toast("Critérios salvos.");audit("Critérios de alerta alterados",`${l}% · ${d} dias`)}catch(err){dbErr(err)}});
+$("#ver-equipe").addEventListener("click",()=>{history.replaceState(null,"","#painel");sec="painel";setModo(false);scrollTo(0,0);toast("Você está vendo como a equipe. Use o botão dourado para voltar.")});
+$("#gerar-pub").addEventListener("click",gerarPublica);
+let rz,lw0=innerWidth;addEventListener("resize",()=>{if(Math.abs(innerWidth-lw0)<40)return;lw0=innerWidth;clearTimeout(rz);rz=setTimeout(renderPage,150)});
 
-/* ---------- inicialização ---------- */
+/* ================= inicialização ================= */
 (async function init(){
-  try{const t=localStorage.getItem("delinst-tab");if(t)document.querySelector(`.tab[data-tab="${t}"]`)?.click();
-      const p=localStorage.getItem("delinst-periodo");if(p)periodo=p}catch(e){}
+  try{const p=localStorage.getItem("gd-periodo");if(p)periodo=p}catch(e){}
+  sec=location.hash.slice(1)||"painel";
   if(SNAP){
-    servidores=SNAP.servidores||[];atividades=SNAP.atividades||[];hist=SNAP.hist||[];pesos={...pesos,...(SNAP.pesos||{})};
-    podeEditar=false;setModo(false);
-    $("#mode").textContent="Atualizado em "+new Date(SNAP.geradoEm).toLocaleDateString("pt-BR");
-    return;
+    servidores=SNAP.servidores||[];atividades=SNAP.atividades||[];hist=SNAP.hist||[];
+    const sc=SNAP.cfg||{};cfg={...cfg,...sc,pesos:{...cfg.pesos,...(sc.pesos||SNAP.pesos||{})}};
+    document.body.classList.add("ro");renderWho();renderPeriodo();renderNav();irPara(sec);return;
   }
-  render();
-  if(!(window.claude&&window.claude.use)){$("#offline").hidden=false;$("#mode").textContent="Sem conexão aos dados";document.body.classList.add("hidden-ro");document.querySelector('.tab[data-tab="acervo"]').hidden=true;document.querySelector('.tab[data-tab="ativ"]').hidden=true;return}
+  document.body.classList.add("ro");renderPeriodo();renderNav();irPara(sec);
+  const nada=()=>{$("#offline").hidden=false;renderWho()};
+  if(!(window.claude&&window.claude.use))return nada();
   try{db=await window.claude.use("db")}catch(e){db=null}
-  if(!db){$("#offline").hidden=false;$("#mode").textContent="Sem conexão aos dados";document.body.classList.add("hidden-ro");document.querySelector('.tab[data-tab="acervo"]').hidden=true;document.querySelector('.tab[data-tab="ativ"]').hidden=true;return}
-  let user=null;try{user=await window.claude.use("user")}catch(e){}
-  podeEditar=user?!!(await user.canEdit()):false;
+  if(!db)return nada();
+  try{userNS=await window.claude.use("user")}catch(e){}
+  podeEditar=userNS?!!(await userNS.canEdit()):false;
+  try{uid=userNS?await userNS.id():null}catch(e){}
   try{dl=await window.claude.use("downloads")}catch(e){dl=null}
-  setModo(podeEditar);
-  $("#gerar-pub").hidden=!(podeEditar&&dl);
   const onErr=e=>{if(e&&e.code!=="revoked")toast("Falha ao carregar os dados. Recarregue a página.",true)};
-  db.collection("servidores").onSnapshot(s=>{servidores=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
-  db.collection("atividades").onSnapshot(s=>{atividades=s.docs.map(d=>({id:d.id,...d.data()}));render()},onErr);
-  db.doc("config/geral").onSnapshot(d=>{if(d.exists){const x=d.data();pesos={...pesos,...(x.pesos||{})}}render()},onErr);
-  db.collection("acervoHist").orderBy("data","desc").limit(24).onSnapshot(s=>{hist=s.docs.map(d=>d.data());render()},onErr);
+  let pend=0;const rr=()=>{cancelAnimationFrame(pend);pend=requestAnimationFrame(()=>{renderPeriodo();renderPage()})};
+  db.collection("servidores").onSnapshot(s=>{servidores=s.docs.map(d=>({id:d.id,...d.data()}));rr()},onErr);
+  db.collection("atividades").onSnapshot(s=>{atividades=s.docs.map(d=>({id:d.id,...d.data()}));rr()},onErr);
+  db.doc("config/geral").onSnapshot(d=>{if(d.exists){const x=d.data();cfg={...cfg,...x,pesos:{...cfg.pesos,...(x.pesos||{})}}}rr()},onErr);
+  db.collection("acervoHist").orderBy("data","desc").limit(36).onSnapshot(s=>{hist=s.docs.map(d=>d.data());rr()},onErr);
+  if(podeEditar)db.collection("auditoria").orderBy("em","desc").limit(60).onSnapshot(s=>{auditoria=s.docs.map(d=>({id:d.id,...d.data()}));rr()},()=>{});
+  setModo(podeEditar);
 })();
 </script></body></html>
